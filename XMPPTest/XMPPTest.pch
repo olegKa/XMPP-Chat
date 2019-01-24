@@ -1,0 +1,30 @@
+//
+//  XMPPTest.pch
+//  XMPPTest
+//
+//  Created by OLEG KALININ on 22.01.2019.
+//  Copyright © 2019 oki. All rights reserved.
+//
+
+#ifndef XMPPTest_pch
+#define XMPPTest_pch
+
+
+@import CocoaLumberjack;
+
+//Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = DDLogLevelVerbose;
+#else
+static const int ddLogLevel = DDLogLevelInfo;
+#endif
+
+#import "TWXMPPProvider.h"
+
+// Extensions
+#import "UIAlertController+AlertShow.h"
+
+
+#define BLOCK_SAFE_RUN(block, ...) block ? block(__VA_ARGS__) : nil
+
+#endif /* XMPPTest_pch */

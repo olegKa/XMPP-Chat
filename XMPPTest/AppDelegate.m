@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "TWXMPPProvider.h"
+#import "TWChatAuthorizationViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Configure logging framework
+    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
+    
+    // Setup and open the XMPP stream
+    
+    UINavigationController *rootViewController;
+    
+    if (![chat connect]) {
+        rootViewController = [[UIStoryboard storyboardWithName:@"TWChatAuthorization" bundle:nil] instantiateInitialViewController];
+        
+        TWChatAuthorizationViewController *authViewController = rootViewController.viewControllers.firstObject;
+        __weak typeof(self) __weakSelf = self;
+        [authViewController setDidSaveBlock:^(BOOL success) {
+            __weakSelf.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+            [self.window makeKeyAndVisible];
+        }];
+    } else {
+        rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    }
+    
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -26,26 +52,59 @@
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
 
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)dealloc
+{
+    [chat teardownStream];
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark UIApplicationDelegate
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store
+    // enough application state information to restore your application to its current state in case
+    // it is terminated later.
+    //
+    // If your application supports background execution,
+    // called instead of applicationWillTerminate: when the user quits.
+    
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+#if TARGET_IPHONE_SIMULATOR
+    DDLogError(@"The iPhone simulator does not process background network traffic. "
+               @"Inbound traffic is queued until the keepAliveTimeout:handler: fires.");
+#endif
+    
+    if ([application respondsToSelector:@selector(setKeepAliveTimeout:handler:)])
+    {
+        [application setKeepAliveTimeout:600 handler:^{
+            
+            DDLogVerbose(@"KeepAliveHandler");
+            
+            // Do other keep alive stuff here.
+        }];
+    }
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    
+    [chat teardownStream];
+}
+
+
 
 
 @end
