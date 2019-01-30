@@ -73,6 +73,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView reloadData];
+    [self scrollToBottom:YES];
 }
 
 - (RCMessage *)rcmessage:(NSIndexPath *)indexPath
@@ -91,7 +92,14 @@
 
 - (NSString *)textBubbleHeader:(NSIndexPath *)indexPath
 {
-    return @"bubble header";
+    NSString *bubbleHeader;
+    XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
+    if (!message.isFromMe) {
+        
+        XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
+        bubbleHeader = vCardFrom.nickname;
+    }
+    return bubbleHeader;
 }
 
 - (NSString *)textBubbleFooter:(NSIndexPath *)indexPath
@@ -108,17 +116,13 @@
 - (UIImage *)avatarImage:(NSIndexPath *)indexPath
 {
     UIImage *photo;
-    XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
-    if (chat.vCard.photo && obj.isFromMe) {
+    XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
+    if (chat.vCard.photo && message.isFromMe) {
         photo = [UIImage imageWithData:chat.vCard.photo];
-    } else if (!obj.isFromMe) {
-        XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:[XMPPJID jidWithUser:obj.nickname
-                                                                                                                       domain:@"192.168.10.3"
-                                                                                                                     resource:nil]
-                                                                                  inManagedObjectContext:chat.managedObjectContext_vCard];
-        if (vCard.photoData) {
-            photo = [UIImage imageWithData:vCard.photoData];
-        }
+    } else if (!message.isFromMe) {
+        
+        XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
+        photo = [UIImage imageWithData:vCardFrom.photo];
     }
     return photo;
 }
@@ -132,7 +136,6 @@
 - (void)actionTapBubble:(NSIndexPath *)indexPath
 {
     [chat.xmppvCardAvatarModule.xmppvCardTempModule fetchvCardTempForJID:[XMPPJID jidWithString:@"bot@192.168.10.3"] ignoreStorage:YES];
-    //XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:[XMPPJID jidWithString:@"bot@192.168.10.3"] inManagedObjectContext:chat.managedObjectContext_vCard];
 }
 
 #pragma mark - <UITableViewDataSource>

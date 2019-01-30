@@ -52,6 +52,25 @@ static TWXMPPProvider *_provider;
     [_xmppStream sendElement:iq];
 }
 
+- (XMPPvCardTemp *)vCardTempWithJID:(XMPPJID *)jid
+{
+    XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:jid
+                                                                              inManagedObjectContext:self.managedObjectContext_vCard];
+    return vCard.vCardTempRel.vCardTemp;
+}
+
+- (XMPPvCardTemp *)vCardTempSenderOfMessage:(XMPPRoomMessageCoreDataStorageObject *)roomMessage
+{
+    XMPPJID *jidFrom;
+    if ([roomMessage.nickname componentsSeparatedByString:@"@"].count > 1) {
+        jidFrom = [XMPPJID jidWithString:roomMessage.nickname];
+    } else {
+        jidFrom = [XMPPJID jidWithUser:roomMessage.nickname domain:@"192.168.10.3" resource:nil];
+    }
+    XMPPvCardTemp *vCard = [self vCardTempWithJID:jidFrom];
+    return vCard;
+}
+
 #pragma mark - Properties
 - (XMPPJID *)myJID
 {
@@ -622,7 +641,20 @@ static TWXMPPProvider *_provider;
  **/
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID
 {
-    NSLog(@"didReceiveMessage:[%@] fromOccupant:[%@]", message.body, occupantJID.user);
+    NSLog(@"didReceiveMessage:[%@] fromOccupant:[%@]", message.body, occupantJID);
+    
+    XMPPJID *jidFrom;
+    if ([occupantJID.resource componentsSeparatedByString:@"@"].count > 1) {
+        jidFrom = [XMPPJID jidWithString:occupantJID.resource];
+    } else {
+        jidFrom = [XMPPJID jidWithUser:occupantJID.resource domain:@"192.168.10.3" resource:nil];
+    }
+   
+    XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:jidFrom
+                                                                              inManagedObjectContext:self.managedObjectContext_vCard];
+    if (!vCard.photoData) {
+        [self.xmppvCardAvatarModule.xmppvCardTempModule fetchvCardTempForJID:jidFrom ignoreStorage:YES];
+    }
 }
 
 #pragma mark - <XMPPvCardTempModuleDelegate>

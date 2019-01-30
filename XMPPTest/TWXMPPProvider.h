@@ -41,6 +41,9 @@ static NSString* kUserRoomKey = @"kUserRoomKey";
 
 - (void)getAllRegisteredUsers;
 
+- (XMPPvCardTemp *)vCardTempWithJID:(XMPPJID *)jid;
+- (XMPPvCardTemp *)vCardTempSenderOfMessage:(XMPPRoomMessageCoreDataStorageObject *)roomMessage;
+
 @end
 
 #define chat [TWXMPPProvider shared]
