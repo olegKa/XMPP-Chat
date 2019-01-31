@@ -9,9 +9,12 @@
 #import "AppDelegate.h"
 #import "TWXMPPProvider.h"
 #import "TWChatAuthorizationViewController.h"
+#import "TWSIPCallViewController.h"
 
 @interface AppDelegate ()
-
+{
+    TWSipProvider *_sip;
+}
 @end
 
 @implementation AppDelegate
@@ -19,6 +22,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    _sip = TWSipProvider.sharedInstance;
+    /*
+    _sip.setupCallViewControllerBlock = ^UIViewController<TWCallViewControllerProtocol> *{
+        TWSIPCallViewController *callVC = [[UIStoryboard storyboardWithName:@"TWSIPCallViewController" bundle:nil] instantiateInitialViewController];
+        return callVC;
+    };
+    */
     
     // Configure logging framework
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
@@ -104,7 +115,11 @@
     [chat teardownStream];
 }
 
-
+#pragma mark - Properties
+- (TWSipProvider *)sip
+{
+    return _sip;
+}
 
 
 @end

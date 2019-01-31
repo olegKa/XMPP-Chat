@@ -20,6 +20,9 @@ static const int ddLogLevel = DDLogLevelInfo;
 #endif
 
 #import "TWXMPPProvider.h"
+#import <TWSIPFramework/TWSIPFramework.h>
+
+
 
 // Extensions
 #import "UIAlertController+AlertShow.h"

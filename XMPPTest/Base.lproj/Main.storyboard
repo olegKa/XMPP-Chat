@@ -166,6 +166,11 @@
                         <viewLayoutGuide key="safeArea" id="gsc-4W-z8Y"/>
                     </view>
                     <navigationItem key="navigationItem" id="A03-ap-hOV">
+                        <barButtonItem key="leftBarButtonItem" title="CALL" id="vFa-tg-6r1">
+                            <connections>
+                                <action selector="buttonCall:" destination="PNv-Yz-mIG" id="lzO-Ts-lBg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="sFQ-jR-arG">
                             <connections>
                                 <segue destination="esn-Ps-D6h" kind="show" identifier="segueChatSettings" id="JSk-pe-sAc"/>
@@ -173,6 +178,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="_btnCall" destination="vFa-tg-6r1" id="qgg-de-2lw"/>
                         <outlet property="buttonInputAttach" destination="feA-Yj-vn0" id="J2X-KX-vCM"/>
                         <outlet property="buttonInputSend" destination="OVS-Vb-3GK" id="NzE-AM-FGn"/>
                         <outlet property="labelInputAudio" destination="AOF-rM-1Pk" id="h9M-AQ-Dur"/>

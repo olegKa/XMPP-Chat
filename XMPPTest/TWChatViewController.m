@@ -9,9 +9,14 @@
 #import "TWChatViewController.h"
 #import "TWChatSettingsViewController.h"
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate>
+#import "AppDelegate.h"
+
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate,  TWSIPProviderDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
+    TWSipProvider *_sip;
+    
+    __weak IBOutlet UIBarButtonItem *_btnCall;
 }
 @end
 
@@ -21,12 +26,42 @@
 {
     [super viewDidLoad];
     
+    _sip = [(AppDelegate *)[UIApplication sharedApplication].delegate sip];
+    _sip.delegate = self;
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     
     
     //[chat getAllRegisteredUsers];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+- (IBAction)buttonCall:(id)sender
+{
+    
+    [_sip callTo:@"r9227345533"];
+}
+
+- (void)sipProvider:(TWSipProvider *)provider incomingCallWithController:(TWIncomingCallViewController *)controller
+{
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)sipProviderAccountDisconnected:(TWSipProvider *)provider
+{
+    _btnCall.enabled = NO;
+}
+
+- (void)sipProviderAccountConnected:(TWSipProvider *)provider
+{
+    _btnCall.enabled = YES;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

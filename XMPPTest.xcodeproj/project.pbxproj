@@ -16,6 +16,10 @@
 		4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6CC21F9702700FA7A5C /* UIAlertController+AlertShow.m */; };
 		4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */; };
 		4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */; };
+		4FED7FDB2201832800AFF67F /* TWSIPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */; };
+		4FED7FDC2201832800AFF67F /* TWSIPFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4FED80052202E47000AFF67F /* TWSIPCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FED80042202E47000AFF67F /* TWSIPCallViewController.m */; };
+		4FED80072202E49400AFF67F /* TWSIPCallViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
 		4FEE102B21F6F22500E6D849 /* TWChatRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102A21F6F22500E6D849 /* TWChatRosterViewController.m */; };
 		4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE102C21F6F22500E6D849 /* Main.storyboard */; };
@@ -24,6 +28,20 @@
 		4FEE103621F6F22C00E6D849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103521F6F22C00E6D849 /* main.m */; };
 		4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4FED7FDD2201832800AFF67F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4FED7FDC2201832800AFF67F /* TWSIPFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F0CC6B521F7421D00FA7A5C /* TWChatMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatMessageCell.h; sourceTree = "<group>"; };
@@ -39,6 +57,10 @@
 		4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatAuthorizationViewController.h; sourceTree = "<group>"; };
 		4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatAuthorizationViewController.m; sourceTree = "<group>"; };
 		4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWChatAuthorization.storyboard; sourceTree = "<group>"; };
+		4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TWSIPFramework.framework; path = "../../../Library/Developer/Xcode/DerivedData/TWSIPFramework-caxmfoewumlrjxfilqleziqdumgm/Build/Products/Debug-iphoneos/TWSIPFramework.framework"; sourceTree = "<group>"; };
+		4FED80032202E47000AFF67F /* TWSIPCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWSIPCallViewController.h; sourceTree = "<group>"; };
+		4FED80042202E47000AFF67F /* TWSIPCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWSIPCallViewController.m; sourceTree = "<group>"; };
+		4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWSIPCallViewController.storyboard; sourceTree = "<group>"; };
 		4FEE102321F6F22500E6D849 /* XMPPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMPPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FEE102621F6F22500E6D849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4FEE102721F6F22500E6D849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				100B51C52783CAA11A32D025 /* Pods_XMPPTest.framework in Frameworks */,
+				4FED7FDB2201832800AFF67F /* TWSIPFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +111,7 @@
 		4FEE101A21F6F22500E6D849 = {
 			isa = PBXGroup;
 			children = (
+				4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */,
 				4FEE102521F6F22500E6D849 /* XMPPTest */,
 				4FEE102421F6F22500E6D849 /* Products */,
 				9728C5A2D020EEBD319E5006 /* Pods */,
@@ -121,6 +145,9 @@
 				4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */,
 				4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */,
 				4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */,
+				4FED80032202E47000AFF67F /* TWSIPCallViewController.h */,
+				4FED80042202E47000AFF67F /* TWSIPCallViewController.m */,
+				4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */,
 				4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */,
 				4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */,
 				4F0CC6CE21F9702E00FA7A5C /* Extensions */,
@@ -164,7 +191,7 @@
 				4FEE102021F6F22500E6D849 /* Frameworks */,
 				4FEE102121F6F22500E6D849 /* Resources */,
 				9E6EB99873CCA92D7DFAEEEC /* [CP] Embed Pods Frameworks */,
-				D997770ECCC2FF0D455791FA /* [CP] Copy Pods Resources */,
+				4FED7FDD2201832800AFF67F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,6 +213,11 @@
 				TargetAttributes = {
 					4FEE102221F6F22500E6D849 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -212,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FED80072202E49400AFF67F /* TWSIPCallViewController.storyboard in Resources */,
 				4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */,
 				4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */,
 				4FEE103021F6F22C00E6D849 /* Assets.xcassets in Resources */,
@@ -278,48 +311,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D997770ECCC2FF0D455791FA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest-resources.sh",
-				"${PODS_ROOT}/XMPPFramework/Extensions/Roster/CoreDataStorage/XMPPRoster.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0045/CoreDataStorage/XMPPRoom.xcdatamodeld",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0045/CoreDataStorage/XMPPRoom.xcdatamodeld/XMPPRoom.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0045/HybridStorage/XMPPRoomHybrid.xcdatamodeld",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0045/HybridStorage/XMPPRoomHybrid.xcdatamodeld/XMPPRoomHybrid.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0054/CoreDataStorage/XMPPvCard.xcdatamodeld",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0054/CoreDataStorage/XMPPvCard.xcdatamodeld/XMPPvCard.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0115/CoreDataStorage/XMPPCapabilities.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0136/CoreDataStorage/XMPPMessageArchiving.xcdatamodeld",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XEP-0136/CoreDataStorage/XMPPMessageArchiving.xcdatamodeld/XMPPMessageArchiving.xcdatamodel",
-				"${PODS_ROOT}/XMPPFramework/Extensions/XMPPMUCLight/CoreDataStorage/XMPPRoomLight.xcdatamodel",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoster.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoom.momd",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoom.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoomHybrid.momd",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoomHybrid.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPvCard.momd",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPvCard.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPCapabilities.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPMessageArchiving.momd",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPMessageArchiving.mom",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XMPPRoomLight.mom",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -336,6 +327,7 @@
 				4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */,
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
 				4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */,
+				4FED80052202E47000AFF67F /* TWSIPCallViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +472,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WTV9MV492Q;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"/Users/OK/Library/Developer/Xcode/DerivedData/TWSIPFramework-caxmfoewumlrjxfilqleziqdumgm/Build/Products/Debug-iphoneos/",
+				);
 				GCC_PREFIX_HEADER = XMPPTest/XMPPTest.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = XMPPTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -500,7 +499,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WTV9MV492Q;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = XMPPTest/XMPPTest.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = XMPPTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
