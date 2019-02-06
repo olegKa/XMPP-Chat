@@ -24,12 +24,10 @@
     // Override point for customization after application launch.
     
     _sip = TWSipProvider.sharedInstance;
-    /*
     _sip.setupCallViewControllerBlock = ^UIViewController<TWCallViewControllerProtocol> *{
         TWSIPCallViewController *callVC = [[UIStoryboard storyboardWithName:@"TWSIPCallViewController" bundle:nil] instantiateInitialViewController];
         return callVC;
     };
-    */
     
     // Configure logging framework
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];

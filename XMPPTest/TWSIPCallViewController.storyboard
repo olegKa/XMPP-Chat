@@ -29,14 +29,37 @@
                                     <action selector="buttonPressHangup:" destination="bdQ-Ei-QOf" eventType="touchUpInside" id="NXo-yM-VVj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yie-Bl-xfo">
+                                <rect key="frame" x="45" y="85" width="285" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                <color key="textColor" red="0.96470588239999999" green="0.5450980392" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLR-MK-Wjo">
+                                <rect key="frame" x="166.5" y="124" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yie-Bl-xfo" firstAttribute="top" secondItem="cMz-41-gDE" secondAttribute="top" constant="65" id="5ew-s7-OEm"/>
+                            <constraint firstItem="bLR-MK-Wjo" firstAttribute="top" secondItem="yie-Bl-xfo" secondAttribute="bottom" constant="9" id="Dlb-hO-ubG"/>
+                            <constraint firstItem="yie-Bl-xfo" firstAttribute="centerX" secondItem="PZr-I3-Jxc" secondAttribute="centerX" id="E1t-e0-Cku"/>
+                            <constraint firstItem="bLR-MK-Wjo" firstAttribute="centerX" secondItem="PZr-I3-Jxc" secondAttribute="centerX" id="KM0-53-jz9"/>
                             <constraint firstItem="JWp-lN-A92" firstAttribute="centerX" secondItem="PZr-I3-Jxc" secondAttribute="centerX" id="PtO-MC-MQb"/>
+                            <constraint firstItem="cMz-41-gDE" firstAttribute="trailing" secondItem="yie-Bl-xfo" secondAttribute="trailing" constant="45" id="Qkl-LG-Csw"/>
                             <constraint firstItem="cMz-41-gDE" firstAttribute="bottom" secondItem="JWp-lN-A92" secondAttribute="bottom" constant="50" id="k1M-mo-Mck"/>
+                            <constraint firstItem="yie-Bl-xfo" firstAttribute="leading" secondItem="cMz-41-gDE" secondAttribute="leading" constant="45" id="rxs-Ow-wGd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cMz-41-gDE"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonHangup" destination="JWp-lN-A92" id="V7V-he-0ZH"/>
+                        <outlet property="labelCallNumber" destination="yie-Bl-xfo" id="f23-dD-XXb"/>
+                        <outlet property="labelCallStatus" destination="bLR-MK-Wjo" id="eMb-xE-oRU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0S4-9A-qQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

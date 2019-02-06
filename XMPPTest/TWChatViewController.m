@@ -11,7 +11,7 @@
 
 #import "AppDelegate.h"
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate,  TWSIPProviderDelegate>
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate,  TWSIPAccountDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
     TWSipProvider *_sip;
@@ -27,7 +27,8 @@
     [super viewDidLoad];
     
     _sip = [(AppDelegate *)[UIApplication sharedApplication].delegate sip];
-    _sip.delegate = self;
+    _sip.accountDelegate = self;
+    [_sip registerUser:[[TWSipUser alloc] initWithAccount:@"oki73" password:@"Wl90bk" domain:@"sip.linphone.org" proxy: nil]];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
