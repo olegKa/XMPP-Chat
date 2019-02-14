@@ -57,6 +57,7 @@
 		4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatAuthorizationViewController.h; sourceTree = "<group>"; };
 		4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatAuthorizationViewController.m; sourceTree = "<group>"; };
 		4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWChatAuthorization.storyboard; sourceTree = "<group>"; };
+		4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XMPPTest.entitlements; sourceTree = "<group>"; };
 		4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TWSIPFramework.framework; path = "../../../Library/Developer/Xcode/DerivedData/TWSIPFramework-caxmfoewumlrjxfilqleziqdumgm/Build/Products/Debug-iphoneos/TWSIPFramework.framework"; sourceTree = "<group>"; };
 		4FED80032202E47000AFF67F /* TWSIPCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWSIPCallViewController.h; sourceTree = "<group>"; };
 		4FED80042202E47000AFF67F /* TWSIPCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWSIPCallViewController.m; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		4FEE102521F6F22500E6D849 /* XMPPTest */ = {
 			isa = PBXGroup;
 			children = (
+				4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */,
 				4FEE102621F6F22500E6D849 /* AppDelegate.h */,
 				4FEE102721F6F22500E6D849 /* AppDelegate.m */,
 				4FEE102921F6F22500E6D849 /* TWChatRosterViewController.h */,
@@ -215,6 +217,9 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -470,6 +475,7 @@
 			baseConfigurationReference = C0EFF5B21620EF2F192B479A /* Pods-XMPPTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XMPPTest/XMPPTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WTV9MV492Q;
 				ENABLE_BITCODE = NO;
@@ -497,6 +503,7 @@
 			baseConfigurationReference = B94D99C325278B573055C7A8 /* Pods-XMPPTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = XMPPTest/XMPPTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WTV9MV492Q;
 				ENABLE_BITCODE = NO;

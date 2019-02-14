@@ -488,11 +488,14 @@ static TWXMPPProvider *_provider;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     NSString *room = [[NSUserDefaults standardUserDefaults] objectForKey:kUserRoomKey];
+    XMPPJID *jid;
     if (room) {
-        XMPPJID *jid = [XMPPJID jidWithString:room];
-        [self joinRoomJID:jid];
+        jid = [XMPPJID jidWithString:room];
+    } else {
+        jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@clientsessions.juragv.fvds.ru", self.myJID.user]];
     }
     
+    [self joinRoomJID:jid];
     [self goOnline];
 }
 
