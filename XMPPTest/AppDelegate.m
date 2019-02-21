@@ -9,12 +9,10 @@
 #import "AppDelegate.h"
 #import "TWXMPPProvider.h"
 #import "TWChatAuthorizationViewController.h"
-#import "TWSIPCallViewController.h"
+#import "TWChatViewController.h"
 
 @interface AppDelegate ()
-{
-    TWSipProvider *_sip;
-}
+
 @end
 
 @implementation AppDelegate
@@ -22,12 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    _sip = TWSipProvider.sharedInstance;
-    _sip.setupCallViewControllerBlock = ^UIViewController<TWCallViewControllerProtocol> *{
-        TWSIPCallViewController *callVC = [[UIStoryboard storyboardWithName:@"TWSIPCallViewController" bundle:nil] instantiateInitialViewController];
-        return callVC;
-    };
     
     // Configure logging framework
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
@@ -42,11 +34,11 @@
         TWChatAuthorizationViewController *authViewController = rootViewController.viewControllers.firstObject;
         __weak typeof(self) __weakSelf = self;
         [authViewController setDidSaveBlock:^(BOOL success) {
-            __weakSelf.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+            __weakSelf.window.rootViewController = [self chatViewController]; //[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
             [self.window makeKeyAndVisible];
         }];
     } else {
-        rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+        rootViewController = [self chatViewController]; //[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
     }
     
     self.window.rootViewController = rootViewController;
@@ -55,6 +47,12 @@
     return YES;
 }
 
+- (UINavigationController *)chatViewController
+{
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:[TWChatViewController new]];
+    //nav = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    return nav;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -114,10 +112,7 @@
 }
 
 #pragma mark - Properties
-- (TWSipProvider *)sip
-{
-    return _sip;
-}
+
 
 
 @end

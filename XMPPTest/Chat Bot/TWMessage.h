@@ -6,11 +6,17 @@
 //  Copyright © 2019 oki. All rights reserved.
 //
 
-#import <RCMessageKit/RCMessageKit.h>
+#import <RCMessageKit/RCMessage.h>
+#import "TWChatBotAction.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TWMessage : RCMessage
+
+@property (nonatomic, strong) NSArray <TWChatBotAction *> *actions;
+
+- (instancetype)initWithBody:(NSString *)body incoming:(BOOL)incoming;
+- (instancetype)initWithAction:(TWChatBotAction *)action;
 
 @end
 
