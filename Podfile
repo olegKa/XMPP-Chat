@@ -9,5 +9,6 @@ target 'XMPPTest' do
 
 	pod 'XMPPFramework'
     pod 'RCMessageKit'
+    pod 'AFNetworking', '~> 3.0'
 
 end

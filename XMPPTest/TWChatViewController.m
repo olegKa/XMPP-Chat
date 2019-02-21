@@ -11,10 +11,11 @@
 
 #import "AppDelegate.h"
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate,  TWSIPAccountDelegate>
+#import "TWMessage.h"
+
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
-    TWSipProvider *_sip;
     
     __weak IBOutlet UIBarButtonItem *_btnCall;
 }
@@ -26,13 +27,15 @@
 {
     [super viewDidLoad];
     
-    _sip = [(AppDelegate *)[UIApplication sharedApplication].delegate sip];
-    _sip.accountDelegate = self;
-    [_sip registerUser:[[TWSipUser alloc] initWithAccount:@"oki73" password:@"Wl90bk" domain:@"sip.linphone.org" proxy: nil]];
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     
+    UIBarButtonItem *btnSettings = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(buttonSettings:)];
+    
+    self.navigationItem.rightBarButtonItem = btnSettings;
     
     //[chat getAllRegisteredUsers];
     
@@ -41,28 +44,43 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.actions = @[];
+    
+}
+
+- (NSArray <TWChatBotAction *> *)actions
+{
+    
+    NSMutableArray *arr = @[].mutableCopy;
+    
+    /*
+    [arr addObject:[TWChatBotAction botActionWithTitle:@"Admin" image:[UIImage imageNamed:@"Admin"] handler:^{
+        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Admin>"]];
+    }]];
+    [arr addObject:[TWChatBotAction botActionWithTitle:@"Banned" image:[UIImage imageNamed:@"Banned"] handler:^{
+        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Banned>"]];
+    }]];
+    [arr addObject:[TWChatBotAction botActionWithTitle:@"Members" image:[UIImage imageNamed:@"Members"] handler:^{
+        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Members>"]];
+    }]];
+    
+    [arr addObject:[TWChatBotAction botActionWithTitle:@"DO 4" image:nil handler:^{
+        NSLog(@"DO 4");
+    }]];
+    */
+    return arr.copy;
     
 }
 
 - (IBAction)buttonCall:(id)sender
 {
     
-    [_sip callTo:@"r9227345533"];
 }
 
-- (void)sipProvider:(TWSipProvider *)provider incomingCallWithController:(TWIncomingCallViewController *)controller
+- (IBAction)buttonSettings:(id)sender
 {
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)sipProviderAccountDisconnected:(TWSipProvider *)provider
-{
-    _btnCall.enabled = NO;
-}
-
-- (void)sipProviderAccountConnected:(TWSipProvider *)provider
-{
-    _btnCall.enabled = YES;
+    TWChatSettingsViewController *settingsVC = [[UIStoryboard storyboardWithName:@"TWChatSettings" bundle:nil] instantiateViewControllerWithIdentifier:@"TWChatSettingsViewController"];
+    [self.navigationController pushViewController:settingsVC animated:YES];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,14 +126,40 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
     [self scrollToBottom:YES];
 }
 
-- (RCMessage *)rcmessage:(NSIndexPath *)indexPath
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+        {
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            XMPPRoomMessageCoreDataStorageObject *obj = [controller objectAtIndexPath:newIndexPath];
+            TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:!obj.isFromMe];
+            if (message.actions) {
+                self.actions = message.actions.copy;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - Message Processing
+- (TWMessage *)rcmessage:(NSIndexPath *)indexPath
 {
     XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
-    RCMessage *msg = [[RCMessage alloc] initWithText:obj.body incoming:!obj.isFromMe];
+    TWMessage *msg = [[TWMessage alloc] initWithBody:obj.body incoming:!obj.isFromMe];
     return msg;
 }
 

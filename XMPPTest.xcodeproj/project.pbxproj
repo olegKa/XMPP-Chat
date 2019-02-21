@@ -16,10 +16,14 @@
 		4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6CC21F9702700FA7A5C /* UIAlertController+AlertShow.m */; };
 		4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */; };
 		4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */; };
-		4FED7FDB2201832800AFF67F /* TWSIPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */; };
-		4FED7FDC2201832800AFF67F /* TWSIPFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4FED80052202E47000AFF67F /* TWSIPCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FED80042202E47000AFF67F /* TWSIPCallViewController.m */; };
-		4FED80072202E49400AFF67F /* TWSIPCallViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */; };
+		4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */; };
+		4F4B68C4221D524500C4AA96 /* TWChatBotActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */; };
+		4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C7221D54E100C4AA96 /* TWMessage.m */; };
+		4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */; };
+		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
+		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
+		4F5D1014221D2E2A007B52A4 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */; };
+		4F5D1015221D2E2A007B52A4 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
 		4FEE102B21F6F22500E6D849 /* TWChatRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102A21F6F22500E6D849 /* TWChatRosterViewController.m */; };
 		4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE102C21F6F22500E6D849 /* Main.storyboard */; };
@@ -36,7 +40,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4FED7FDC2201832800AFF67F /* TWSIPFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,10 +61,25 @@
 		4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatAuthorizationViewController.m; sourceTree = "<group>"; };
 		4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWChatAuthorization.storyboard; sourceTree = "<group>"; };
 		4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XMPPTest.entitlements; sourceTree = "<group>"; };
-		4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TWSIPFramework.framework; path = "../../../Library/Developer/Xcode/DerivedData/TWSIPFramework-caxmfoewumlrjxfilqleziqdumgm/Build/Products/Debug-iphoneos/TWSIPFramework.framework"; sourceTree = "<group>"; };
-		4FED80032202E47000AFF67F /* TWSIPCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWSIPCallViewController.h; sourceTree = "<group>"; };
-		4FED80042202E47000AFF67F /* TWSIPCallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWSIPCallViewController.m; sourceTree = "<group>"; };
-		4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWSIPCallViewController.storyboard; sourceTree = "<group>"; };
+		4F4B68BF221D503000C4AA96 /* TWChatBotAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotAction.h; sourceTree = "<group>"; };
+		4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotAction.m; sourceTree = "<group>"; };
+		4F4B68C2221D524500C4AA96 /* TWChatBotActionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotActionButton.h; sourceTree = "<group>"; };
+		4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotActionButton.m; sourceTree = "<group>"; };
+		4F4B68C6221D54E100C4AA96 /* TWMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessage.h; sourceTree = "<group>"; };
+		4F4B68C7221D54E100C4AA96 /* TWMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessage.m; sourceTree = "<group>"; };
+		4F4B68CA221E5A9B00C4AA96 /* HPTextViewInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		4F4B68CB221E5A9B00C4AA96 /* HPGrowingTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		4F4B68CC221E5A9B00C4AA96 /* HPTextViewInternal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		4F4B68CD221E5A9B00C4AA96 /* HPGrowingTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		4F4B68CE221E61C700C4AA96 /* TWChatDataProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatDataProvider.h; sourceTree = "<group>"; };
+		4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatDataProvider.m; sourceTree = "<group>"; };
+		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
+		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
+		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
+		4F5D1010221D2E29007B52A4 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		4F5D1013221D2E29007B52A4 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		4FEE102321F6F22500E6D849 /* XMPPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMPPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FEE102621F6F22500E6D849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4FEE102721F6F22500E6D849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -86,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				100B51C52783CAA11A32D025 /* Pods_XMPPTest.framework in Frameworks */,
-				4FED7FDB2201832800AFF67F /* TWSIPFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,10 +126,49 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4F4B68C5221D549D00C4AA96 /* Chat Bot */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B68C9221E5A9B00C4AA96 /* HPGrowingTextView */,
+				4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */,
+				4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */,
+				4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */,
+				4F4B68BF221D503000C4AA96 /* TWChatBotAction.h */,
+				4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */,
+				4F4B68C2221D524500C4AA96 /* TWChatBotActionButton.h */,
+				4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */,
+				4F4B68C6221D54E100C4AA96 /* TWMessage.h */,
+				4F4B68C7221D54E100C4AA96 /* TWMessage.m */,
+			);
+			path = "Chat Bot";
+			sourceTree = "<group>";
+		};
+		4F4B68C9221E5A9B00C4AA96 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B68CA221E5A9B00C4AA96 /* HPTextViewInternal.h */,
+				4F4B68CB221E5A9B00C4AA96 /* HPGrowingTextView.m */,
+				4F4B68CC221E5A9B00C4AA96 /* HPTextViewInternal.m */,
+				4F4B68CD221E5A9B00C4AA96 /* HPGrowingTextView.h */,
+			);
+			path = HPGrowingTextView;
+			sourceTree = "<group>";
+		};
+		4F5D100F221D2E29007B52A4 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				4F5D1010221D2E29007B52A4 /* HPTextViewInternal.h */,
+				4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */,
+				4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */,
+				4F5D1013221D2E29007B52A4 /* HPGrowingTextView.h */,
+			);
+			name = HPGrowingTextView;
+			path = ../../GrowingTextViewTest/GrowingTextViewTest/HPGrowingTextView;
+			sourceTree = "<group>";
+		};
 		4FEE101A21F6F22500E6D849 = {
 			isa = PBXGroup;
 			children = (
-				4FED7FDA2201832800AFF67F /* TWSIPFramework.framework */,
 				4FEE102521F6F22500E6D849 /* XMPPTest */,
 				4FEE102421F6F22500E6D849 /* Products */,
 				9728C5A2D020EEBD319E5006 /* Pods */,
@@ -131,6 +187,7 @@
 		4FEE102521F6F22500E6D849 /* XMPPTest */ = {
 			isa = PBXGroup;
 			children = (
+				4F5D100F221D2E29007B52A4 /* HPGrowingTextView */,
 				4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */,
 				4FEE102621F6F22500E6D849 /* AppDelegate.h */,
 				4FEE102721F6F22500E6D849 /* AppDelegate.m */,
@@ -147,11 +204,11 @@
 				4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */,
 				4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */,
 				4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */,
-				4FED80032202E47000AFF67F /* TWSIPCallViewController.h */,
-				4FED80042202E47000AFF67F /* TWSIPCallViewController.m */,
-				4FED80062202E49400AFF67F /* TWSIPCallViewController.storyboard */,
 				4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */,
 				4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */,
+				4F4B68CE221E61C700C4AA96 /* TWChatDataProvider.h */,
+				4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */,
+				4F4B68C5221D549D00C4AA96 /* Chat Bot */,
 				4F0CC6CE21F9702E00FA7A5C /* Extensions */,
 				4F0CC6BA21F873D100FA7A5C /* XMPPExtensions */,
 				4FEE102C21F6F22500E6D849 /* Main.storyboard */,
@@ -249,12 +306,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FED80072202E49400AFF67F /* TWSIPCallViewController.storyboard in Resources */,
 				4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */,
 				4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */,
 				4FEE103021F6F22C00E6D849 /* Assets.xcassets in Resources */,
 				4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */,
 				4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */,
+				4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */,
 				4F0CC6CA21F9698000FA7A5C /* TWChatSettings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +328,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
@@ -282,6 +340,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
@@ -327,12 +386,18 @@
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,
+				4F5D1014221D2E2A007B52A4 /* HPGrowingTextView.m in Sources */,
+				4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */,
+				4F5D1015221D2E2A007B52A4 /* HPTextViewInternal.m in Sources */,
+				4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */,
 				4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */,
 				4FEE103621F6F22C00E6D849 /* main.m in Sources */,
 				4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */,
+				4F4B68C4221D524500C4AA96 /* TWChatBotActionButton.m in Sources */,
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
+				4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */,
 				4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */,
-				4FED80052202E47000AFF67F /* TWSIPCallViewController.m in Sources */,
+				4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

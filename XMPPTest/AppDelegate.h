@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <TWSIPFramework/TWSipProvider.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (readonly, nonatomic) UINavigationController *chatViewController;
 
-@property (nonatomic, readonly) TWSipProvider *sip;
 
 @end
 
+#define APP_DELEGATE ((AppDelegate *)UIApplication.sharedApplication.delegate)

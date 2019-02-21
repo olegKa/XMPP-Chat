@@ -7,6 +7,7 @@
 //
 
 #import "TWChatSettingsViewController.h"
+#import "TWChatAuthorizationViewController.h"
 
 @interface TWChatSettingsViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -114,14 +115,21 @@
     return newImage;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segueChatAuth"]) {
+        TWChatAuthorizationViewController *vc = segue.destinationViewController;
+        vc.didSaveBlock = ^(BOOL success) {
+            if (success) {
+                APP_DELEGATE.window.rootViewController = APP_DELEGATE.chatViewController;
+                [APP_DELEGATE.window makeKeyAndVisible];
+            }
+        };
+    }
 }
-*/
+
 
 @end

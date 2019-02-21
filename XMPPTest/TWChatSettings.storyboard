@@ -110,7 +110,7 @@
                     <navigationItem key="navigationItem" id="Hvh-mC-sfZ">
                         <barButtonItem key="rightBarButtonItem" title="Account" id="s4I-TI-Af8">
                             <connections>
-                                <segue destination="PNA-YR-aJ6" kind="show" id="ogV-Ce-bTm"/>
+                                <segue destination="PNA-YR-aJ6" kind="show" identifier="segueChatAuth" id="ogV-Ce-bTm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

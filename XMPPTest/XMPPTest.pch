@@ -20,7 +20,8 @@ static const int ddLogLevel = DDLogLevelInfo;
 #endif
 
 #import "TWXMPPProvider.h"
-#import <TWSIPFramework/TWSIPFramework.h>
+#import "AppDelegate.h"
+#import "TWChatDataProvider.h"
 
 
 
@@ -29,5 +30,11 @@ static const int ddLogLevel = DDLogLevelInfo;
 
 
 #define BLOCK_SAFE_RUN(block, ...) block ? block(__VA_ARGS__) : nil
+
+#define UIColorFromRGB(rgbValue) \
+            [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                            green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+                             blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+                            alpha:1.0]
 
 #endif /* XMPPTest_pch */

@@ -6,11 +6,13 @@
 //  Copyright © 2019 oki. All rights reserved.
 //
 
-#import <RCMessageKit/RCMessagesView.h>
+//#import <RCMessageKit/RCMessagesView.h>
+
+#import "TWMessagesView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TWChatViewController : RCMessagesView
+@interface TWChatViewController : TWMessagesView
 
 - (IBAction)actionInputSend:(id)sender;
 

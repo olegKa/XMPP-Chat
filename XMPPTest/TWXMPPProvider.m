@@ -65,7 +65,7 @@ static TWXMPPProvider *_provider;
     if ([roomMessage.nickname componentsSeparatedByString:@"@"].count > 1) {
         jidFrom = [XMPPJID jidWithString:roomMessage.nickname];
     } else {
-        jidFrom = [XMPPJID jidWithUser:roomMessage.nickname domain:@"192.168.10.3" resource:nil];
+        jidFrom = [XMPPJID jidWithUser:roomMessage.nickname domain:roomMessage.jid.domain resource:nil];
     }
     XMPPvCardTemp *vCard = [self vCardTempWithJID:jidFrom];
     return vCard;
@@ -333,15 +333,7 @@ static TWXMPPProvider *_provider;
     // If you don't want to use the Settings view to set the JID,
     // uncomment the section below to hard code a JID and password.
     //
-    
-    //myJID = @"olegka@192.168.10.3";
-    //myPassword = @"1234";
-    
-    //myJID = @"ImFake@jabber.ru";
-    //myPassword = @"r]G9EebEJnH2o2";
-    
-    //myJID = @"olegKa@jabber.ru";
-    //myPassword = @"r]doBgac-jobzyx-huxvu0";
+
     
     if (self.myJID == nil || self.myPassword == nil) {
         return NO;
@@ -630,6 +622,11 @@ static TWXMPPProvider *_provider;
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender
 {
     NSLog(@"xmppRoomDidJoin");
+    [[TWChatDataProvider shared] joinBotToRoom:_xmppRoom.roomJID.user completion:^(NSDictionary *json, NSError *error) {
+        if (error) {
+            NSLog(@"joinBotToRoom error:%@", error);
+        }
+    }];
     [[NSUserDefaults standardUserDefaults] setObject:sender.roomJID.full forKey:kUserRoomKey];
 }
 
@@ -644,13 +641,13 @@ static TWXMPPProvider *_provider;
  **/
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID
 {
-    NSLog(@"didReceiveMessage:[%@] fromOccupant:[%@]", message.body, occupantJID);
+    NSLog(@"didReceiveMessage:[%@]-[%@] fromOccupant:[%@]", message.body, message.elementID, occupantJID);
     
     XMPPJID *jidFrom;
     if ([occupantJID.resource componentsSeparatedByString:@"@"].count > 1) {
         jidFrom = [XMPPJID jidWithString:occupantJID.resource];
     } else {
-        jidFrom = [XMPPJID jidWithUser:occupantJID.resource domain:@"192.168.10.3" resource:nil];
+        jidFrom = [XMPPJID jidWithUser:occupantJID.resource domain:occupantJID.domain resource:nil];
     }
    
     XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:jidFrom
