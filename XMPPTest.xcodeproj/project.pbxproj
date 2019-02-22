@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		100B51C52783CAA11A32D025 /* Pods_XMPPTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9586E59E50722E6E597E59 /* Pods_XMPPTest.framework */; };
+		3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CB221E5A9B00C4AA96 /* HPGrowingTextView.m */; };
+		3AFE4073221FC1C900C5A0FE /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CC221E5A9B00C4AA96 /* HPTextViewInternal.m */; };
 		4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6B621F7421D00FA7A5C /* TWChatMessageCell.m */; };
 		4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CC6B721F7421D00FA7A5C /* TWChatMessageCell.xib */; };
 		4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6C421F8820700FA7A5C /* TWChatViewController.m */; };
@@ -22,8 +23,6 @@
 		4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */; };
 		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
 		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
-		4F5D1014221D2E2A007B52A4 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */; };
-		4F5D1015221D2E2A007B52A4 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
 		4FEE102B21F6F22500E6D849 /* TWChatRosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102A21F6F22500E6D849 /* TWChatRosterViewController.m */; };
 		4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE102C21F6F22500E6D849 /* Main.storyboard */; };
@@ -31,6 +30,7 @@
 		4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE103121F6F22C00E6D849 /* LaunchScreen.storyboard */; };
 		4FEE103621F6F22C00E6D849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103521F6F22C00E6D849 /* main.m */; };
 		4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */; };
+		7AEEC73EE258F6B1AAC16C78 /* Pods_XMPPTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,10 +76,6 @@
 		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
 		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
 		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
-		4F5D1010221D2E29007B52A4 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
-		4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
-		4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
-		4F5D1013221D2E29007B52A4 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		4FEE102321F6F22500E6D849 /* XMPPTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMPPTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FEE102621F6F22500E6D849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4FEE102721F6F22500E6D849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -93,7 +89,7 @@
 		4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWXMPPProvider.h; sourceTree = "<group>"; };
 		4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWXMPPProvider.m; sourceTree = "<group>"; };
 		4FEE103F21F7257800E6D849 /* XMPPTest.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPTest.pch; sourceTree = "<group>"; };
-		8B9586E59E50722E6E597E59 /* Pods_XMPPTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XMPPTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XMPPTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94D99C325278B573055C7A8 /* Pods-XMPPTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMPPTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest.release.xcconfig"; sourceTree = "<group>"; };
 		C0EFF5B21620EF2F192B479A /* Pods-XMPPTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMPPTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				100B51C52783CAA11A32D025 /* Pods_XMPPTest.framework in Frameworks */,
+				7AEEC73EE258F6B1AAC16C78 /* Pods_XMPPTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,18 +150,6 @@
 			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
-		4F5D100F221D2E29007B52A4 /* HPGrowingTextView */ = {
-			isa = PBXGroup;
-			children = (
-				4F5D1010221D2E29007B52A4 /* HPTextViewInternal.h */,
-				4F5D1011221D2E29007B52A4 /* HPGrowingTextView.m */,
-				4F5D1012221D2E29007B52A4 /* HPTextViewInternal.m */,
-				4F5D1013221D2E29007B52A4 /* HPGrowingTextView.h */,
-			);
-			name = HPGrowingTextView;
-			path = ../../GrowingTextViewTest/GrowingTextViewTest/HPGrowingTextView;
-			sourceTree = "<group>";
-		};
 		4FEE101A21F6F22500E6D849 = {
 			isa = PBXGroup;
 			children = (
@@ -187,7 +171,6 @@
 		4FEE102521F6F22500E6D849 /* XMPPTest */ = {
 			isa = PBXGroup;
 			children = (
-				4F5D100F221D2E29007B52A4 /* HPGrowingTextView */,
 				4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */,
 				4FEE102621F6F22500E6D849 /* AppDelegate.h */,
 				4FEE102721F6F22500E6D849 /* AppDelegate.m */,
@@ -224,7 +207,7 @@
 		8BDCF9E10BBE1CF7904B12A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B9586E59E50722E6E597E59 /* Pods_XMPPTest.framework */,
+				9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -249,8 +232,8 @@
 				4FEE101F21F6F22500E6D849 /* Sources */,
 				4FEE102021F6F22500E6D849 /* Frameworks */,
 				4FEE102121F6F22500E6D849 /* Resources */,
-				9E6EB99873CCA92D7DFAEEEC /* [CP] Embed Pods Frameworks */,
 				4FED7FDD2201832800AFF67F /* Embed Frameworks */,
+				67F246DADBF756E2D6E9A3C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -319,7 +302,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9E6EB99873CCA92D7DFAEEEC /* [CP] Embed Pods Frameworks */ = {
+		67F246DADBF756E2D6E9A3C3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -382,13 +365,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */,
+				3AFE4073221FC1C900C5A0FE /* HPTextViewInternal.m in Sources */,
 				4FEE102B21F6F22500E6D849 /* TWChatRosterViewController.m in Sources */,
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,
-				4F5D1014221D2E2A007B52A4 /* HPGrowingTextView.m in Sources */,
 				4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */,
-				4F5D1015221D2E2A007B52A4 /* HPTextViewInternal.m in Sources */,
 				4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */,
 				4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */,
 				4FEE103621F6F22C00E6D849 /* main.m in Sources */,

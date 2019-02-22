@@ -8,6 +8,7 @@
 
 #import "TWMessagesView.h"
 #import "TWChatBotActionButton.h"
+#import "TWMessage.h"
 
 @interface TWMessagesView () <HPGrowingTextViewDelegate>
 {
@@ -39,7 +40,7 @@
     _gTextInput.delegate = self;
     _gTextInput.clipsToBounds = YES;
     _gTextInput.layer.cornerRadius = _gTextInput.bounds.size.height / 2;
-    _gTextInput.placeholder = @"Введите сообщение";
+    _gTextInput.placeholder = @"Введите сообщение";    
 }
 
 - (void)viewDidLayoutSubviews
@@ -127,7 +128,9 @@ static const CGFloat halfSpace = 0.5f * space;
 {
     if ([_gTextInput.text length] != 0)
     {
-        [self actionSendMessage:_gTextInput.text];
+        //[self actionSendMessage:_gTextInput.text];
+        NSString *jsonString = [TWMessage messageTextWithText:_gTextInput.text];
+        [self actionSendMessage:jsonString];
         [self dismissKeyboard];
         _gTextInput.text = nil;
         [self inputPanelUpdate];

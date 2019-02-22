@@ -37,7 +37,9 @@
     
     self.navigationItem.rightBarButtonItem = btnSettings;
     
-    //[chat getAllRegisteredUsers];
+    UIView *viewTypingIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 50)];
+    viewTypingIndicator.backgroundColor = UIColor.redColor;
+    self.viewTypingIndicator = viewTypingIndicator;
     
 }
 
@@ -46,6 +48,14 @@
     [super viewDidAppear:animated];
     self.actions = @[];
     
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+    
+    [self typingIndicatorShow:YES animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self typingIndicatorShow:NO animated:YES];
+    });
+    });
 }
 
 - (NSArray <TWChatBotAction *> *)actions

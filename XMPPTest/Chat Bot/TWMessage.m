@@ -31,7 +31,7 @@
             // json
             if ([json isKindOfClass:NSDictionary.class]) {
                 NSDictionary *message = json[@"message"];
-                self.plainText = message[@"plainText"];
+                self.plainText = message[@"plainText"]? : @"error";
                 self = [super initWithText:_plainText incoming:incoming];
                 
                 NSDictionary *vidget = message[@"vidget"];
@@ -59,8 +59,34 @@
     NSString *jsonString;
     NSDictionary *json = @{@"message":
                                @{@"vidget":
-                                    @{@"vidgetRowsList": @[action.json]}},
-                           @"plainText": action.title
+                                    @{@"vidgetRowsList": @[action.json]},
+                                 @"plainText": action.title
+                                 },
+                           
+                           };
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:json
+                                                       options:0
+                                                         error:&error];
+    
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    return jsonString;
+}
+
++ (NSString *)messageTextWithText:(NSString *)text
+{
+    NSString *jsonString;
+    NSDictionary *json = @{@"message":
+                               @{@"vidget":
+                                     @{@"vidgetRowsList": @[]},
+                                 @"plainText": text
+                                 },
                            };
     
     NSError *error;

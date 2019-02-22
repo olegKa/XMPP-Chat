@@ -6,7 +6,7 @@
 //  Copyright © 2019 oki. All rights reserved.
 //
 
-#import <RCMessageKit/RCMessage.h>
+#import "RCMessage.h"
 #import "TWChatBotAction.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithBody:(NSString *)body incoming:(BOOL)incoming;
 - (instancetype)initWithAction:(TWChatBotAction *)action;
+
++ (NSString *)messageTextWithText:(NSString *)text;
++ (NSString *)messageTextWithAction:(TWChatBotAction *)action;
 
 @end
 
