@@ -115,4 +115,10 @@
           completion:completion];
 }
 
+
+#pragma mark - Properties
+- (NSString *)resourcePath
+{
+    return [NSString stringWithFormat:@"%@%@%@", _scheme, _url, @"/xmppManager"];
+}
 @end

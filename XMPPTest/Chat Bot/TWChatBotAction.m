@@ -24,7 +24,13 @@
 {
     if (self = [super init]) {
         _title = json[@"text"];
-        _image = [json[@"icon"] isEqualToString:@"N/A"]? [UIImage imageNamed:@"Banned"]: nil;
+        _image = nil; //[json[@"icon"] isEqualToString:@"N/A"]? [UIImage imageNamed:@"Banned"]: nil;
+        
+        NSString *iconPath = [json[@"icon"] isEqualToString:@"N/A"]? nil: json[@"icon"];
+        if (iconPath) {
+            _iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/resources/%@", TWChatDataProvider.shared.resourcePath, iconPath]];
+        }
+        
         _keyWord = json[@"keyWord"];
         _handler = handler;
     }
@@ -50,6 +56,11 @@
     }
     
     return json.copy;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"key:[%@], title:[%@]", self.keyWord, self.title];
 }
 
 @end

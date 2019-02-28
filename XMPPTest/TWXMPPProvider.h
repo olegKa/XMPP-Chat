@@ -14,6 +14,24 @@ static NSString* kUserLoginKey = @"kUserLoginKey";
 static NSString* kUserPasswordKey = @"kUserPasswordKey";
 static NSString* kUserRoomKey = @"kUserRoomKey";
 
+@class TWXMPPProvider;
+
+typedef NS_ENUM(NSInteger, XMPPChatState) {
+    kChatStateUnknown = 0,
+    kChatStateComposing,
+    kChatStatePaused,
+    kChatStateActive,
+    kChatStateInactive,
+    kChatStateGone
+};
+
+@protocol XMPPChatStateDelegate <NSObject>
+
+@optional
+- (void)xmppProvider:(TWXMPPProvider *)provider didChangeState:(XMPPChatState)state room:(XMPPRoom *)room occupant:(XMPPJID *)occupant;
+
+@end
+
 @interface TWXMPPProvider : NSObject <XMPPRosterDelegate, XMPPRoomDelegate, XMPPMUCDelegate, XMPPvCardTempModuleDelegate, XMPPvCardAvatarDelegate>
 
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
@@ -28,6 +46,8 @@ static NSString* kUserRoomKey = @"kUserRoomKey";
 @property (nonatomic, strong, readonly) XMPPRoomCoreDataStorage *xmppRoomStorage;
 
 @property (nonatomic, strong, readonly) XMPPvCardTemp *vCard;
+
+@property (nonatomic, weak) id <XMPPChatStateDelegate> chatStateDelegate;
 
 + (instancetype)shared;
 - (BOOL)connect;

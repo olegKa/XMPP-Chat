@@ -7,6 +7,7 @@
 //
 
 #import "TWChatBotActionButton.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 @implementation TWChatBotActionButton
 
@@ -37,7 +38,9 @@
 {
     _action = action;
     [self setTitle:action.title forState:UIControlStateNormal];
-    [self setImage:action.image forState:UIControlStateNormal];
+    //[self setImage:action.image forState:UIControlStateNormal];
+    
+    [self sd_setImageWithURL:action.iconUrl forState:UIControlStateNormal];
     
     if (action.image) {
         self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 5);
@@ -49,7 +52,7 @@
 
 - (void)didPressActionButton:(id)sender {
     if (_action.handler) {
-        _action.handler(_action.keyWord, _action.title);
+        _action.handler(_action);
     }
 }
 

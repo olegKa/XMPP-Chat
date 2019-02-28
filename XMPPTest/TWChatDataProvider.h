@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *scheme;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *path;
+@property (nonatomic, readonly) NSString *resourcePath;
 
 + (instancetype)shared;
 

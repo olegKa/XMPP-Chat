@@ -142,7 +142,8 @@ static TWXMPPProvider *_provider;
 #endif
     
     // Setup Room Storage
-    _xmppRoomStorage = [[XMPPRoomCoreDataStorage alloc] init];
+    //_xmppRoomStorage = [[XMPPRoomCoreDataStorage alloc] init];
+    _xmppRoomStorage = [[XMPPRoomCoreDataStorage alloc] initWithInMemoryStore];
     _xmppMUC = [[XMPPMUC alloc] init];
     
     // Setup reconnect
@@ -164,8 +165,8 @@ static TWXMPPProvider *_provider;
     // You can do it however you like! It's your application.
     // But you do need to provide the roster with some storage facility.
     
-    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
-    //    xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
+    //_xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] init];
+    _xmppRosterStorage = [[XMPPRosterCoreDataStorage alloc] initWithInMemoryStore];
     
     _xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterStorage];
     
@@ -314,6 +315,25 @@ static TWXMPPProvider *_provider;
     [_xmppRoom activate:_xmppStream];
     [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [_xmppRoom joinRoomUsingNickname:[[NSUserDefaults standardUserDefaults] objectForKey:kUserLoginKey] history:nil];
+}
+
+- (XMPPChatState)chatStateMessage:(XMPPMessage *)message
+{
+    XMPPChatState state = kChatStateUnknown;
+    if ([message hasChatState]) {
+        if (message.hasComposingChatState) {
+            state = kChatStateComposing;
+        } else if (message.hasPausedChatState) {
+            state = kChatStatePaused;
+        } else if (message.hasActiveChatState) {
+            state = kChatStateActive;
+        } else if (message.hasInactiveChatState) {
+            state = kChatStateInactive;
+        } else if (message.hasGoneChatState) {
+            state = kChatStateGone;
+        }
+    }
+    return state;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -654,6 +674,19 @@ static TWXMPPProvider *_provider;
                                                                               inManagedObjectContext:self.managedObjectContext_vCard];
     if (!vCard.photoData) {
         [self.xmppvCardAvatarModule.xmppvCardTempModule fetchvCardTempForJID:jidFrom ignoreStorage:YES];
+    }
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didReceiveChatStateMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID
+{
+    NSLog(@"didReceiveChatState [%@] fromOccupant:[%@]", message.hasComposingChatState? @"typing":@"pause", occupantJID);
+    if ([[occupantJID.resource componentsSeparatedByString:@"@"].firstObject isEqualToString:_xmppStream.myJID.user] == NO) {
+        if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:didChangeState:room:occupant:)]) {
+            [self.chatStateDelegate xmppProvider:self
+                                  didChangeState:[self chatStateMessage:message]
+                                            room:sender
+                                        occupant:occupantJID];
+        }
     }
 }
 

@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _textLogin.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserLoginKey];
+    _textLogin.text = [[NSUserDefaults standardUserDefaults] objectForKey:kUserLoginKey]? :@"user123@185.246.65.33";
     [self validateInput];
     
 }

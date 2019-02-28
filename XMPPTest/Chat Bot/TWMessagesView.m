@@ -16,7 +16,12 @@
     __weak IBOutlet NSLayoutConstraint *_inputViewHeight;
     __weak IBOutlet NSLayoutConstraint *_actionsViewHeight;
     __weak IBOutlet NSLayoutConstraint *_actionsBottom;
+    
+    NSTimer *_timerUserTyping;
 }
+
+@property (nonatomic, assign) BOOL userTyping;
+
 @end
 
 @implementation TWMessagesView
@@ -40,7 +45,8 @@
     _gTextInput.delegate = self;
     _gTextInput.clipsToBounds = YES;
     _gTextInput.layer.cornerRadius = _gTextInput.bounds.size.height / 2;
-    _gTextInput.placeholder = @"Введите сообщение";    
+    _gTextInput.placeholder = @"Введите сообщение";
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -67,8 +73,8 @@ static const CGFloat halfSpace = 0.5f * space;
     for (NSUInteger i = 0; i < rows; i++) {
         
         TWChatBotAction *actionL = [_actions objectAtIndex:idx];
-        actionL.handler = ^(NSString * _Nonnull keyWord, NSString * _Nonnull text) {
-            
+        actionL.handler = ^(TWChatBotAction *action) {
+            [self actionSendMessage:[TWMessage messageTextWithAction:action]];
         };
         TWChatBotActionButton *btnActionL = [TWChatBotActionButton buttonWithAction:actionL];
         CGRect frameL = CGRectMake(posX,
@@ -82,8 +88,8 @@ static const CGFloat halfSpace = 0.5f * space;
         
         if (_actions.count > idx) {
             TWChatBotAction *actionR = [_actions objectAtIndex:idx];
-            actionR.handler = ^(NSString * _Nonnull keyWord, NSString * _Nonnull text) {
-                
+            actionR.handler = ^(TWChatBotAction *action) {
+                [self actionSendMessage:[TWMessage messageTextWithAction:action]];
             };
             TWChatBotActionButton *btnActionR = [TWChatBotActionButton buttonWithAction:actionR];
             CGRect frameR = CGRectMake(posX + width + (0.5 * space), posY + halfSpace, width, actionButtonHeight);
@@ -109,6 +115,25 @@ static const CGFloat halfSpace = 0.5f * space;
     [self updateActionsPanel];
 }
 
+- (void)setUserTyping:(BOOL)userTyping
+{
+    if (_userTyping != userTyping) {
+        [self updateUserTypingState:userTyping];
+    }
+        _userTyping = userTyping;
+        
+        if (userTyping && !_timerUserTyping.isValid) {
+            _timerUserTyping = [NSTimer scheduledTimerWithTimeInterval:1.f repeats:NO block:^(NSTimer * _Nonnull timer) {
+                [self setUserTyping:NO];
+            }];
+        } else {
+            [_timerUserTyping invalidate];
+            _timerUserTyping = nil;
+            
+        }
+    //}
+}
+
 #pragma mark - Override
 - (void)inputPanelUpdate {
     
@@ -116,6 +141,16 @@ static const CGFloat halfSpace = 0.5f * space;
 
 - (void)dismissKeyboard {
     [self.view endEditing:YES];
+}
+
+- (void)typingIndicatorUpdate
+{
+    
+}
+
+- (void)updateUserTypingState:(BOOL)typing
+{
+    NSLog(@"user %@", typing? @"taping...": @"stop taping");
 }
 
 #pragma mark - User Actions
@@ -175,7 +210,7 @@ static const CGFloat halfSpace = 0.5f * space;
 }
 
 - (void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView {
-    
+    self.userTyping = YES;
 }
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
@@ -203,10 +238,7 @@ static const CGFloat halfSpace = 0.5f * space;
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    //int curve = [[notification.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    // set views with new info
-    //_containerView.frame = containerFrame;
+ 
     CGFloat bottomPadding = 0;
     if (@available(iOS 11.0, *)) {
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
@@ -236,5 +268,47 @@ static const CGFloat halfSpace = 0.5f * space;
         
     }];
 }
+
+#pragma mark -
+/*
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+{
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (indexPath.row == 0) // Section header
+    {
+        return [RCSectionHeaderCell height:indexPath messagesView:self];
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (indexPath.row == 1) // Bubble header
+    {
+        return [RCBubbleHeaderCell height:indexPath messagesView:self];
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (indexPath.row == 2) // Message body
+    {
+        RCMessage *rcmessage = [self rcmessage:indexPath];
+        if (rcmessage.type == RC_TYPE_STATUS)    return [RCStatusCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_TEXT)        return [RCTextMessageCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_EMOJI)    return [RCEmojiMessageCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_PICTURE)    return [RCPictureMessageCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_VIDEO)    return [RCVideoMessageCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_AUDIO)    return [RCAudioMessageCell height:indexPath messagesView:self];
+        if (rcmessage.type == RC_TYPE_LOCATION)    return [RCLocationMessageCell height:indexPath messagesView:self];
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (indexPath.row == 3) // Bubble footer
+    {
+        return [RCBubbleFooterCell height:indexPath messagesView:self];
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (indexPath.row == 4) // Section footer
+    {
+        return [RCSectionFooterCell height:indexPath messagesView:self];
+    }
+    return 0;
+}
+*/
 
 @end

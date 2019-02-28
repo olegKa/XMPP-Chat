@@ -12,10 +12,15 @@
 #import "AppDelegate.h"
 
 #import "TWMessage.h"
+#import "TWChatTypingIndicator.h"
+#import "NSDate+TWChat.h"
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate>
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
+    TWChatTypingIndicator *typingIndicatorView;
+    NSArray <NSString *> *_firstMessageAtDay; // список из первых сообщений за каждый из дней (для группировки по датам)
+    NSMutableArray <TWMessage *> *_messages;
     
     __weak IBOutlet UIBarButtonItem *_btnCall;
 }
@@ -27,6 +32,8 @@
 {
     [super viewDidLoad];
     
+    _messages = @[].mutableCopy;
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     
@@ -37,9 +44,9 @@
     
     self.navigationItem.rightBarButtonItem = btnSettings;
     
-    UIView *viewTypingIndicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 50)];
-    viewTypingIndicator.backgroundColor = UIColor.redColor;
-    self.viewTypingIndicator = viewTypingIndicator;
+    typingIndicatorView = [TWChatTypingIndicator default];
+    self.viewTypingIndicator = typingIndicatorView;
+    chat.chatStateDelegate = self;
     
 }
 
@@ -47,39 +54,6 @@
 {
     [super viewDidAppear:animated];
     self.actions = @[];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-    
-    [self typingIndicatorShow:YES animated:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self typingIndicatorShow:NO animated:YES];
-    });
-    });
-}
-
-- (NSArray <TWChatBotAction *> *)actions
-{
-    
-    NSMutableArray *arr = @[].mutableCopy;
-    
-    /*
-    [arr addObject:[TWChatBotAction botActionWithTitle:@"Admin" image:[UIImage imageNamed:@"Admin"] handler:^{
-        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Admin>"]];
-    }]];
-    [arr addObject:[TWChatBotAction botActionWithTitle:@"Banned" image:[UIImage imageNamed:@"Banned"] handler:^{
-        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Banned>"]];
-    }]];
-    [arr addObject:[TWChatBotAction botActionWithTitle:@"Members" image:[UIImage imageNamed:@"Members"] handler:^{
-        [chat.xmppRoom sendMessageWithBody:[NSString stringWithFormat:@"Сделай мне <Members>"]];
-    }]];
-    
-    [arr addObject:[TWChatBotAction botActionWithTitle:@"DO 4" image:nil handler:^{
-        NSLog(@"DO 4");
-    }]];
-    */
-    return arr.copy;
-    
 }
 
 - (IBAction)buttonCall:(id)sender
@@ -91,6 +65,21 @@
 {
     TWChatSettingsViewController *settingsVC = [[UIStoryboard storyboardWithName:@"TWChatSettings" bundle:nil] instantiateViewControllerWithIdentifier:@"TWChatSettingsViewController"];
     [self.navigationController pushViewController:settingsVC animated:YES];
+}
+
+- (void)updateDates
+{
+    NSMutableDictionary *dates = @{}.mutableCopy;
+    NSDateFormatter *df = [NSDateFormatter new];
+    df.dateFormat = @"dd MMMM yyyy";
+    [fetchedResultsController.fetchedObjects enumerateObjectsUsingBlock:^(XMPPRoomMessageCoreDataStorageObject * _Nonnull msg, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *date = [df stringFromDate:msg.localTimestamp];
+        if (![dates.allValues containsObject:date] && msg.message.elementID.length) {
+            dates[msg.message.elementID] = date;
+        }
+    }];
+    
+    _firstMessageAtDay = dates.allKeys;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,6 +125,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    [self updateDates];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
 }
@@ -153,7 +143,7 @@
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
             
             XMPPRoomMessageCoreDataStorageObject *obj = [controller objectAtIndexPath:newIndexPath];
-            TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:!obj.isFromMe];
+            TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
             if (message.actions) {
                 self.actions = message.actions.copy;
             }
@@ -165,12 +155,80 @@
     }
 }
 
+#pragma mark - XMPPChatStateDelegate
+- (void)xmppProvider:(TWXMPPProvider *)provider didChangeState:(XMPPChatState)state room:(XMPPRoom *)room occupant:(XMPPJID *)occupant
+{
+    [self typingIndicatorShow:(state == kChatStateComposing) animated:YES];
+    typingIndicatorView.text = [NSString stringWithFormat:@"%@ печатает...", occupant.resource];
+}
+
 #pragma mark - Message Processing
 - (TWMessage *)rcmessage:(NSIndexPath *)indexPath
 {
-    XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+    //XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+    
+    TWMessage *msg = [self messageAtIndexPath:indexPath];
+    
+    /*
     TWMessage *msg = [[TWMessage alloc] initWithBody:obj.body incoming:!obj.isFromMe];
+    msg.loadingHandle = ^{
+        [self.tableView reloadData];
+        //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+    };
+     */
     return msg;
+}
+
+- (BOOL)isFromMeMessage:(XMPPRoomMessageCoreDataStorageObject *)message
+{
+    BOOL isFromMe = [message.jid.resource hasPrefix:chat.xmppStream.myJID.user];
+    return isFromMe;
+}
+
+- (TWMessage *)messageAtIndexPath:(NSIndexPath *)indexPath
+{
+    TWMessage *message;
+    XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+    NSUInteger msgIdx = [_messages indexOfObjectPassingTest:^BOOL(TWMessage * _Nonnull msg, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([msg.elementID isEqualToString:obj.message.elementID]) {
+            *stop = YES;
+        }
+        return *stop;
+    }];
+    
+    if (msgIdx == NSNotFound) {
+        message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
+        message.elementID = obj.message.elementID;
+        if (message.type == RC_TYPE_LOCATION) {
+            message.loadingHandle = ^(TWMessage * _Nonnull message) {
+                NSIndexPath *ip = [self indexPathOfMessage:message];
+                if (ip) {
+                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:ip.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            };
+        }
+        [_messages addObject:message];
+    } else {
+        message = _messages[msgIdx];
+    }
+    
+    return message;
+}
+
+- (NSIndexPath *)indexPathOfMessage:(TWMessage *)message
+{
+    NSUInteger idx = [_messages indexOfObjectPassingTest:^BOOL(TWMessage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([message.elementID isEqualToString:obj.elementID]) {
+            *stop = YES;
+        }
+        return *stop;
+    }];
+    
+    if (idx == NSNotFound) {
+        return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:0 inSection:idx];
 }
 
 - (XMPPRoomMessageCoreDataStorageObject *)objectAtIndexPath:(NSIndexPath *)indexPath
@@ -184,7 +242,7 @@
 {
     NSString *bubbleHeader;
     XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
-    if (!message.isFromMe) {
+    if (![self isFromMeMessage:message]) {
         
         XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
         bubbleHeader = vCardFrom.nickname;
@@ -194,22 +252,26 @@
 
 - (NSString *)textBubbleFooter:(NSIndexPath *)indexPath
 {
-    return @"bubble footer";
+    XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+    return [obj.localTimestamp stringMessage];
 }
 
 - (NSString *)textSectionHeader:(NSIndexPath *)indexPath
 {
     XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
-    return [NSString stringWithFormat:@"%@", obj.localTimestamp];
+    if ([_firstMessageAtDay containsObject:obj.message.elementID]) {
+        return [obj.localTimestamp stringGroup];
+    }
+    return nil;
 }
 
 - (UIImage *)avatarImage:(NSIndexPath *)indexPath
 {
     UIImage *photo;
     XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
-    if (chat.vCard.photo && message.isFromMe) {
+    if (chat.vCard.photo && [self isFromMeMessage:message]) {
         photo = [UIImage imageWithData:chat.vCard.photo];
-    } else if (!message.isFromMe) {
+    } else if (![self isFromMeMessage:message]) {
         
         XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
         photo = [UIImage imageWithData:vCardFrom.photo];
@@ -228,6 +290,19 @@
     [chat.xmppvCardAvatarModule.xmppvCardTempModule fetchvCardTempForJID:[XMPPJID jidWithString:@"bot@192.168.10.3"] ignoreStorage:YES];
 }
 
+- (void)updateUserTypingState:(BOOL)typing
+{
+    XMPPMessage *msg = [XMPPMessage message];
+    if (typing) {
+        [msg addComposingChatState];
+    } else {
+        [msg addPausedChatState];
+    }
+    
+    [chat.xmppRoom sendMessage:msg];
+    
+}
+
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -238,16 +313,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"segueChatSettings"]) {
-        /*
-        __weak TWChatSettingsViewController *vc = segue.destinationViewController;
-        vc.didSaveBlock = ^(BOOL success) {
-            if (success) {
-                [vc.navigationController popViewControllerAnimated:YES];
-            } else {
-                [UIAlertController alertWithTitle:@"Error" andMessage:@"Ошибка"];
-            }
-        };
-         */
+ 
     }
 }
 

@@ -11,9 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TWMessage;
+
+typedef void (^TWMessageLoadingHandle) (TWMessage *message);
+
 @interface TWMessage : RCMessage
 
+@property (nonatomic, strong) NSString *elementID;
 @property (nonatomic, strong) NSArray <TWChatBotAction *> *actions;
+@property (nonatomic, copy) TWMessageLoadingHandle loadingHandle;
 
 - (instancetype)initWithBody:(NSString *)body incoming:(BOOL)incoming;
 - (instancetype)initWithAction:(TWChatBotAction *)action;

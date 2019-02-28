@@ -10,12 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TWChatBotActionHandler) (NSString *keyWord, NSString *text);
+@class TWChatBotAction;
+
+typedef void (^TWChatBotActionHandler) (TWChatBotAction *action);
 
 @interface TWChatBotAction : NSObject
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSURL *iconUrl;
 @property (nonatomic, strong) NSString *keyWord;
 @property (nonatomic, copy) TWChatBotActionHandler handler;
 @property (nonatomic, readonly) NSDictionary *json;

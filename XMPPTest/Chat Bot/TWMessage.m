@@ -32,15 +32,23 @@
             if ([json isKindOfClass:NSDictionary.class]) {
                 NSDictionary *message = json[@"message"];
                 self.plainText = message[@"plainText"]? : @"error";
-                self = [super initWithText:_plainText incoming:incoming];
+                if ([self.plainText isEqualToString:@"Тест "]) {
+                    self = [super initWithLatitude:55.157210 longitude:61.367877 incoming:incoming completion:^{
+                        if (self.loadingHandle) {
+                            self.loadingHandle(self);
+                        }
+                    }];
+                } else {
+                    self = [super initWithText:_plainText incoming:incoming];
+                }
                 
                 NSDictionary *vidget = message[@"vidget"];
                 NSArray <NSDictionary *> *vidgetList = vidget[@"vidgetRowsList"];
                 if ([vidgetList isKindOfClass:NSArray.class]) {
                     NSMutableArray *actions = @[].mutableCopy;
                     [vidgetList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        TWChatBotAction *action = [[TWChatBotAction alloc] initWithJSON:obj handler:^(NSString * _Nonnull keyWord, NSString * _Nonnull text) {
-                            NSLog(@"keyWord is [%@]", keyWord);
+                        TWChatBotAction *action = [[TWChatBotAction alloc] initWithJSON:obj handler:^(TWChatBotAction *action) {
+                            NSLog(@"keyWord is [%@]", action.keyWord);
                         }];
                         [actions addObject:action];
                     }];
