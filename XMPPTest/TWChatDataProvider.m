@@ -111,7 +111,7 @@
 - (void)createRoom:(NSString *)room completion:(TWChatResponse)completion
 {
     [self postMethod:@"createMUCRoom"
-              params:@{@"roomName" : room}
+              params:@{@"roomname" : room}
           completion:completion];
 }
 

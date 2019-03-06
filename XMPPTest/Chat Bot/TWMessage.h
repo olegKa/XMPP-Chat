@@ -22,6 +22,7 @@ typedef void (^TWMessageLoadingHandle) (TWMessage *message);
 @property (nonatomic, copy) TWMessageLoadingHandle loadingHandle;
 
 - (instancetype)initWithBody:(NSString *)body incoming:(BOOL)incoming;
+- (instancetype)initWithPictureUrl:(NSURL *)url incoming:(BOOL)incoming complation:(void(^)(void))completion;
 - (instancetype)initWithAction:(TWChatBotAction *)action;
 
 + (NSString *)messageTextWithText:(NSString *)text;

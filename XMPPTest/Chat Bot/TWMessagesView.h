@@ -11,6 +11,8 @@
 #import "HPGrowingTextView.h"
 #import "TWChatBotAction.h"
 
+#import "XMPPRoomMessageCoreDataStorageObject+TWChat.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet HPGrowingTextView *gTextInput;
 @property (strong, nonatomic) NSArray <TWChatBotAction *> *actions;
+@property (assign, nonatomic, getter=isEnabled) BOOL enabled;
 
 @end
 

@@ -17,10 +17,43 @@
 		4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6CC21F9702700FA7A5C /* UIAlertController+AlertShow.m */; };
 		4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */; };
 		4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */; };
+		4F168EE8222CF33B00A0355A /* rcmessage_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB4222CF33B00A0355A /* rcmessage_send@2x.png */; };
+		4F168EE9222CF33B00A0355A /* rcmessages_audiopause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB5222CF33B00A0355A /* rcmessages_audiopause@2x.png */; };
+		4F168EEA222CF33B00A0355A /* rcmessages_audioplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB6222CF33B00A0355A /* rcmessages_audioplay@2x.png */; };
+		4F168EEB222CF33B00A0355A /* rcmessage_outgoing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB7222CF33B00A0355A /* rcmessage_outgoing.aiff */; };
+		4F168EEC222CF33B00A0355A /* rcmessages_manual@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB8222CF33B00A0355A /* rcmessages_manual@2x.png */; };
+		4F168EED222CF33B00A0355A /* rcmessages_videoplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EB9222CF33B00A0355A /* rcmessages_videoplay@2x.png */; };
+		4F168EEE222CF33B00A0355A /* rcmessage_incoming.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EBA222CF33B00A0355A /* rcmessage_incoming.aiff */; };
+		4F168EEF222CF33B00A0355A /* rcmessage_attach@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EBB222CF33B00A0355A /* rcmessage_attach@2x.png */; };
+		4F168EF0222CF33B00A0355A /* RCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EBD222CF33B00A0355A /* RCMenuItem.m */; };
+		4F168EF1222CF33B00A0355A /* RCTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EC3222CF33B00A0355A /* RCTextMessageCell.m */; };
+		4F168EF2222CF33B00A0355A /* RCEmojiMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EC5222CF33B00A0355A /* RCEmojiMessageCell.m */; };
+		4F168EF3222CF33B00A0355A /* RCMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EC7222CF33B00A0355A /* RCMessageCell.m */; };
+		4F168EF4222CF33B00A0355A /* RCPictureMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168ECA222CF33B00A0355A /* RCPictureMessageCell.m */; };
+		4F168EF5222CF33B00A0355A /* RCVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168ECD222CF33B00A0355A /* RCVideoMessageCell.m */; };
+		4F168EF6222CF33B00A0355A /* RCAudioMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168ED0222CF33B00A0355A /* RCAudioMessageCell.m */; };
+		4F168EF7222CF33B00A0355A /* RCLocationMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168ED3222CF33B00A0355A /* RCLocationMessageCell.m */; };
+		4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168ED6222CF33B00A0355A /* RCStatusCell.m */; };
+		4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EDB222CF33B00A0355A /* RCSectionFooterCell.m */; };
+		4F168EFA222CF33B00A0355A /* RCBubbleFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EDC222CF33B00A0355A /* RCBubbleFooterCell.m */; };
+		4F168EFB222CF33B00A0355A /* RCSectionHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EDE222CF33B00A0355A /* RCSectionHeaderCell.m */; };
+		4F168EFC222CF33B00A0355A /* RCBubbleHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EDF222CF33B00A0355A /* RCBubbleHeaderCell.m */; };
+		4F168EFD222CF33B00A0355A /* RCMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EE2222CF33B00A0355A /* RCMessagesView.m */; };
+		4F168EFE222CF33B00A0355A /* RCMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EE3222CF33B00A0355A /* RCMessages.m */; };
+		4F168EFF222CF33B00A0355A /* RCMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F168EE4222CF33B00A0355A /* RCMessagesView.xib */; };
+		4F168F00222CF33B00A0355A /* RCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168EE6222CF33B00A0355A /* RCMessage.m */; };
+		4F168F02222CF63300A0355A /* testRtf.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4F168F01222CF63300A0355A /* testRtf.rtf */; };
+		4F168F05222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168F04222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m */; };
+		4F168F08222E820200A0355A /* NSString+TWChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F168F07222E820200A0355A /* NSString+TWChat.m */; };
 		4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */; };
 		4F4B68C4221D524500C4AA96 /* TWChatBotActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */; };
 		4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68C7221D54E100C4AA96 /* TWMessage.m */; };
 		4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */; };
+		4F4B68E22224080900C4AA96 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B68E12224080900C4AA96 /* ImageIO.framework */; };
+		4F4B697B2225441700C4AA96 /* TWChatTypingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B697A2225441700C4AA96 /* TWChatTypingIndicator.m */; };
+		4F4B69832225442B00C4AA96 /* TWChatTypingIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */; };
+		4F4B69862225573400C4AA96 /* NSDate+TWChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B69852225573400C4AA96 /* NSDate+TWChat.m */; };
+		4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B698822255A0600C4AA96 /* NSDate+Escort.m */; };
 		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
 		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
@@ -30,7 +63,7 @@
 		4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FEE103121F6F22C00E6D849 /* LaunchScreen.storyboard */; };
 		4FEE103621F6F22C00E6D849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103521F6F22C00E6D849 /* main.m */; };
 		4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */; };
-		7AEEC73EE258F6B1AAC16C78 /* Pods_XMPPTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */; };
+		FDAB015F9E2BF6291F7E35CA /* Pods_XMPPTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AABFA6546C87F3DAD572786 /* Pods_XMPPTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +93,52 @@
 		4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatAuthorizationViewController.h; sourceTree = "<group>"; };
 		4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatAuthorizationViewController.m; sourceTree = "<group>"; };
 		4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWChatAuthorization.storyboard; sourceTree = "<group>"; };
+		4F168EB1222CF33B00A0355A /* RCMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessages.h; sourceTree = "<group>"; };
+		4F168EB2222CF33B00A0355A /* RCMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessagesView.h; sourceTree = "<group>"; };
+		4F168EB4222CF33B00A0355A /* rcmessage_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessage_send@2x.png"; sourceTree = "<group>"; };
+		4F168EB5222CF33B00A0355A /* rcmessages_audiopause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessages_audiopause@2x.png"; sourceTree = "<group>"; };
+		4F168EB6222CF33B00A0355A /* rcmessages_audioplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessages_audioplay@2x.png"; sourceTree = "<group>"; };
+		4F168EB7222CF33B00A0355A /* rcmessage_outgoing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = rcmessage_outgoing.aiff; sourceTree = "<group>"; };
+		4F168EB8222CF33B00A0355A /* rcmessages_manual@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessages_manual@2x.png"; sourceTree = "<group>"; };
+		4F168EB9222CF33B00A0355A /* rcmessages_videoplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessages_videoplay@2x.png"; sourceTree = "<group>"; };
+		4F168EBA222CF33B00A0355A /* rcmessage_incoming.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = rcmessage_incoming.aiff; sourceTree = "<group>"; };
+		4F168EBB222CF33B00A0355A /* rcmessage_attach@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rcmessage_attach@2x.png"; sourceTree = "<group>"; };
+		4F168EBD222CF33B00A0355A /* RCMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMenuItem.m; sourceTree = "<group>"; };
+		4F168EBE222CF33B00A0355A /* RCMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMenuItem.h; sourceTree = "<group>"; };
+		4F168EC2222CF33B00A0355A /* RCTextMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTextMessageCell.h; sourceTree = "<group>"; };
+		4F168EC3222CF33B00A0355A /* RCTextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTextMessageCell.m; sourceTree = "<group>"; };
+		4F168EC5222CF33B00A0355A /* RCEmojiMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCEmojiMessageCell.m; sourceTree = "<group>"; };
+		4F168EC6222CF33B00A0355A /* RCEmojiMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCEmojiMessageCell.h; sourceTree = "<group>"; };
+		4F168EC7222CF33B00A0355A /* RCMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessageCell.m; sourceTree = "<group>"; };
+		4F168EC9222CF33B00A0355A /* RCPictureMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPictureMessageCell.h; sourceTree = "<group>"; };
+		4F168ECA222CF33B00A0355A /* RCPictureMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCPictureMessageCell.m; sourceTree = "<group>"; };
+		4F168ECC222CF33B00A0355A /* RCVideoMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCVideoMessageCell.h; sourceTree = "<group>"; };
+		4F168ECD222CF33B00A0355A /* RCVideoMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCVideoMessageCell.m; sourceTree = "<group>"; };
+		4F168ECF222CF33B00A0355A /* RCAudioMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCAudioMessageCell.h; sourceTree = "<group>"; };
+		4F168ED0222CF33B00A0355A /* RCAudioMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCAudioMessageCell.m; sourceTree = "<group>"; };
+		4F168ED1222CF33B00A0355A /* RCMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessageCell.h; sourceTree = "<group>"; };
+		4F168ED3222CF33B00A0355A /* RCLocationMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCLocationMessageCell.m; sourceTree = "<group>"; };
+		4F168ED4222CF33B00A0355A /* RCLocationMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCLocationMessageCell.h; sourceTree = "<group>"; };
+		4F168ED6222CF33B00A0355A /* RCStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCStatusCell.m; sourceTree = "<group>"; };
+		4F168ED7222CF33B00A0355A /* RCStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCStatusCell.h; sourceTree = "<group>"; };
+		4F168ED9222CF33B00A0355A /* RCSectionFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSectionFooterCell.h; sourceTree = "<group>"; };
+		4F168EDA222CF33B00A0355A /* RCBubbleFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCBubbleFooterCell.h; sourceTree = "<group>"; };
+		4F168EDB222CF33B00A0355A /* RCSectionFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSectionFooterCell.m; sourceTree = "<group>"; };
+		4F168EDC222CF33B00A0355A /* RCBubbleFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCBubbleFooterCell.m; sourceTree = "<group>"; };
+		4F168EDE222CF33B00A0355A /* RCSectionHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSectionHeaderCell.m; sourceTree = "<group>"; };
+		4F168EDF222CF33B00A0355A /* RCBubbleHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCBubbleHeaderCell.m; sourceTree = "<group>"; };
+		4F168EE0222CF33B00A0355A /* RCSectionHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSectionHeaderCell.h; sourceTree = "<group>"; };
+		4F168EE1222CF33B00A0355A /* RCBubbleHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCBubbleHeaderCell.h; sourceTree = "<group>"; };
+		4F168EE2222CF33B00A0355A /* RCMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessagesView.m; sourceTree = "<group>"; };
+		4F168EE3222CF33B00A0355A /* RCMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessages.m; sourceTree = "<group>"; };
+		4F168EE4222CF33B00A0355A /* RCMessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RCMessagesView.xib; sourceTree = "<group>"; };
+		4F168EE6222CF33B00A0355A /* RCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCMessage.m; sourceTree = "<group>"; };
+		4F168EE7222CF33B00A0355A /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
+		4F168F01222CF63300A0355A /* testRtf.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = testRtf.rtf; sourceTree = "<group>"; };
+		4F168F03222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XMPPRoomMessageCoreDataStorageObject+TWChat.h"; sourceTree = "<group>"; };
+		4F168F04222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "XMPPRoomMessageCoreDataStorageObject+TWChat.m"; sourceTree = "<group>"; };
+		4F168F06222E820200A0355A /* NSString+TWChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+TWChat.h"; sourceTree = "<group>"; };
+		4F168F07222E820200A0355A /* NSString+TWChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+TWChat.m"; sourceTree = "<group>"; };
 		4F493FD122157FF4004CBBFC /* XMPPTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XMPPTest.entitlements; sourceTree = "<group>"; };
 		4F4B68BF221D503000C4AA96 /* TWChatBotAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotAction.h; sourceTree = "<group>"; };
 		4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotAction.m; sourceTree = "<group>"; };
@@ -73,6 +152,14 @@
 		4F4B68CD221E5A9B00C4AA96 /* HPGrowingTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		4F4B68CE221E61C700C4AA96 /* TWChatDataProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatDataProvider.h; sourceTree = "<group>"; };
 		4F4B68CF221E61C700C4AA96 /* TWChatDataProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatDataProvider.m; sourceTree = "<group>"; };
+		4F4B68E12224080900C4AA96 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		4F4B69792225441700C4AA96 /* TWChatTypingIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatTypingIndicator.h; sourceTree = "<group>"; };
+		4F4B697A2225441700C4AA96 /* TWChatTypingIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatTypingIndicator.m; sourceTree = "<group>"; };
+		4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatTypingIndicator.xib; sourceTree = "<group>"; };
+		4F4B69842225573400C4AA96 /* NSDate+TWChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+TWChat.h"; sourceTree = "<group>"; };
+		4F4B69852225573400C4AA96 /* NSDate+TWChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TWChat.m"; sourceTree = "<group>"; };
+		4F4B698722255A0500C4AA96 /* NSDate+Escort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Escort.h"; sourceTree = "<group>"; };
+		4F4B698822255A0600C4AA96 /* NSDate+Escort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Escort.m"; sourceTree = "<group>"; };
 		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
 		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
 		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
@@ -89,7 +176,7 @@
 		4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWXMPPProvider.h; sourceTree = "<group>"; };
 		4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWXMPPProvider.m; sourceTree = "<group>"; };
 		4FEE103F21F7257800E6D849 /* XMPPTest.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPTest.pch; sourceTree = "<group>"; };
-		9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XMPPTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AABFA6546C87F3DAD572786 /* Pods_XMPPTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XMPPTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94D99C325278B573055C7A8 /* Pods-XMPPTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMPPTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest.release.xcconfig"; sourceTree = "<group>"; };
 		C0EFF5B21620EF2F192B479A /* Pods-XMPPTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMPPTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XMPPTest/Pods-XMPPTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AEEC73EE258F6B1AAC16C78 /* Pods_XMPPTest.framework in Frameworks */,
+				4F4B68E22224080900C4AA96 /* ImageIO.framework in Frameworks */,
+				FDAB015F9E2BF6291F7E35CA /* Pods_XMPPTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,13 +206,180 @@
 			children = (
 				4F0CC6CB21F9702700FA7A5C /* UIAlertController+AlertShow.h */,
 				4F0CC6CC21F9702700FA7A5C /* UIAlertController+AlertShow.m */,
+				4F4B69842225573400C4AA96 /* NSDate+TWChat.h */,
+				4F4B69852225573400C4AA96 /* NSDate+TWChat.m */,
+				4F4B698722255A0500C4AA96 /* NSDate+Escort.h */,
+				4F4B698822255A0600C4AA96 /* NSDate+Escort.m */,
+				4F168F06222E820200A0355A /* NSString+TWChat.h */,
+				4F168F07222E820200A0355A /* NSString+TWChat.m */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4F168EB0222CF33B00A0355A /* RCMessageKit */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EB1222CF33B00A0355A /* RCMessages.h */,
+				4F168EB2222CF33B00A0355A /* RCMessagesView.h */,
+				4F168EB3222CF33B00A0355A /* Resources */,
+				4F168EBC222CF33B00A0355A /* MenuItem */,
+				4F168EBF222CF33B00A0355A /* Cell */,
+				4F168EE2222CF33B00A0355A /* RCMessagesView.m */,
+				4F168EE3222CF33B00A0355A /* RCMessages.m */,
+				4F168EE4222CF33B00A0355A /* RCMessagesView.xib */,
+				4F168EE5222CF33B00A0355A /* Data */,
+			);
+			path = RCMessageKit;
+			sourceTree = "<group>";
+		};
+		4F168EB3222CF33B00A0355A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EB4222CF33B00A0355A /* rcmessage_send@2x.png */,
+				4F168EB5222CF33B00A0355A /* rcmessages_audiopause@2x.png */,
+				4F168EB6222CF33B00A0355A /* rcmessages_audioplay@2x.png */,
+				4F168EB7222CF33B00A0355A /* rcmessage_outgoing.aiff */,
+				4F168EB8222CF33B00A0355A /* rcmessages_manual@2x.png */,
+				4F168EB9222CF33B00A0355A /* rcmessages_videoplay@2x.png */,
+				4F168EBA222CF33B00A0355A /* rcmessage_incoming.aiff */,
+				4F168EBB222CF33B00A0355A /* rcmessage_attach@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4F168EBC222CF33B00A0355A /* MenuItem */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EBD222CF33B00A0355A /* RCMenuItem.m */,
+				4F168EBE222CF33B00A0355A /* RCMenuItem.h */,
+			);
+			path = MenuItem;
+			sourceTree = "<group>";
+		};
+		4F168EBF222CF33B00A0355A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EC0222CF33B00A0355A /* MessageCells */,
+				4F168ED5222CF33B00A0355A /* StatusCell */,
+				4F168ED8222CF33B00A0355A /* FooterCells */,
+				4F168EDD222CF33B00A0355A /* HeaderCells */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		4F168EC0222CF33B00A0355A /* MessageCells */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EC1222CF33B00A0355A /* 01_Text */,
+				4F168EC4222CF33B00A0355A /* 02_Emoji */,
+				4F168EC7222CF33B00A0355A /* RCMessageCell.m */,
+				4F168EC8222CF33B00A0355A /* 03_Picture */,
+				4F168ECB222CF33B00A0355A /* 04_Video */,
+				4F168ECE222CF33B00A0355A /* 05_Audio */,
+				4F168ED1222CF33B00A0355A /* RCMessageCell.h */,
+				4F168ED2222CF33B00A0355A /* 06_Location */,
+			);
+			path = MessageCells;
+			sourceTree = "<group>";
+		};
+		4F168EC1222CF33B00A0355A /* 01_Text */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EC2222CF33B00A0355A /* RCTextMessageCell.h */,
+				4F168EC3222CF33B00A0355A /* RCTextMessageCell.m */,
+			);
+			path = 01_Text;
+			sourceTree = "<group>";
+		};
+		4F168EC4222CF33B00A0355A /* 02_Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EC5222CF33B00A0355A /* RCEmojiMessageCell.m */,
+				4F168EC6222CF33B00A0355A /* RCEmojiMessageCell.h */,
+			);
+			path = 02_Emoji;
+			sourceTree = "<group>";
+		};
+		4F168EC8222CF33B00A0355A /* 03_Picture */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EC9222CF33B00A0355A /* RCPictureMessageCell.h */,
+				4F168ECA222CF33B00A0355A /* RCPictureMessageCell.m */,
+			);
+			path = 03_Picture;
+			sourceTree = "<group>";
+		};
+		4F168ECB222CF33B00A0355A /* 04_Video */ = {
+			isa = PBXGroup;
+			children = (
+				4F168ECC222CF33B00A0355A /* RCVideoMessageCell.h */,
+				4F168ECD222CF33B00A0355A /* RCVideoMessageCell.m */,
+			);
+			path = 04_Video;
+			sourceTree = "<group>";
+		};
+		4F168ECE222CF33B00A0355A /* 05_Audio */ = {
+			isa = PBXGroup;
+			children = (
+				4F168ECF222CF33B00A0355A /* RCAudioMessageCell.h */,
+				4F168ED0222CF33B00A0355A /* RCAudioMessageCell.m */,
+			);
+			path = 05_Audio;
+			sourceTree = "<group>";
+		};
+		4F168ED2222CF33B00A0355A /* 06_Location */ = {
+			isa = PBXGroup;
+			children = (
+				4F168ED3222CF33B00A0355A /* RCLocationMessageCell.m */,
+				4F168ED4222CF33B00A0355A /* RCLocationMessageCell.h */,
+			);
+			path = 06_Location;
+			sourceTree = "<group>";
+		};
+		4F168ED5222CF33B00A0355A /* StatusCell */ = {
+			isa = PBXGroup;
+			children = (
+				4F168ED6222CF33B00A0355A /* RCStatusCell.m */,
+				4F168ED7222CF33B00A0355A /* RCStatusCell.h */,
+			);
+			path = StatusCell;
+			sourceTree = "<group>";
+		};
+		4F168ED8222CF33B00A0355A /* FooterCells */ = {
+			isa = PBXGroup;
+			children = (
+				4F168ED9222CF33B00A0355A /* RCSectionFooterCell.h */,
+				4F168EDA222CF33B00A0355A /* RCBubbleFooterCell.h */,
+				4F168EDB222CF33B00A0355A /* RCSectionFooterCell.m */,
+				4F168EDC222CF33B00A0355A /* RCBubbleFooterCell.m */,
+			);
+			path = FooterCells;
+			sourceTree = "<group>";
+		};
+		4F168EDD222CF33B00A0355A /* HeaderCells */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EDE222CF33B00A0355A /* RCSectionHeaderCell.m */,
+				4F168EDF222CF33B00A0355A /* RCBubbleHeaderCell.m */,
+				4F168EE0222CF33B00A0355A /* RCSectionHeaderCell.h */,
+				4F168EE1222CF33B00A0355A /* RCBubbleHeaderCell.h */,
+			);
+			path = HeaderCells;
+			sourceTree = "<group>";
+		};
+		4F168EE5222CF33B00A0355A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4F168EE6222CF33B00A0355A /* RCMessage.m */,
+				4F168EE7222CF33B00A0355A /* RCMessage.h */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		4F4B68C5221D549D00C4AA96 /* Chat Bot */ = {
 			isa = PBXGroup;
 			children = (
+				4F168EB0222CF33B00A0355A /* RCMessageKit */,
 				4F4B68C9221E5A9B00C4AA96 /* HPGrowingTextView */,
 				4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */,
 				4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */,
@@ -135,6 +390,11 @@
 				4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */,
 				4F4B68C6221D54E100C4AA96 /* TWMessage.h */,
 				4F4B68C7221D54E100C4AA96 /* TWMessage.m */,
+				4F4B69792225441700C4AA96 /* TWChatTypingIndicator.h */,
+				4F4B697A2225441700C4AA96 /* TWChatTypingIndicator.m */,
+				4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */,
+				4F168F03222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.h */,
+				4F168F04222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m */,
 			);
 			path = "Chat Bot";
 			sourceTree = "<group>";
@@ -150,9 +410,17 @@
 			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
+		4F4B692122251F4400C4AA96 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
 		4FEE101A21F6F22500E6D849 = {
 			isa = PBXGroup;
 			children = (
+				4F4B692122251F4400C4AA96 /* Dependencies */,
 				4FEE102521F6F22500E6D849 /* XMPPTest */,
 				4FEE102421F6F22500E6D849 /* Products */,
 				9728C5A2D020EEBD319E5006 /* Pods */,
@@ -196,6 +464,7 @@
 				4F0CC6BA21F873D100FA7A5C /* XMPPExtensions */,
 				4FEE102C21F6F22500E6D849 /* Main.storyboard */,
 				4FEE102F21F6F22C00E6D849 /* Assets.xcassets */,
+				4F168F01222CF63300A0355A /* testRtf.rtf */,
 				4FEE103121F6F22C00E6D849 /* LaunchScreen.storyboard */,
 				4FEE103421F6F22C00E6D849 /* Info.plist */,
 				4FEE103F21F7257800E6D849 /* XMPPTest.pch */,
@@ -207,7 +476,8 @@
 		8BDCF9E10BBE1CF7904B12A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9F659D23027A8F7CAF7C6179 /* Pods_XMPPTest.framework */,
+				4F4B68E12224080900C4AA96 /* ImageIO.framework */,
+				7AABFA6546C87F3DAD572786 /* Pods_XMPPTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -290,12 +560,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */,
+				4F168EE9222CF33B00A0355A /* rcmessages_audiopause@2x.png in Resources */,
+				4F168EEF222CF33B00A0355A /* rcmessage_attach@2x.png in Resources */,
+				4F168F02222CF63300A0355A /* testRtf.rtf in Resources */,
 				4F0CC6D321F9CAF100FA7A5C /* TWChatAuthorization.storyboard in Resources */,
+				4F168EFF222CF33B00A0355A /* RCMessagesView.xib in Resources */,
 				4FEE103021F6F22C00E6D849 /* Assets.xcassets in Resources */,
 				4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */,
+				4F168EE8222CF33B00A0355A /* rcmessage_send@2x.png in Resources */,
 				4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */,
+				4F168EEE222CF33B00A0355A /* rcmessage_incoming.aiff in Resources */,
+				4F4B69832225442B00C4AA96 /* TWChatTypingIndicator.xib in Resources */,
+				4F168EEB222CF33B00A0355A /* rcmessage_outgoing.aiff in Resources */,
 				4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */,
 				4F0CC6CA21F9698000FA7A5C /* TWChatSettings.storyboard in Resources */,
+				4F168EEA222CF33B00A0355A /* rcmessages_audioplay@2x.png in Resources */,
+				4F168EEC222CF33B00A0355A /* rcmessages_manual@2x.png in Resources */,
+				4F168EED222CF33B00A0355A /* rcmessages_videoplay@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,8 +595,9 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
-				"${BUILT_PRODUCTS_DIR}/RCMessageKit/RCMessageKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/libidn/libidn.framework",
 			);
@@ -326,8 +608,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCMessageKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XMPPFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libidn.framework",
 			);
@@ -366,21 +649,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */,
+				4F4B69862225573400C4AA96 /* NSDate+TWChat.m in Sources */,
+				4F168EF3222CF33B00A0355A /* RCMessageCell.m in Sources */,
+				4F168F00222CF33B00A0355A /* RCMessage.m in Sources */,
+				4F168EFA222CF33B00A0355A /* RCBubbleFooterCell.m in Sources */,
 				3AFE4073221FC1C900C5A0FE /* HPTextViewInternal.m in Sources */,
 				4FEE102B21F6F22500E6D849 /* TWChatRosterViewController.m in Sources */,
+				4F168EF1222CF33B00A0355A /* RCTextMessageCell.m in Sources */,
+				4F168EF0222CF33B00A0355A /* RCMenuItem.m in Sources */,
+				4F168F08222E820200A0355A /* NSString+TWChat.m in Sources */,
+				4F168EF4222CF33B00A0355A /* RCPictureMessageCell.m in Sources */,
+				4F168EF5222CF33B00A0355A /* RCVideoMessageCell.m in Sources */,
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
+				4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */,
+				4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,
 				4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */,
+				4F168EFD222CF33B00A0355A /* RCMessagesView.m in Sources */,
 				4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */,
+				4F168EF2222CF33B00A0355A /* RCEmojiMessageCell.m in Sources */,
 				4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */,
 				4FEE103621F6F22C00E6D849 /* main.m in Sources */,
 				4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */,
+				4F168EFE222CF33B00A0355A /* RCMessages.m in Sources */,
 				4F4B68C4221D524500C4AA96 /* TWChatBotActionButton.m in Sources */,
+				4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */,
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
 				4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */,
+				4F168EFC222CF33B00A0355A /* RCBubbleHeaderCell.m in Sources */,
 				4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */,
+				4F168EF6222CF33B00A0355A /* RCAudioMessageCell.m in Sources */,
+				4F168EFB222CF33B00A0355A /* RCSectionHeaderCell.m in Sources */,
+				4F168F05222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m in Sources */,
 				4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */,
+				4F4B697B2225441700C4AA96 /* TWChatTypingIndicator.m in Sources */,
+				4F168EF7222CF33B00A0355A /* RCLocationMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,7 @@ static const int ddLogLevel = DDLogLevelInfo;
 
 // Extensions
 #import "UIAlertController+AlertShow.h"
+#import "NSString+TWChat.h"
 
 
 #define BLOCK_SAFE_RUN(block, ...) block ? block(__VA_ARGS__) : nil

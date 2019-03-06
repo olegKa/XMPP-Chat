@@ -8,6 +8,8 @@
 
 #import "TWXMPPProvider.h"
 
+typedef void (^JoinRoomHandle)(BOOL success);
+
 @interface TWXMPPProvider()
 
 {
@@ -18,10 +20,14 @@
     BOOL bypassTLS;
     BOOL isXmppConnected;
     //NSString *password;
+    
 }
 
 @property (nonatomic, readonly) XMPPJID *myJID;
 @property (nonatomic, readonly) NSString *myPassword;
+
+@property (nonatomic, copy) JoinRoomHandle handleDidJoinRoom;
+@property (nonatomic, copy) JoinRoomHandle handleDidLeaveRoom;
 
 - (void)setupStream;
 
@@ -103,6 +109,7 @@ static TWXMPPProvider *_provider;
 - (NSManagedObjectContext *)managedObjectContext_room
 {
     return [_xmppRoomStorage mainThreadManagedObjectContext];
+    //return [_xmppRoomStorage managedObjectContext];
 }
 
 - (NSManagedObjectContext *)managedObjectContext_vCard
@@ -271,6 +278,36 @@ static TWXMPPProvider *_provider;
     _xmppMUC = nil;
 }
 
+- (void)resetRoomWithCompletion:(void (^)(BOOL success))completion
+{
+
+    __weak typeof(self) __weakSelf = self;
+    self.handleDidLeaveRoom = ^ (BOOL success) {
+        self->_xmppRoomStorage = [[XMPPRoomCoreDataStorage alloc] initWithInMemoryStore];
+        [__weakSelf joinMyRoom];
+    };
+    
+    [_xmppRoom destroyRoom];
+}
+
+/**
+ Подключение к "своей" комнате
+ */
+- (void)joinMyRoom
+{
+    
+    [TWChatDataProvider.shared createRoom:self.xmppStream.myJID.user completion:^(NSDictionary *json, NSError *error) {
+        if (error) {
+            NSLog(@"Create Room failed with error:%@", error.userInfo[NSLocalizedDescriptionKey]);
+        } else {
+            XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@clientsessions.%@", self.xmppStream.myJID.user, self.xmppStream.myJID.domain]];
+            [self joinRoomJID:jid];
+            [self goOnline];
+        }
+    }];
+}
+
+
 // It's easy to create XML elments to send and to read received XML elements.
 // You have the entire NSXMLElement and NSXMLNode API's.
 //
@@ -311,9 +348,13 @@ static TWXMPPProvider *_provider;
 
 - (void)joinRoomJID:(XMPPJID *)roomJID
 {
-    _xmppRoom  = [[XMPPRoom alloc] initWithRoomStorage:_xmppRoomStorage jid:roomJID];
-    [_xmppRoom activate:_xmppStream];
-    [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    if (_xmppRoom && [_xmppRoom.roomJID isEqualToJID:roomJID]) {
+        // вернулся
+    } else {
+        _xmppRoom  = [[XMPPRoom alloc] initWithRoomStorage:_xmppRoomStorage jid:roomJID];
+        [_xmppRoom activate:_xmppStream];
+        [_xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
     [_xmppRoom joinRoomUsingNickname:[[NSUserDefaults standardUserDefaults] objectForKey:kUserLoginKey] history:nil];
 }
 
@@ -382,8 +423,10 @@ static TWXMPPProvider *_provider;
 
 - (void)disconnect
 {
+    [_xmppRoom leaveRoom];
     [self goOffline];
     [_xmppStream disconnect];
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -498,17 +541,8 @@ static TWXMPPProvider *_provider;
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    NSString *room = [[NSUserDefaults standardUserDefaults] objectForKey:kUserRoomKey];
-    XMPPJID *jid;
-    if (room) {
-        jid = [XMPPJID jidWithString:room];
-    } else {
-        jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@clientsessions.juragv.fvds.ru", self.myJID.user]];
-    }
-    
-    [self joinRoomJID:jid];
-    [self goOnline];
+    //[_xmppMUC discoverServices];
+    [self joinMyRoom];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
@@ -638,6 +672,16 @@ static TWXMPPProvider *_provider;
     
 }
 
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverServices:(NSArray<NSXMLElement*> *)services
+{
+    NSLog(@"didDiscoverServices");
+}
+
+- (void)xmppMUCFailedToDiscoverServices:(XMPPMUC *)sender withError:(NSError *)error
+{
+    NSLog(@"xmppMUCFailedToDiscoverServices");
+}
+
 #pragma mark - <XMPPRoomDelegate>
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender
 {
@@ -645,14 +689,32 @@ static TWXMPPProvider *_provider;
     [[TWChatDataProvider shared] joinBotToRoom:_xmppRoom.roomJID.user completion:^(NSDictionary *json, NSError *error) {
         if (error) {
             NSLog(@"joinBotToRoom error:%@", error);
+        } else {
+            if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:didJoinToRoom:)]) {
+                [self.chatStateDelegate xmppProvider:self didJoinToRoom:sender];
+            }
+            
+            if (self.handleDidJoinRoom) {
+                self.handleDidJoinRoom(YES);
+                self.handleDidJoinRoom = nil;
+            }
         }
     }];
+    
     [[NSUserDefaults standardUserDefaults] setObject:sender.roomJID.full forKey:kUserRoomKey];
 }
 
 - (void)xmppRoomDidLeave:(XMPPRoom *)sender
 {
     NSLog(@"xmppRoomDidLeave");
+    if ([self.chatStateDelegate respondsToSelector:@selector(didLeaveRoomXmppProvider:)]) {
+        [self.chatStateDelegate didLeaveRoomXmppProvider:self];
+    }
+    
+    if (self.handleDidLeaveRoom) {
+        self.handleDidLeaveRoom(YES);
+        self.handleDidLeaveRoom = nil;
+    }
 }
 
 /**
@@ -661,7 +723,8 @@ static TWXMPPProvider *_provider;
  **/
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID
 {
-    NSLog(@"didReceiveMessage:[%@]-[%@] fromOccupant:[%@]", message.body, message.elementID, occupantJID);
+    //NSLog(@"didReceiveMessage:[%@]-[%@] fromOccupant:[%@]", message.body, message.elementID, occupantJID);
+    NSLog(@"didReceiveMessage:[%@] - [%@]", message.elementID, [message.body plainText]);
     
     XMPPJID *jidFrom;
     if ([occupantJID.resource componentsSeparatedByString:@"@"].count > 1) {

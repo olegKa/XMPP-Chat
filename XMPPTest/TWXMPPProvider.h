@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 
 @optional
 - (void)xmppProvider:(TWXMPPProvider *)provider didChangeState:(XMPPChatState)state room:(XMPPRoom *)room occupant:(XMPPJID *)occupant;
+- (void)xmppProvider:(TWXMPPProvider *)provider didJoinToRoom:(XMPPRoom *)room;
+- (void)didLeaveRoomXmppProvider:(TWXMPPProvider *)provider;
 
 @end
 
@@ -53,6 +55,7 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 - (BOOL)connect;
 - (void)disconnect;
 - (void)teardownStream;
+- (void)resetRoomWithCompletion:(void (^)(BOOL success))completion;
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;

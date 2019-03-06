@@ -14,8 +14,9 @@
 #import "TWMessage.h"
 #import "TWChatTypingIndicator.h"
 #import "NSDate+TWChat.h"
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate>
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource>
 {
     NSFetchedResultsController *fetchedResultsController;
     TWChatTypingIndicator *typingIndicatorView;
@@ -32,10 +33,21 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackground:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+    
     _messages = @[].mutableCopy;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
+    self.tableView.emptyDataSetSource = self;
     
     UIBarButtonItem *btnSettings = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
                                                                     style:UIBarButtonItemStylePlain
@@ -43,6 +55,13 @@
                                                                    action:@selector(buttonSettings:)];
     
     self.navigationItem.rightBarButtonItem = btnSettings;
+    
+    UIBarButtonItem *btnClearRoom = [[UIBarButtonItem alloc] initWithTitle:@"Clear"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(buttonClearRoom:)];
+    
+    self.navigationItem.leftBarButtonItem = btnClearRoom;
     
     typingIndicatorView = [TWChatTypingIndicator default];
     self.viewTypingIndicator = typingIndicatorView;
@@ -56,6 +75,17 @@
     self.actions = @[];
 }
 
+- (void)applicationDidEnterBackground:(NSNotification *)notify
+{
+    //[chat disconnect];
+    [self.view endEditing:YES];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notify
+{
+    //[chat connect];
+}
+
 - (IBAction)buttonCall:(id)sender
 {
     
@@ -65,6 +95,13 @@
 {
     TWChatSettingsViewController *settingsVC = [[UIStoryboard storyboardWithName:@"TWChatSettings" bundle:nil] instantiateViewControllerWithIdentifier:@"TWChatSettingsViewController"];
     [self.navigationController pushViewController:settingsVC animated:YES];
+}
+
+- (void)buttonClearRoom:(id)sender
+{
+    [chat resetRoomWithCompletion:^(BOOL success) {
+        
+    }];
 }
 
 - (void)updateDates
@@ -117,6 +154,7 @@
         {
             DDLogError(@"Error performing fetch: %@", error);
         }
+        [self.tableView reloadData];
         
     }
     
@@ -140,7 +178,7 @@
     switch (type) {
         case NSFetchedResultsChangeInsert:
         {
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationFade];
             
             XMPPRoomMessageCoreDataStorageObject *obj = [controller objectAtIndexPath:newIndexPath];
             TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
@@ -149,7 +187,11 @@
             }
         }
             break;
-            
+        case NSFetchedResultsChangeDelete:
+        {
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationNone];
+        }
+            break;
         default:
             break;
     }
@@ -158,24 +200,31 @@
 #pragma mark - XMPPChatStateDelegate
 - (void)xmppProvider:(TWXMPPProvider *)provider didChangeState:(XMPPChatState)state room:(XMPPRoom *)room occupant:(XMPPJID *)occupant
 {
-    [self typingIndicatorShow:(state == kChatStateComposing) animated:YES];
     typingIndicatorView.text = [NSString stringWithFormat:@"%@ печатает...", occupant.resource];
+    [self typingIndicatorShow:(state == kChatStateComposing) animated:YES];
+}
+
+- (void)xmppProvider:(TWXMPPProvider *)provider didJoinToRoom:(XMPPRoom *)room
+{
+    self.title = @"Онлайн";
+    self.enabled = YES;
+    if (fetchedResultsController) {
+        fetchedResultsController.delegate = nil;
+        fetchedResultsController = nil;
+        [self fetchedResultsController];
+    }
+}
+
+- (void)didLeaveRoomXmppProvider:(TWXMPPProvider *)provider
+{
+    self.title = @"Оффлайн";
+    self.enabled = NO;
 }
 
 #pragma mark - Message Processing
 - (TWMessage *)rcmessage:(NSIndexPath *)indexPath
 {
-    //XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
-    
     TWMessage *msg = [self messageAtIndexPath:indexPath];
-    
-    /*
-    TWMessage *msg = [[TWMessage alloc] initWithBody:obj.body incoming:!obj.isFromMe];
-    msg.loadingHandle = ^{
-        [self.tableView reloadData];
-        //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:UITableViewRowAnimationAutomatic];
-    };
-     */
     return msg;
 }
 
@@ -190,20 +239,22 @@
     TWMessage *message;
     XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
     NSUInteger msgIdx = [_messages indexOfObjectPassingTest:^BOOL(TWMessage * _Nonnull msg, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([msg.elementID isEqualToString:obj.message.elementID]) {
+        if ([msg.elementID isEqualToString:obj.elementID]) {
             *stop = YES;
         }
         return *stop;
     }];
     
     if (msgIdx == NSNotFound) {
-        message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
-        message.elementID = obj.message.elementID;
-        if (message.type == RC_TYPE_LOCATION) {
+        BOOL isFromMe = [self isFromMeMessage:obj];
+        message = [[TWMessage alloc] initWithBody:obj.body incoming:!isFromMe];
+        message.elementID = obj.elementID;
+        if (message.type == RC_TYPE_LOCATION || message.type == RC_TYPE_PICTURE) {
             message.loadingHandle = ^(TWMessage * _Nonnull message) {
                 NSIndexPath *ip = [self indexPathOfMessage:message];
                 if (ip) {
                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:ip.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self scrollToBottom:YES];
                 }
             };
         }
@@ -253,6 +304,7 @@
 - (NSString *)textBubbleFooter:(NSIndexPath *)indexPath
 {
     XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+    //return [NSString stringWithFormat:@"ID:[%@]", obj.message.elementID];
     return [obj.localTimestamp stringMessage];
 }
 
@@ -275,6 +327,10 @@
         
         XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
         photo = [UIImage imageWithData:vCardFrom.photo];
+    }
+    
+    if (!photo && ![self isFromMeMessage:message]) {
+        photo = [UIImage imageNamed:@"bot_avatar"];
     }
     return photo;
 }
@@ -307,6 +363,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[[self fetchedResultsController] sections][0] numberOfObjects];
+}
+
+#pragma mark - <DZNEmptyDataSetSource> -
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [[NSAttributedString alloc] initWithString:@"Сервис не доступен" attributes:@{}];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [[NSAttributedString alloc] initWithString:@"Мы уже все исправляем. Попробуйте зайти позже."];
 }
 
 #pragma mark - Navigation

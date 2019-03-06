@@ -26,6 +26,8 @@
 
 @implementation TWMessagesView
 
+@synthesize enabled = _enabled;
+
 - (instancetype)init
 {
     self = [self initWithNibName:@"TWMessagesView" bundle:nil];
@@ -132,6 +134,23 @@ static const CGFloat halfSpace = 0.5f * space;
             
         }
     //}
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    _enabled = enabled;
+    _gTextInput.editable = enabled;
+    
+    for (UIView *button in _actionsPanel.subviews) {
+        if ([button isKindOfClass:UIButton.class]) {
+            [(UIButton *)button setEnabled:enabled];
+        }
+    }
+}
+
+- (BOOL)isEnabled
+{
+    return _enabled;
 }
 
 #pragma mark - Override

@@ -82,22 +82,7 @@
     // If your application supports background execution,
     // called instead of applicationWillTerminate: when the user quits.
     
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-#if TARGET_IPHONE_SIMULATOR
-    DDLogError(@"The iPhone simulator does not process background network traffic. "
-               @"Inbound traffic is queued until the keepAliveTimeout:handler: fires.");
-#endif
-    
-    if ([application respondsToSelector:@selector(setKeepAliveTimeout:handler:)])
-    {
-        [application setKeepAliveTimeout:600 handler:^{
-            
-            DDLogVerbose(@"KeepAliveHandler");
-            
-            // Do other keep alive stuff here.
-        }];
-    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
