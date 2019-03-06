@@ -61,7 +61,7 @@
                                                                     target:self
                                                                     action:@selector(buttonClearRoom:)];
     
-    self.navigationItem.leftBarButtonItem = btnClearRoom;
+    //self.navigationItem.leftBarButtonItem = btnClearRoom;
     
     typingIndicatorView = [TWChatTypingIndicator default];
     self.viewTypingIndicator = typingIndicatorView;
@@ -77,13 +77,11 @@
 
 - (void)applicationDidEnterBackground:(NSNotification *)notify
 {
-    //[chat disconnect];
     [self.view endEditing:YES];
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notify
 {
-    //[chat connect];
 }
 
 - (IBAction)buttonCall:(id)sender
