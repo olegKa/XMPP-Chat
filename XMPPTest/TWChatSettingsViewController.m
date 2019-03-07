@@ -22,8 +22,8 @@
     [super viewDidLoad];
     
     
-    if (chat.vCard.photo) {
-        _imageAvatar.image = [UIImage imageWithData:chat.vCard.photo];
+    if (chat.xmppvCardTempModule.myvCardTemp.photo) {
+        _imageAvatar.image = [UIImage imageWithData:chat.xmppvCardTempModule.myvCardTemp.photo];
     } else {
         _imageAvatar.image = [UIImage imageNamed:@"rcmessage_attach"];
     }
@@ -33,8 +33,10 @@
 
 - (IBAction)buttonSave:(id)sender
 {
-    XMPPvCardTemp *vCard = chat.vCard? :[XMPPvCardTemp vCardTemp];
+    XMPPvCardTemp *vCard = chat.xmppvCardTempModule.myvCardTemp? :[XMPPvCardTemp vCardTemp];
     vCard.title = @"programmer";
+    vCard.nickname = @"MyNickName";
+    vCard.formattedName = @"Чезан Аристарх Харитонович";
     [chat.xmppvCardTempModule updateMyvCardTemp:vCard];
 }
 

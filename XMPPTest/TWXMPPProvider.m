@@ -758,7 +758,7 @@ static TWXMPPProvider *_provider;
         didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp
                      forJID:(XMPPJID *)jid
 {
-    if (!_vCard && [jid isEqualToJID:self.myJID] ) {
+    if (!_vCard && [jid isEqualToJID:_xmppStream.myJID] ) {
         _vCard = [_xmppvCardStorage vCardTempForJID:jid xmppStream:_xmppStream];
     }
     

@@ -16,7 +16,7 @@
 #import "NSDate+TWChat.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
-@interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource>
+@interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
     TWChatTypingIndicator *typingIndicatorView;
@@ -48,6 +48,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    [self.tableView reloadEmptyDataSet];
     
     UIBarButtonItem *btnSettings = [[UIBarButtonItem alloc] initWithTitle:@"Settings"
                                                                     style:UIBarButtonItemStylePlain
@@ -66,6 +68,8 @@
     typingIndicatorView = [TWChatTypingIndicator default];
     self.viewTypingIndicator = typingIndicatorView;
     chat.chatStateDelegate = self;
+    
+    //[self fetchedResultsController];
     
 }
 
@@ -153,6 +157,7 @@
             DDLogError(@"Error performing fetch: %@", error);
         }
         [self.tableView reloadData];
+        [self.tableView reloadEmptyDataSet];
         
     }
     
@@ -162,6 +167,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self updateDates];
+    [self.tableView reloadEmptyDataSet];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
 }
@@ -318,6 +324,24 @@
 - (UIImage *)avatarImage:(NSIndexPath *)indexPath
 {
     UIImage *photo;
+    
+    
+    TWMessage *message = [self messageAtIndexPath:indexPath];
+    switch (message.senderType) {
+        case kSenderTypeClient:
+            photo = [UIImage imageWithData:chat.xmppvCardTempModule.myvCardTemp.photo];
+            break;
+        case kSenderTypeBot:
+            [UIImage imageNamed:@"bot_avatar"];
+            break;
+        case kSenderTypeOperator:
+            
+            break;
+        default:
+            break;
+    }
+    
+    /*
     XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
     if (chat.vCard.photo && [self isFromMeMessage:message]) {
         photo = [UIImage imageWithData:chat.vCard.photo];
@@ -330,6 +354,7 @@
     if (!photo && ![self isFromMeMessage:message]) {
         photo = [UIImage imageNamed:@"bot_avatar"];
     }
+     */
     return photo;
 }
 

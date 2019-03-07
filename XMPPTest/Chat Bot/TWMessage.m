@@ -10,7 +10,9 @@
 #import <SDWebImage/SDWebImageDownloader.h>
 
 @interface TWMessage ()
-
+{
+    NSInteger _senderType;
+}
 
 @property (nonatomic, strong) NSString *plainText;
 
@@ -63,6 +65,7 @@
                 
                 // check if picture
                 NSString *iconPath = [message[@"imgUrl"] isEqualToString:@"N/A"]? nil: message[@"imgUrl"];
+                NSString *rtfText = [message[@"rtfText"] isEqualToString:@"N/A"]? nil: message[@"rtfText"];
                 
                 if (iconPath) {
                     NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/resources/%@", TWChatDataProvider.shared.resourcePath, iconPath]];
@@ -74,9 +77,9 @@
                     }];
                     
                 // check if Attributed String
-                } else if ([message[@"rtfText"] length]) {
-                    NSString *rtf = message[@"rtfText"];
-                    NSData *rtfData = [rtf dataUsingEncoding:NSUTF8StringEncoding];
+                    
+                } else if (rtfText) {
+                    NSData *rtfData = [rtfText dataUsingEncoding:NSUTF8StringEncoding];
                     
                     NSDictionary *const options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
                     
@@ -102,6 +105,11 @@
                                                                                              attributes:attributes]
                                                     incoming:incoming];
                     }
+                }
+                
+                // initalize sender type
+                if (message[@"senderType"]) {
+                    _senderType = [message[@"senderType"] integerValue];
                 }
                 
                 // initialize vidgets
@@ -131,7 +139,8 @@
     NSDictionary *json = @{@"message":
                                @{@"vidget":
                                     @{@"vidgetRowsList": @[action.json]},
-                                 @"plainText": action.title
+                                 @"plainText": action.title,
+                                 @"senderType": @(kSenderTypeClient)
                                  },
                            
                            };
@@ -156,7 +165,8 @@
     NSDictionary *json = @{@"message":
                                @{@"vidget":
                                      @{@"vidgetRowsList": @[]},
-                                 @"plainText": text
+                                 @"plainText": text,
+                                 @"senderType": @(kSenderTypeClient)
                                  },
                            };
     
@@ -172,6 +182,22 @@
     }
     
     return jsonString;
+}
+
+#pragma  mark - Properties
+- (TWSenderType)senderType
+{
+    switch (_senderType) {
+        case kSenderTypeBot:
+            return  kSenderTypeBot;
+        case kSenderTypeClient:
+            return kSenderTypeClient;
+        case kSenderTypeOperator:
+            return kSenderTypeOperator;
+        default:
+            return kSenderTypeUnknown;
+            break;
+    }
 }
 
 @end
