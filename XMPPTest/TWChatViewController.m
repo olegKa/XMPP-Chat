@@ -8,6 +8,7 @@
 
 #import "TWChatViewController.h"
 #import "TWChatSettingsViewController.h"
+#import "TWImageViewController.h"
 
 #import "AppDelegate.h"
 
@@ -24,6 +25,8 @@
     NSMutableArray <TWMessage *> *_messages;
     
     __weak IBOutlet UIBarButtonItem *_btnCall;
+    
+    NSTimer *activityTimer;
 }
 @end
 
@@ -70,13 +73,24 @@
     chat.chatStateDelegate = self;
     
     //[self fetchedResultsController];
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [self.tableView reloadEmptyDataSet];
+    }];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.actions = @[];
+    [chat sendPresenceShow:@"chat"];
+    
+    //self.actions = @[];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [chat sendPresenceShow:@"away"];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notify
@@ -332,7 +346,7 @@
             photo = [UIImage imageWithData:chat.xmppvCardTempModule.myvCardTemp.photo];
             break;
         case kSenderTypeBot:
-            [UIImage imageNamed:@"bot_avatar"];
+            photo = [UIImage imageNamed:@"bot_avatar"];
             break;
         case kSenderTypeOperator:
             
@@ -340,21 +354,7 @@
         default:
             break;
     }
-    
-    /*
-    XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
-    if (chat.vCard.photo && [self isFromMeMessage:message]) {
-        photo = [UIImage imageWithData:chat.vCard.photo];
-    } else if (![self isFromMeMessage:message]) {
-        
-        XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
-        photo = [UIImage imageWithData:vCardFrom.photo];
-    }
-    
-    if (!photo && ![self isFromMeMessage:message]) {
-        photo = [UIImage imageNamed:@"bot_avatar"];
-    }
-     */
+
     return photo;
 }
 
@@ -366,7 +366,12 @@
 
 - (void)actionTapBubble:(NSIndexPath *)indexPath
 {
-    [chat.xmppvCardAvatarModule.xmppvCardTempModule fetchvCardTempForJID:[XMPPJID jidWithString:@"bot@192.168.10.3"] ignoreStorage:YES];
+    TWMessage *msg = [self messageAtIndexPath:indexPath];
+    if (msg.picture_image) {
+        TWImageViewController *vc = [UIStoryboard storyboardWithName:@"TWImageViewController" bundle:nil].instantiateInitialViewController;
+        vc.image = msg.picture_image;
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)updateUserTypingState:(BOOL)typing
@@ -391,19 +396,80 @@
 #pragma mark - <DZNEmptyDataSetSource> -
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [[NSAttributedString alloc] initWithString:@"Сервис не доступен" attributes:@{}];
+    NSString *title = @"";
+    if (chat.xmppStream.isConnecting) {
+        title = @"Подключение...";
+        [self startActivityTimer];
+    } else if (chat.xmppStream.isDisconnected) {
+        title = @"Сервер не доступен";
+    }
+    return [[NSAttributedString alloc] initWithString:title attributes:@{}];
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [[NSAttributedString alloc] initWithString:@"Мы уже все исправляем. Попробуйте зайти позже."];
+    NSString *title = @"";
+    if (chat.xmppStream.isConnecting) {
+        title = @"Загружается история сообщений";
+    } else if (chat.xmppStream.isDisconnected) {
+        title = @"Мы уже все исправляем. Попробуйте зайти позже.";
+    }
+    return [[NSAttributedString alloc] initWithString:title];
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSString *title = @"";
+    if (chat.xmppStream.isDisconnected) {
+        title = @"Повторить";
+    }
+    return [[NSAttributedString alloc] initWithString:title
+                                           attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:18 weight:UIFontWeightBold],
+                                                        NSForegroundColorAttributeName: self.view.tintColor
+                                                        }];
+}
+
+#pragma mark - <DZNEmptyDataSetDelegate> -
+- (void)emptyDataSetWillAppear:(UIScrollView *)scrollView
+{
+    //[self startActivityTimer];
+}
+
+- (void)emptyDataSetDidDisappear:(UIScrollView *)scrollView
+{
+    [self stopActivityTimer];
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
+    NSLog(@"tap reconnect");
+    [chat connect];
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [self.tableView reloadEmptyDataSet];
+    });
+    
+}
+
+#pragma mark - Activity Timer -
+- (void)startActivityTimer {
+    if (!activityTimer || !activityTimer.valid) {
+        activityTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [self.tableView reloadEmptyDataSet];
+        }];
+        //activityTimer.tolerance = 2.0;
+    }
+}
+
+- (void)stopActivityTimer {
+    [activityTimer invalidate];
+    activityTimer = nil;
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"segueChatSettings"]) {
- 
+        
     }
 }
 

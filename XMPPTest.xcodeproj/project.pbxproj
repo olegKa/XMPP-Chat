@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3E66132239269800243F93 /* TWImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E66122239269800243F93 /* TWImageViewController.m */; };
+		3A3E6615223926AB00243F93 /* TWImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */; };
 		3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CB221E5A9B00C4AA96 /* HPGrowingTextView.m */; };
 		3AFE4073221FC1C900C5A0FE /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CC221E5A9B00C4AA96 /* HPTextViewInternal.m */; };
 		4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6B621F7421D00FA7A5C /* TWChatMessageCell.m */; };
@@ -80,6 +82,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A3E66112239269800243F93 /* TWImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWImageViewController.h; sourceTree = "<group>"; };
+		3A3E66122239269800243F93 /* TWImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWImageViewController.m; sourceTree = "<group>"; };
+		3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWImageViewController.storyboard; sourceTree = "<group>"; };
 		4F0CC6B521F7421D00FA7A5C /* TWChatMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatMessageCell.h; sourceTree = "<group>"; };
 		4F0CC6B621F7421D00FA7A5C /* TWChatMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatMessageCell.m; sourceTree = "<group>"; };
 		4F0CC6B721F7421D00FA7A5C /* TWChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatMessageCell.xib; sourceTree = "<group>"; };
@@ -220,12 +225,12 @@
 			isa = PBXGroup;
 			children = (
 				4F168EB1222CF33B00A0355A /* RCMessages.h */,
+				4F168EE3222CF33B00A0355A /* RCMessages.m */,
 				4F168EB2222CF33B00A0355A /* RCMessagesView.h */,
+				4F168EE2222CF33B00A0355A /* RCMessagesView.m */,
 				4F168EB3222CF33B00A0355A /* Resources */,
 				4F168EBC222CF33B00A0355A /* MenuItem */,
 				4F168EBF222CF33B00A0355A /* Cell */,
-				4F168EE2222CF33B00A0355A /* RCMessagesView.m */,
-				4F168EE3222CF33B00A0355A /* RCMessages.m */,
 				4F168EE4222CF33B00A0355A /* RCMessagesView.xib */,
 				4F168EE5222CF33B00A0355A /* Data */,
 			);
@@ -455,6 +460,9 @@
 				4F0CC6CF21F9CADA00FA7A5C /* TWChatAuthorizationViewController.h */,
 				4F0CC6D021F9CADA00FA7A5C /* TWChatAuthorizationViewController.m */,
 				4F0CC6D221F9CAF100FA7A5C /* TWChatAuthorization.storyboard */,
+				3A3E66112239269800243F93 /* TWImageViewController.h */,
+				3A3E66122239269800243F93 /* TWImageViewController.m */,
+				3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */,
 				4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */,
 				4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */,
 				4F4B68CE221E61C700C4AA96 /* TWChatDataProvider.h */,
@@ -568,6 +576,7 @@
 				4FEE103021F6F22C00E6D849 /* Assets.xcassets in Resources */,
 				4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */,
 				4F168EE8222CF33B00A0355A /* rcmessage_send@2x.png in Resources */,
+				3A3E6615223926AB00243F93 /* TWImageViewController.storyboard in Resources */,
 				4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */,
 				4F168EEE222CF33B00A0355A /* rcmessage_incoming.aiff in Resources */,
 				4F4B69832225442B00C4AA96 /* TWChatTypingIndicator.xib in Resources */,
@@ -677,6 +686,7 @@
 				4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */,
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
 				4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */,
+				3A3E66132239269800243F93 /* TWImageViewController.m in Sources */,
 				4F168EFC222CF33B00A0355A /* RCBubbleHeaderCell.m in Sources */,
 				4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */,
 				4F168EF6222CF33B00A0355A /* RCAudioMessageCell.m in Sources */,

@@ -70,14 +70,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0D-CN-OXy">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0D-CN-OXy">
                                                     <rect key="frame" x="99.5" y="6" width="176" height="44"/>
                                                     <color key="backgroundColor" red="0.96470588239999999" green="0.5450980392" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="j0D-CN-OXy" secondAttribute="height" multiplier="4:1" id="2YH-m8-Hgj"/>
                                                         <constraint firstAttribute="height" constant="44" id="nmX-cq-sDH"/>
                                                     </constraints>
-                                                    <state key="normal" title="Save">
+                                                    <state key="normal" title="Save" image="toATMs">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
@@ -150,4 +150,7 @@
             <point key="canvasLocation" x="384.80000000000001" y="131.78410794602701"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="toATMs" width="96" height="96"/>
+    </resources>
 </document>

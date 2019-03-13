@@ -20,6 +20,7 @@
     button.backgroundColor = UIColorFromRGB(0x4A90E2);// C6EF98
     button.titleLabel.textColor = UIColorFromRGB(0x417505);
     button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    button.imageView.contentMode = UIViewContentModeScaleAspectFit;
     //button.titleLabel.adjustsFontSizeToFitWidth = YES;
     //button.titleLabel.contentMode = UIViewContentModeCenter;
     button.clipsToBounds = YES;
@@ -38,14 +39,21 @@
 {
     _action = action;
     [self setTitle:action.title forState:UIControlStateNormal];
-    //[self setImage:action.image forState:UIControlStateNormal];
     
-    [self sd_setImageWithURL:action.iconUrl forState:UIControlStateNormal];
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:action.iconUrl
+                                                          options:SDWebImageDownloaderUseNSURLCache
+                                                         progress:nil
+                                                        completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        if (image) {
+            
+            UIImage *scaledImage = [UIImage imageWithCGImage:image.CGImage scale:3 orientation:image.imageOrientation];
+            
+            [self setImage:scaledImage forState:UIControlStateNormal];
+        }
+    }];
     
-    if (action.image) {
-        self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 5);
-        self.imageEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 10);
-    }
+    self.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    self.imageEdgeInsets = UIEdgeInsetsMake(5, 0, 5, 5);
     
     [self addTarget:self action:@selector(didPressActionButton:) forControlEvents:UIControlEventTouchUpInside];
 }

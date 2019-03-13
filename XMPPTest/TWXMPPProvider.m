@@ -123,6 +123,7 @@ static TWXMPPProvider *_provider;
 
 - (void)setupStream
 {
+    DDLogInfo(@"Start Setup XMPP Stream");
     NSAssert(_xmppStream == nil, @"Method setupStream invoked multiple times");
     
     // Setup xmpp stream
@@ -307,6 +308,28 @@ static TWXMPPProvider *_provider;
     }];
 }
 
+- (void)sendPresenceShow:(NSString *)show
+{
+    XMPPPresence *presence = [XMPPPresence presenceWithType:show to:_xmppRoom.roomJID];
+    [_xmppStream sendElement:presence];
+}
+
+- (NSString *)valueShow:(XMPPPresenceShow)show
+{
+    switch (show) {
+        case XMPPPresenceShowDND:
+            return @"dnd";
+        case XMPPPresenceShowXA:
+            return @"xa";
+        case XMPPPresenceShowAway:
+            return @"away";
+        case XMPPPresenceShowChat:
+            return @"chat";
+        default:
+            return nil;
+            break;
+    }
+}
 
 // It's easy to create XML elments to send and to read received XML elements.
 // You have the entire NSXMLElement and NSXMLNode API's.
@@ -751,6 +774,21 @@ static TWXMPPProvider *_provider;
                                         occupant:occupantJID];
         }
     }
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
+{
+    NSLog(@"occupantDidJoin");
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
+{
+    NSLog(@"occupantDidLeave");
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
+{
+    NSLog(@"occupantDidUpdate");
 }
 
 #pragma mark - <XMPPvCardTempModuleDelegate>

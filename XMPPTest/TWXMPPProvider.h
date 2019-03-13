@@ -56,6 +56,8 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 - (void)disconnect;
 - (void)teardownStream;
 - (void)resetRoomWithCompletion:(void (^)(BOOL success))completion;
+- (void)sendPresenceShow:(NSString *)show;
+
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
 - (NSManagedObjectContext *)managedObjectContext_capabilities;
