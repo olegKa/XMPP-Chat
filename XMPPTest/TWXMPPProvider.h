@@ -14,6 +14,8 @@ static NSString* kUserLoginKey = @"kUserLoginKey";
 static NSString* kUserPasswordKey = @"kUserPasswordKey";
 static NSString* kUserRoomKey = @"kUserRoomKey";
 
+static NSString* kServer = @"juragv.fvds.ru";
+
 @class TWXMPPProvider;
 
 typedef NS_ENUM(NSInteger, XMPPChatState) {
@@ -30,7 +32,11 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 @optional
 - (void)xmppProvider:(TWXMPPProvider *)provider didChangeState:(XMPPChatState)state room:(XMPPRoom *)room occupant:(XMPPJID *)occupant;
 - (void)xmppProvider:(TWXMPPProvider *)provider didJoinToRoom:(XMPPRoom *)room;
+- (void)xmppProvider:(TWXMPPProvider *)provider occupantDidJoin:(XMPPJID *)occupantJID;
+- (void)xmppProvider:(TWXMPPProvider *)provider occupantDidLeave:(XMPPJID *)occupantJID;
+- (void)xmppProvider:(TWXMPPProvider *)provider didChangeOccupantSet:(NSSet<XMPPJID *> *)occupants;
 - (void)didLeaveRoomXmppProvider:(TWXMPPProvider *)provider;
+
 
 @end
 
@@ -46,8 +52,11 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 @property (nonatomic, strong, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
 @property (nonatomic, strong, readonly) XMPPRoom *xmppRoom;
 @property (nonatomic, strong, readonly) XMPPRoomCoreDataStorage *xmppRoomStorage;
-
 @property (nonatomic, strong, readonly) XMPPvCardTemp *vCard;
+
+@property (nonatomic, readonly) XMPPJID *bot;
+@property (nonatomic, readonly) XMPPJID *operator;
+@property (nonatomic, readonly) NSSet<XMPPJID *> *users;
 
 @property (nonatomic, weak) id <XMPPChatStateDelegate> chatStateDelegate;
 
@@ -68,6 +77,7 @@ typedef NS_ENUM(NSInteger, XMPPChatState) {
 
 - (XMPPvCardTemp *)vCardTempWithJID:(XMPPJID *)jid;
 - (XMPPvCardTemp *)vCardTempSenderOfMessage:(XMPPRoomMessageCoreDataStorageObject *)roomMessage;
+- (XMPPvCardTemp *)vCardTempWithOccupantJID:(XMPPJID *)occupantJID;
 
 @end
 

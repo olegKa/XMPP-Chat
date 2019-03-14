@@ -21,6 +21,7 @@ typedef void (^JoinRoomHandle)(BOOL success);
     BOOL isXmppConnected;
     //NSString *password;
     
+    NSMutableSet<XMPPJID *> *_users;
 }
 
 @property (nonatomic, readonly) XMPPJID *myJID;
@@ -58,10 +59,19 @@ static TWXMPPProvider *_provider;
     [_xmppStream sendElement:iq];
 }
 
+- (XMPPvCardTemp *)vCardTempWithOccupantJID:(XMPPJID *)occupantJID
+{
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", occupantJID.resource, kServer]];
+    return [self vCardTempWithJID:jid];
+}
+
 - (XMPPvCardTemp *)vCardTempWithJID:(XMPPJID *)jid
 {
     XMPPvCardCoreDataStorageObject *vCard = [XMPPvCardCoreDataStorageObject fetchOrInsertvCardForJID:jid
                                                                               inManagedObjectContext:self.managedObjectContext_vCard];
+    if (!vCard.vCardTempRel.vCardTemp) {
+        [_xmppvCardTempModule fetchvCardTempForJID:jid ignoreStorage:YES];
+    }
     return vCard.vCardTempRel.vCardTemp;
 }
 
@@ -90,6 +100,35 @@ static TWXMPPProvider *_provider;
 - (NSString *)myPassword
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:kUserPasswordKey];
+}
+
+- (NSSet<XMPPJID *> *)users
+{
+    return _users.copy;
+}
+
+- (XMPPJID *)bot
+{
+    __block XMPPJID *bot;
+    [_users enumerateObjectsUsingBlock:^(XMPPJID * _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj.user isEqualToString:@"bot_pocketbank"]) {
+            bot = obj;
+        }
+        *stop = bot != nil;
+    }];
+    return bot;
+}
+
+- (XMPPJID *)operator
+{
+    __block XMPPJID *operator;
+    [_users enumerateObjectsUsingBlock:^(XMPPJID * _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj.user hasPrefix:@"operator"]) {
+            operator = obj;
+        }
+        *stop = operator != nil;
+    }];
+    return operator;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +164,8 @@ static TWXMPPProvider *_provider;
 {
     DDLogInfo(@"Start Setup XMPP Stream");
     NSAssert(_xmppStream == nil, @"Method setupStream invoked multiple times");
+    
+    _users = [NSMutableSet new];
     
     // Setup xmpp stream
     //
@@ -712,7 +753,7 @@ static TWXMPPProvider *_provider;
     [[TWChatDataProvider shared] joinBotToRoom:_xmppRoom.roomJID.user completion:^(NSDictionary *json, NSError *error) {
         if (error) {
             NSLog(@"joinBotToRoom error:%@", error);
-        } else {
+        } //else {
             if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:didJoinToRoom:)]) {
                 [self.chatStateDelegate xmppProvider:self didJoinToRoom:sender];
             }
@@ -721,7 +762,7 @@ static TWXMPPProvider *_provider;
                 self.handleDidJoinRoom(YES);
                 self.handleDidJoinRoom = nil;
             }
-        }
+        //}
     }];
     
     [[NSUserDefaults standardUserDefaults] setObject:sender.roomJID.full forKey:kUserRoomKey];
@@ -778,17 +819,59 @@ static TWXMPPProvider *_provider;
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
 {
-    NSLog(@"occupantDidJoin");
+    if ([presence.show isEqualToString:@"available"]) {
+        
+        if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:occupantDidJoin:)]) {
+            [self.chatStateDelegate xmppProvider:self occupantDidJoin:occupantJID];
+        }
+    }
+    
+    NSXMLElement *queryElement = [presence elementForName: @"x" xmlns: @"http://jabber.org/protocol/muc#user"];
+    if (queryElement) {
+        NSArray *itemElements = [queryElement elementsForName: @"item"];
+        for (int i=0; i<[itemElements count]; i++) {
+            NSString *strJID=[[[itemElements objectAtIndex:i] attributeForName:@"jid"] stringValue];
+            XMPPJID *jid = [XMPPJID jidWithString:strJID];
+            if (jid) {
+                [_users addObject:jid];
+                if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:didChangeOccupantSet:)]) {
+                    [self.chatStateDelegate xmppProvider:self didChangeOccupantSet:self.users];
+                }
+            }
+        }
+    }
+    
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
 {
-    NSLog(@"occupantDidLeave");
+    NSLog(@"occupantDidLeave: [%@] presence type: [%@]", occupantJID.resource, presence.type);
+    
+    if ([presence.show isEqualToString:@"unavailable"]) {
+        if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:occupantDidLeave:)]) {
+            [self.chatStateDelegate xmppProvider:self occupantDidLeave:occupantJID];
+        }
+    }
+    
+    NSXMLElement *queryElement = [presence elementForName: @"x" xmlns: @"http://jabber.org/protocol/muc#user"];
+    if (queryElement) {
+        NSArray *itemElements = [queryElement elementsForName: @"item"];
+        for (int i=0; i<[itemElements count]; i++) {
+            NSString *strJID=[[[itemElements objectAtIndex:i] attributeForName:@"jid"] stringValue];
+            XMPPJID *jid = [XMPPJID jidWithString:strJID];
+            if (jid) {
+                [_users removeObject:jid];
+                if ([self.chatStateDelegate respondsToSelector:@selector(xmppProvider:didChangeOccupantSet:)]) {
+                    [self.chatStateDelegate xmppProvider:self didChangeOccupantSet:self.users];
+                }
+            }
+        }
+    }
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence
 {
-    NSLog(@"occupantDidUpdate");
+    NSLog(@"occupantDidUpdate: [%@] presence type: [%@]", occupantJID.resource, presence.type);
 }
 
 #pragma mark - <XMPPvCardTempModuleDelegate>

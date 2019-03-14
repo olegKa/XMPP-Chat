@@ -29,6 +29,7 @@
                     <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="biR-hi-xqI" firstAttribute="leading" secondItem="jzl-AV-g8x" secondAttribute="leading" constant="10" id="3Fd-Un-V7L"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="Cc5-Jp-WMU"/>
                         <constraint firstAttribute="trailing" secondItem="biR-hi-xqI" secondAttribute="trailing" constant="10" id="KSF-14-DPr"/>
                         <constraint firstAttribute="bottom" secondItem="biR-hi-xqI" secondAttribute="bottom" constant="5" id="Xjl-8f-VXR"/>
                         <constraint firstItem="biR-hi-xqI" firstAttribute="top" secondItem="jzl-AV-g8x" secondAttribute="top" constant="5" id="iQV-AG-dfB"/>
@@ -36,7 +37,6 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="jzl-AV-g8x" secondAttribute="bottom" constant="5" id="2ab-dj-UJy"/>
                 <constraint firstItem="jzl-AV-g8x" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="H8X-dv-Ecm"/>
                 <constraint firstItem="jzl-AV-g8x" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="jh5-y2-mTA"/>
             </constraints>

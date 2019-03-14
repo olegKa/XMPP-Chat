@@ -27,6 +27,7 @@
     __weak IBOutlet UIBarButtonItem *_btnCall;
     
     NSTimer *activityTimer;
+    UIButton *_operator;
 }
 @end
 
@@ -35,6 +36,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.enabled = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidEnterBackground:)
@@ -59,23 +62,19 @@
                                                                    target:self
                                                                    action:@selector(buttonSettings:)];
     
-    self.navigationItem.rightBarButtonItem = btnSettings;
+    self.navigationItem.leftBarButtonItem = btnSettings;
+   
+    // Configure Operator Menu
+    [self configureNavigationBar];
     
-    UIBarButtonItem *btnClearRoom = [[UIBarButtonItem alloc] initWithTitle:@"Clear"
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(buttonClearRoom:)];
-    
-    //self.navigationItem.leftBarButtonItem = btnClearRoom;
-    
+    // Configure Typing Indicator
     typingIndicatorView = [TWChatTypingIndicator default];
     self.viewTypingIndicator = typingIndicatorView;
     chat.chatStateDelegate = self;
     
-    //[self fetchedResultsController];
-    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        [self.tableView reloadEmptyDataSet];
-    }];
+//    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//        [self.tableView reloadEmptyDataSet];
+//    }];
     
 }
 
@@ -93,6 +92,27 @@
     [chat sendPresenceShow:@"away"];
 }
 
+- (void)configureNavigationBar {
+    _operator = [UIButton buttonWithType:UIButtonTypeCustom];
+    _operator.bounds = CGRectMake(0,0, 32, 32);
+    _operator.layer.cornerRadius = 16;
+    _operator.clipsToBounds = YES;
+    _operator.enabled = NO;
+    _operator.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [_operator setImage:[UIImage imageNamed:@"operator_avatar"] forState:UIControlStateNormal];
+    [_operator addTarget:self action:@selector(tapOperator:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:_operator];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                                    target:nil
+                                                                                    action:nil];
+    
+    negativeSpacer.width = -8;
+    
+    [self.navigationItem setRightBarButtonItems:@[negativeSpacer, rightButton] animated:NO];
+    
+}
+
 - (void)applicationDidEnterBackground:(NSNotification *)notify
 {
     [self.view endEditing:YES];
@@ -100,6 +120,22 @@
 
 - (void)applicationWillEnterForeground:(NSNotification *)notify
 {
+}
+
+- (IBAction)tapOperator:(id)sender
+{
+    if (chat.operator) {
+        /*
+        XMPPvCardTemp *vCard = [chat vCardTempWithJID:chat.operator];
+        if (vCard.telecomsAddresses.count) {
+            NSLog(@"%@", vCard.telecomsAddresses.firstObject.number);
+        }
+         */
+    } else {
+        NSString *phoneNumber = [@"tel://" stringByAppendingString:@"+79227345533"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber] options:@{} completionHandler:nil];
+    }
+    
 }
 
 - (IBAction)buttonCall:(id)sender
@@ -135,8 +171,27 @@
     _firstMessageAtDay = dates.allKeys;
 }
 
+- (void)updateActionsWithController:(NSFetchedResultsController *)controller
+{
+    XMPPRoomMessageCoreDataStorageObject *obj = controller.fetchedObjects.lastObject;
+    TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
+    if (message.actions) {
+        self.actions = message.actions.copy;
+    }
+}
+
+
+- (void)showTypingIndicatorWithText:(NSString *)text duration:(CGFloat)duration
+{
+    typingIndicatorView.text = text;
+    [self typingIndicatorShow:YES animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self typingIndicatorShow:NO animated:YES];
+    });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark NSFetchedResultsController
+#pragma mark - NSFetchedResultsController -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -181,9 +236,12 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self updateDates];
+    [self updateActionsWithController:controller];
     [self.tableView reloadEmptyDataSet];
     [self.tableView endUpdates];
+    
     [self scrollToBottom:YES];
+    
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -198,11 +256,6 @@
         {
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationFade];
             
-            XMPPRoomMessageCoreDataStorageObject *obj = [controller objectAtIndexPath:newIndexPath];
-            TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
-            if (message.actions) {
-                self.actions = message.actions.copy;
-            }
         }
             break;
         case NSFetchedResultsChangeDelete:
@@ -231,12 +284,43 @@
         fetchedResultsController = nil;
         [self fetchedResultsController];
     }
+    
 }
 
 - (void)didLeaveRoomXmppProvider:(TWXMPPProvider *)provider
 {
     self.title = @"Оффлайн";
     self.enabled = NO;
+}
+
+- (void)xmppProvider:(TWXMPPProvider *)provider occupantDidJoin:(XMPPJID *)occupantJID
+{
+    NSString *name = occupantJID.resource;
+    [self showTypingIndicatorWithText:[NSString stringWithFormat:@"%@ подключился к чату", [chat vCardTempWithOccupantJID:occupantJID].nickname? : name]
+                             duration:1];
+    
+    
+    
+}
+
+- (void)xmppProvider:(TWXMPPProvider *)provider occupantDidLeave:(XMPPJID *)occupantJID
+{
+    NSString *name = occupantJID.user;
+    [self showTypingIndicatorWithText:[NSString stringWithFormat:@"%@ вышел из чата", [chat vCardTempWithOccupantJID:occupantJID].nickname? : name]
+                             duration:1];
+}
+
+- (void)xmppProvider:(TWXMPPProvider *)provider didChangeOccupantSet:(NSSet<XMPPJID *> *)occupants
+{
+    if (chat.operator) {
+        XMPPvCardTemp *vCard = [chat vCardTempWithJID:chat.operator];
+        [_operator setImage:[[UIImage imageWithData:vCard.photo] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                   forState:UIControlStateNormal];
+        
+    } else {
+        [_operator setImage:[[UIImage imageNamed:@"operator_avatar"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                   forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Message Processing
@@ -313,7 +397,8 @@
     XMPPRoomMessageCoreDataStorageObject *message = [self objectAtIndexPath:indexPath];
     if (![self isFromMeMessage:message]) {
         
-        XMPPvCardTemp *vCardFrom = [chat vCardTempSenderOfMessage:message];
+        XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+        XMPPvCardTemp *vCardFrom = [chat vCardTempWithOccupantJID:obj.jid];
         bubbleHeader = vCardFrom.nickname;
     }
     return bubbleHeader;
@@ -349,7 +434,13 @@
             photo = [UIImage imageNamed:@"bot_avatar"];
             break;
         case kSenderTypeOperator:
-            
+        {
+            XMPPRoomMessageCoreDataStorageObject *obj = [self objectAtIndexPath:indexPath];
+            NSData *photoData = [chat vCardTempWithOccupantJID:obj.jid].photo;
+            if (photoData) {
+                photo = [UIImage imageWithData:photoData];
+            }
+        }
             break;
         default:
             break;
@@ -432,7 +523,7 @@
 #pragma mark - <DZNEmptyDataSetDelegate> -
 - (void)emptyDataSetWillAppear:(UIScrollView *)scrollView
 {
-    //[self startActivityTimer];
+    
 }
 
 - (void)emptyDataSetDidDisappear:(UIScrollView *)scrollView

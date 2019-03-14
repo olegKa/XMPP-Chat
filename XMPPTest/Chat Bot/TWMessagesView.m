@@ -38,6 +38,8 @@
 {
     [super viewDidLoad];
     
+    //_actions = @[];
+    
     _gTextInput.isScrollable = NO;
     _gTextInput.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     
