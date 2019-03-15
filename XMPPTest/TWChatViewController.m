@@ -17,6 +17,8 @@
 #import "NSDate+TWChat.h"
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
+#import <SafariServices/SafariServices.h>
+
 @interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
@@ -84,6 +86,9 @@
     [chat sendPresenceShow:@"chat"];
     
     //self.actions = @[];
+    
+    //XMPPvCardTempTel *tel = [XMPPvCardTempTel vCardTempWorkVoiceNumber:@"000000099"];
+    //NSLog(@"%@", tel);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -124,16 +129,17 @@
 
 - (IBAction)tapOperator:(id)sender
 {
+    NSString *tel = [@"tel://" stringByAppendingString:@"+79227345533"];
     if (chat.operator) {
-        /*
+        
         XMPPvCardTemp *vCard = [chat vCardTempWithJID:chat.operator];
         if (vCard.telecomsAddresses.count) {
-            NSLog(@"%@", vCard.telecomsAddresses.firstObject.number);
+            tel = [@"tel://" stringByAppendingString:vCard.telecomsAddresses.firstObject.number];
         }
-         */
-    } else {
-        NSString *phoneNumber = [@"tel://" stringByAppendingString:@"+79227345533"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber] options:@{} completionHandler:nil];
+        
+    }
+    if (tel.length) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel] options:@{} completionHandler:nil];
     }
     
 }
@@ -478,7 +484,14 @@
     
 }
 
-#pragma mark - <UITableViewDataSource>
+#pragma mark - <RCTextMessageCellDelegate>
+- (void)textMessageCell:(id)cell didInteractURL:(NSURL *)url
+{
+    SFSafariViewController *vc = [[SFSafariViewController alloc] initWithURL:url];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - <UITableViewDataSource> -
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[[self fetchedResultsController] sections][0] numberOfObjects];

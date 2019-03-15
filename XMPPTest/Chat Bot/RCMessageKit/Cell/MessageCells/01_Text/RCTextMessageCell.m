@@ -12,7 +12,7 @@
 #import "RCTextMessageCell.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface RCTextMessageCell()
+@interface RCTextMessageCell() <UITextViewDelegate>
 {
 	NSIndexPath *indexPath;
 	RCMessagesView *messagesView;
@@ -44,10 +44,11 @@
 	{
 		textView = [[UITextView alloc] init];
 		textView.font = [RCMessages textFont];
+        textView.delegate = self;
 		textView.editable = NO;
-		textView.selectable = NO;
+		textView.selectable = YES;
 		textView.scrollEnabled = NO;
-		textView.userInteractionEnabled = NO;
+		textView.userInteractionEnabled = YES;
 		textView.backgroundColor = [UIColor clearColor];
 		textView.textContainer.lineFragmentPadding = 0;
 		textView.textContainerInset = [RCMessages textInset];
@@ -114,6 +115,15 @@
 	CGFloat height = rect.size.height + [RCMessages textInsetTop] + [RCMessages textInsetBottom];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	return CGSizeMake(fmaxf(width, [RCMessages textBubbleWidthMin]), fmaxf(height, [RCMessages textBubbleHeightMin]));
+}
+
+#pragma mark - <UITextViewDelegate>
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
+{
+    if ([self.delegate respondsToSelector:@selector(textMessageCell:didInteractURL:)]) {
+        [self.delegate textMessageCell:self didInteractURL:URL];
+    }
+    return NO;
 }
 
 @end

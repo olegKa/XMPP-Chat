@@ -11,14 +11,25 @@
 
 #import "RCMessageCell.h"
 
+@protocol RCTextMessageDelegate;
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RCTextMessageCell : RCMessageCell
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 @property (strong, nonatomic) UITextView *textView;
+@property (nonatomic, weak) id <RCTextMessageDelegate> delegate;
 
 - (void)bindData:(NSIndexPath *)indexPath messagesView:(RCMessagesView *)messagesView;
 
 + (CGFloat)height:(NSIndexPath *)indexPath messagesView:(RCMessagesView *)messagesView;
+
+@end
+
+@protocol RCTextMessageDelegate <NSObject>
+
+@optional
+
+- (void)textMessageCell:(RCTextMessageCell *)cell didInteractURL:(NSURL *)url;
 
 @end

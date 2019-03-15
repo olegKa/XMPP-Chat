@@ -79,9 +79,24 @@
                 // check if Attributed String
                     
                 } else if (rtfText) {
+                    /*
+                    rtfText = @"\
+                    <head>\
+                    <title>Пример веб-страницы</title>\
+                    </head>\
+                    <body>\
+                    <h1>Заголовок</h1>\
+                    <!-- Комментарий -->\
+                    <p>Первый абзац.</p>\
+                    <p>Второй абзац.</p>\
+                    </body>";
+                    */
+                    
                     NSData *rtfData = [rtfText dataUsingEncoding:NSUTF8StringEncoding];
                     
-                    NSDictionary *const options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+                    NSDictionary *const options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                    NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)
+                                                    };
                     
                     NSAttributedString *text = [[NSAttributedString alloc] initWithData: rtfData
                                                                                 options: options

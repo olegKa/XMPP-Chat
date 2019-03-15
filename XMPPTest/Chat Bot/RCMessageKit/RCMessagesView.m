@@ -25,7 +25,7 @@
 #import "RCLocationMessageCell.h"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-@interface RCMessagesView()
+@interface RCMessagesView() <RCTextMessageDelegate>
 {
 	BOOL initialized;
 	CGPoint centerView;
@@ -572,6 +572,7 @@
 		if (rcmessage.type == RC_TYPE_TEXT)
 		{
 			RCTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCTextMessageCell" forIndexPath:indexPath];
+            cell.delegate = self;
 			[cell bindData:indexPath messagesView:self];
 			return cell;
 		}
@@ -651,6 +652,11 @@
 {
 	[self inputPanelUpdate];
 	[self typingIndicatorUpdate];
+}
+
+- (void)textMessageCell:(RCTextMessageCell *)cell didInteractURL:(NSURL *)url
+{
+    
 }
 
 @end

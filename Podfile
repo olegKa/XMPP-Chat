@@ -6,7 +6,7 @@ target 'XMPPTest' do
   use_frameworks!
 
   # Pods for XMPPTest
-    pod 'XMPPFramework', :git => 'https://github.com/olegKa/XMPPFramework.git', :commit => 'eed8dea02ec8320fd2f2747c3321e1010d7214b8'
+    pod 'XMPPFramework', :git => 'https://github.com/olegKa/XMPPFramework.git', :commit => '0335c1ca5bacb12fbf3faee3e99724e48e605d30'
     pod 'AFNetworking', '~> 3.0'
     pod 'SDWebImage', '~> 4.0'
     pod 'DZNEmptyDataSet'
