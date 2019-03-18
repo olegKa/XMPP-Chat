@@ -71,4 +71,10 @@
 	return ([messagesView textSectionFooter:indexPath] != nil) ? [RCMessages sectionFooterHeight] : 0;
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = CGSizeMake(size.width, [RCSectionFooterCell height:indexPath messagesView:messagesView]);
+    return retVal;
+}
+
 @end

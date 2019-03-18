@@ -140,4 +140,10 @@
 	return CGSizeMake([RCMessages videoBubbleWidth], [RCMessages videoBubbleHeight]);
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCVideoMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 @end

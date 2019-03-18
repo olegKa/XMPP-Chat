@@ -71,4 +71,10 @@
 	return ([messagesView textSectionHeader:indexPath] != nil) ? [RCMessages sectionHeaderHeight] : 0;
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = CGSizeMake(size.width, [messagesView textSectionHeader:indexPath] != nil? [RCMessages sectionHeaderHeight] : 0);
+    return retVal;
+}
+
 @end

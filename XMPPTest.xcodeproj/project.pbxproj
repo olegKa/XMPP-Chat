@@ -56,6 +56,10 @@
 		4F4B69832225442B00C4AA96 /* TWChatTypingIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */; };
 		4F4B69862225573400C4AA96 /* NSDate+TWChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B69852225573400C4AA96 /* NSDate+TWChat.m */; };
 		4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B698822255A0600C4AA96 /* NSDate+Escort.m */; };
+		4F4BF0A4223F68DC00E88693 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF09C223F68D900E88693 /* UITableView+FDIndexPathHeightCache.m */; };
+		4F4BF0A5223F68DC00E88693 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */; };
+		4F4BF0A6223F68DC00E88693 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */; };
+		4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */; };
 		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
 		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
@@ -165,6 +169,14 @@
 		4F4B69852225573400C4AA96 /* NSDate+TWChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TWChat.m"; sourceTree = "<group>"; };
 		4F4B698722255A0500C4AA96 /* NSDate+Escort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Escort.h"; sourceTree = "<group>"; };
 		4F4B698822255A0600C4AA96 /* NSDate+Escort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Escort.m"; sourceTree = "<group>"; };
+		4F4BF09C223F68D900E88693 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
+		4F4BF09D223F68DA00E88693 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
+		4F4BF09E223F68DA00E88693 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
+		4F4BF09F223F68DA00E88693 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
+		4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
+		4F4BF0A2223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
+		4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
 		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
 		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
@@ -384,6 +396,14 @@
 		4F4B68C5221D549D00C4AA96 /* Chat Bot */ = {
 			isa = PBXGroup;
 			children = (
+				4F4BF09E223F68DA00E88693 /* UITableView+FDIndexPathHeightCache.h */,
+				4F4BF09C223F68D900E88693 /* UITableView+FDIndexPathHeightCache.m */,
+				4F4BF09D223F68DA00E88693 /* UITableView+FDKeyedHeightCache.h */,
+				4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */,
+				4F4BF09F223F68DA00E88693 /* UITableView+FDTemplateLayoutCell.h */,
+				4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */,
+				4F4BF0A2223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.h */,
+				4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */,
 				4F168EB0222CF33B00A0355A /* RCMessageKit */,
 				4F4B68C9221E5A9B00C4AA96 /* HPGrowingTextView */,
 				4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */,
@@ -669,10 +689,13 @@
 				4F168F08222E820200A0355A /* NSString+TWChat.m in Sources */,
 				4F168EF4222CF33B00A0355A /* RCPictureMessageCell.m in Sources */,
 				4F168EF5222CF33B00A0355A /* RCVideoMessageCell.m in Sources */,
+				4F4BF0A4223F68DC00E88693 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
 				4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */,
+				4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
+				4F4BF0A5223F68DC00E88693 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,
 				4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */,
 				4F168EFD222CF33B00A0355A /* RCMessagesView.m in Sources */,
@@ -687,6 +710,7 @@
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
 				4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */,
 				3A3E66132239269800243F93 /* TWImageViewController.m in Sources */,
+				4F4BF0A6223F68DC00E88693 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				4F168EFC222CF33B00A0355A /* RCBubbleHeaderCell.m in Sources */,
 				4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */,
 				4F168EF6222CF33B00A0355A /* RCAudioMessageCell.m in Sources */,

@@ -24,6 +24,8 @@
 #import "RCAudioMessageCell.h"
 #import "RCLocationMessageCell.h"
 
+#import "UITableView+FDTemplateLayoutCell.h"
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface RCMessagesView() <RCTextMessageDelegate>
 {
@@ -59,6 +61,8 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.navigationItem.titleView = viewTitle;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 0;
 	[self.tableView registerClass:[RCSectionHeaderCell class] forCellReuseIdentifier:@"RCSectionHeaderCell"];
 	[self.tableView registerClass:[RCBubbleHeaderCell class] forCellReuseIdentifier:@"RCBubbleHeaderCell"];
 	[self.tableView registerClass:[RCBubbleFooterCell class] forCellReuseIdentifier:@"RCBubbleFooterCell"];
@@ -509,34 +513,64 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 0) // Section header
 	{
-		return [RCSectionHeaderCell height:indexPath messagesView:self];
+	    return [tableView fd_heightForCellWithIdentifier:@"RCSectionHeaderCell" cacheByIndexPath:indexPath configuration:^(RCSectionHeaderCell* cell) {
+            [cell bindData:indexPath messagesView:self];
+        }];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 1) // Bubble header
 	{
-		return [RCBubbleHeaderCell height:indexPath messagesView:self];
+	   return [tableView fd_heightForCellWithIdentifier:@"RCBubbleHeaderCell" cacheByIndexPath:indexPath configuration:^(RCBubbleHeaderCell* cell) {
+            [cell bindData:indexPath messagesView:self];
+        }];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 2) // Message body
 	{
 		RCMessage *rcmessage = [self rcmessage:indexPath];
-		if (rcmessage.type == RC_TYPE_STATUS)	return [RCStatusCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_TEXT)		return [RCTextMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_EMOJI)	return [RCEmojiMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_PICTURE)	return [RCPictureMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_VIDEO)	return [RCVideoMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_AUDIO)	return [RCAudioMessageCell height:indexPath messagesView:self];
-		if (rcmessage.type == RC_TYPE_LOCATION)	return [RCLocationMessageCell height:indexPath messagesView:self];
-	}
+		if (rcmessage.type == RC_TYPE_STATUS)
+            return [tableView fd_heightForCellWithIdentifier:@"RCStatusCell" cacheByIndexPath:indexPath configuration:^(RCStatusCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+		if (rcmessage.type == RC_TYPE_TEXT)
+            return [tableView fd_heightForCellWithIdentifier:@"RCTextMessageCell" cacheByIndexPath:indexPath configuration:^(RCTextMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+		if (rcmessage.type == RC_TYPE_EMOJI)
+            return [tableView fd_heightForCellWithIdentifier:@"RCEmojiMessageCell" cacheByIndexPath:indexPath configuration:^(RCEmojiMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+        if (rcmessage.type == RC_TYPE_PICTURE)
+            return [tableView fd_heightForCellWithIdentifier:@"RCPictureMessageCell" cacheByIndexPath:indexPath configuration:^(RCPictureMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+        if (rcmessage.type == RC_TYPE_VIDEO)
+            return [tableView fd_heightForCellWithIdentifier:@"RCVideoMessageCell" cacheByIndexPath:indexPath configuration:^(RCVideoMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+        if (rcmessage.type == RC_TYPE_AUDIO)
+            return [tableView fd_heightForCellWithIdentifier:@"RCAudioMessageCell" cacheByIndexPath:indexPath configuration:^(RCAudioMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+        
+        if (rcmessage.type == RC_TYPE_LOCATION)
+            return [tableView fd_heightForCellWithIdentifier:@"RCLocationMessageCell" cacheByIndexPath:indexPath configuration:^(RCLocationMessageCell *cell) {
+                [cell bindData:indexPath messagesView:self];
+            }];
+    }
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 3) // Bubble footer
 	{
-		return [RCBubbleFooterCell height:indexPath messagesView:self];
+	    return [tableView fd_heightForCellWithIdentifier:@"RCBubbleFooterCell" cacheByIndexPath:indexPath configuration:^(RCBubbleFooterCell *cell) {
+            [cell bindData:indexPath messagesView:self];
+        }];
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 4) // Section footer
 	{
-		return [RCSectionFooterCell height:indexPath messagesView:self];
+	    return [tableView fd_heightForCellWithIdentifier:@"RCSectionFooterCell" cacheByIndexPath:indexPath configuration:^(RCSectionFooterCell *cell) {
+            [cell bindData:indexPath messagesView:self];
+        }];
 	}
 	return 0;
 }
@@ -545,19 +579,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 {
+    UITableViewCell *returnCell;
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 0)	// Section header
 	{
 		RCSectionHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCSectionHeaderCell" forIndexPath:indexPath];
 		[cell bindData:indexPath messagesView:self];
-		return cell;
+        returnCell = cell;
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 1) // Bubble header
 	{
 		RCBubbleHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCBubbleHeaderCell" forIndexPath:indexPath];
 		[cell bindData:indexPath messagesView:self];
-		return cell;
+        returnCell = cell;
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 2) // Message body
@@ -567,44 +602,44 @@
 		{
 			RCStatusCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCStatusCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_TEXT)
 		{
 			RCTextMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCTextMessageCell" forIndexPath:indexPath];
             cell.delegate = self;
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_EMOJI)
 		{
 			RCEmojiMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCEmojiMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_PICTURE)
 		{
 			RCPictureMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCPictureMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_VIDEO)
 		{
 			RCVideoMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCVideoMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_AUDIO)
 		{
 			RCAudioMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCAudioMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 		if (rcmessage.type == RC_TYPE_LOCATION)
 		{
 			RCLocationMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCLocationMessageCell" forIndexPath:indexPath];
 			[cell bindData:indexPath messagesView:self];
-			return cell;
+            returnCell = cell;
 		}
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
@@ -612,16 +647,17 @@
 	{
 		RCBubbleFooterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCBubbleFooterCell" forIndexPath:indexPath];
 		[cell bindData:indexPath messagesView:self];
-		return cell;
+        returnCell = cell;
 	}
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (indexPath.row == 4) // Section footer
 	{
 		RCSectionFooterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RCSectionFooterCell" forIndexPath:indexPath];
 		[cell bindData:indexPath messagesView:self];
-		return cell;
+        returnCell = cell;
 	}
-	return nil;
+    //returnCell.fd_enforceFrameLayout = NO;
+	return returnCell;
 }
 
 #pragma mark - Helper methods

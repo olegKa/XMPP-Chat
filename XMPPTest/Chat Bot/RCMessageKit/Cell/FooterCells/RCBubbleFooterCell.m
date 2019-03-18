@@ -71,4 +71,10 @@
 	return ([messagesView textBubbleFooter:indexPath] != nil) ? [RCMessages bubbleFooterHeight] : 0;
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = CGSizeMake(size.width, [RCBubbleFooterCell height:indexPath messagesView:messagesView]);
+    return retVal;
+}
+
 @end

@@ -71,4 +71,10 @@
 	return ([messagesView textBubbleHeader:indexPath] != nil) ? [RCMessages bubbleHeaderHeight] : 0;
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = CGSizeMake(size.width, [messagesView textBubbleHeader:indexPath] != nil? [RCMessages bubbleHeaderHeight] : 0);
+    return retVal;
+}
+
 @end

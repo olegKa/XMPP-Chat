@@ -127,4 +127,10 @@
 	return CGSizeMake(width, rcmessage.picture_height * width / rcmessage.picture_width);
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCPictureMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 @end

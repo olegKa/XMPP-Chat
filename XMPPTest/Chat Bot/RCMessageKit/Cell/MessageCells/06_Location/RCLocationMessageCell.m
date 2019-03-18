@@ -104,4 +104,10 @@
 	return CGSizeMake([RCMessages locationBubbleWidth], [RCMessages locationBubbleHeight]);
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCLocationMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 @end

@@ -116,6 +116,12 @@
 	return CGSizeMake(width, height);
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCStatusCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 #pragma mark - Gesture recognizer methods
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------

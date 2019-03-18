@@ -117,6 +117,12 @@
 	return CGSizeMake(fmaxf(width, [RCMessages textBubbleWidthMin]), fmaxf(height, [RCMessages textBubbleHeightMin]));
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCTextMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 #pragma mark - <UITextViewDelegate>
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction
 {

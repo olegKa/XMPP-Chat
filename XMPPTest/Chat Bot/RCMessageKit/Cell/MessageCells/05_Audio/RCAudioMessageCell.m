@@ -148,4 +148,10 @@
 	return CGSizeMake([RCMessages audioBubbleWidht], [RCMessages audioBubbleHeight]);
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCAudioMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 @end

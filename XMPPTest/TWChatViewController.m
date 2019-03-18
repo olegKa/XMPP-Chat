@@ -261,7 +261,6 @@
         case NSFetchedResultsChangeInsert:
         {
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.row] withRowAnimation:UITableViewRowAnimationFade];
-            
         }
             break;
         case NSFetchedResultsChangeDelete:

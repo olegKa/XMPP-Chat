@@ -100,4 +100,10 @@
 	return CGSizeMake(fmaxf(width, [RCMessages emojiBubbleWidthMin]), fmaxf(height, [RCMessages emojiBubbleHeightMin]));
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+    CGSize retVal = [RCEmojiMessageCell size:indexPath messagesView:messagesView];
+    return retVal;
+}
+
 @end
