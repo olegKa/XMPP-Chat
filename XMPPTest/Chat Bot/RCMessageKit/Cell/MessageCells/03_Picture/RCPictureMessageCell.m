@@ -71,7 +71,12 @@
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	if (rcmessage.status == RC_STATUS_SUCCEED)
 	{
-		imageView.image = rcmessage.picture_image;
+        if (rcmessage.picture_image.images) {
+            imageView.animationImages = rcmessage.picture_image.images;
+            imageView.image = rcmessage.picture_image.images.firstObject;
+        } else {
+            imageView.image = rcmessage.picture_image;
+        }
 		[spinner stopAnimating];
 		imageManual.hidden = YES;
 	}

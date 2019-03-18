@@ -506,6 +506,28 @@
 	view.tintColor = [UIColor clearColor];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 2) // Message body
+    {
+        RCMessage *rcmessage = [self rcmessage:indexPath];
+        if (rcmessage.type == RC_TYPE_PICTURE && rcmessage.picture_image.images) {
+            [[(RCPictureMessageCell*)cell imageView] startAnimating];
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 2) // Message body
+    {
+        RCMessage *rcmessage = [self rcmessage:indexPath];
+        if (rcmessage.type == RC_TYPE_PICTURE && rcmessage.picture_image.images) {
+            [[(RCPictureMessageCell*)cell imageView] stopAnimating];
+        }
+    }
+}
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 //-------------------------------------------------------------------------------------------------------------------------------------------------

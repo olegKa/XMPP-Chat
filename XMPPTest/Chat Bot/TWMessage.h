@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, TWSenderType) {
 
 - (instancetype)initWithBody:(NSString *)body incoming:(BOOL)incoming;
 - (instancetype)initWithPictureUrl:(NSURL *)url incoming:(BOOL)incoming complation:(void(^)(void))completion;
+- (instancetype)initWithAnimatedGIFUrl:(NSURL *)url incoming:(BOOL)incoming;
 - (instancetype)initWithAction:(TWChatBotAction *)action;
 
 + (NSString *)messageTextWithText:(NSString *)text;

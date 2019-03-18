@@ -60,6 +60,7 @@
 		4F4BF0A5223F68DC00E88693 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		4F4BF0A6223F68DC00E88693 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */; };
 		4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */; };
+		4F4BF0AB223F98FE00E88693 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */; };
 		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
 		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
@@ -177,6 +178,8 @@
 		4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
 		4F4BF0A2223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
 		4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		4F4BF0AA223F98FE00E88693 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
 		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
 		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
@@ -396,14 +399,8 @@
 		4F4B68C5221D549D00C4AA96 /* Chat Bot */ = {
 			isa = PBXGroup;
 			children = (
-				4F4BF09E223F68DA00E88693 /* UITableView+FDIndexPathHeightCache.h */,
-				4F4BF09C223F68D900E88693 /* UITableView+FDIndexPathHeightCache.m */,
-				4F4BF09D223F68DA00E88693 /* UITableView+FDKeyedHeightCache.h */,
-				4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */,
-				4F4BF09F223F68DA00E88693 /* UITableView+FDTemplateLayoutCell.h */,
-				4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */,
-				4F4BF0A2223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.h */,
-				4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */,
+				4F4BF0AC223F990400E88693 /* AnimatedGIF */,
+				4F4BF0A8223F984800E88693 /* FDTemplateLayoutCell */,
 				4F168EB0222CF33B00A0355A /* RCMessageKit */,
 				4F4B68C9221E5A9B00C4AA96 /* HPGrowingTextView */,
 				4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */,
@@ -440,6 +437,30 @@
 			children = (
 			);
 			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		4F4BF0A8223F984800E88693 /* FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				4F4BF09E223F68DA00E88693 /* UITableView+FDIndexPathHeightCache.h */,
+				4F4BF09C223F68D900E88693 /* UITableView+FDIndexPathHeightCache.m */,
+				4F4BF09D223F68DA00E88693 /* UITableView+FDKeyedHeightCache.h */,
+				4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */,
+				4F4BF09F223F68DA00E88693 /* UITableView+FDTemplateLayoutCell.h */,
+				4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */,
+				4F4BF0A2223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.h */,
+				4F4BF0A0223F68DB00E88693 /* UITableView+FDTemplateLayoutCellDebug.m */,
+			);
+			path = FDTemplateLayoutCell;
+			sourceTree = "<group>";
+		};
+		4F4BF0AC223F990400E88693 /* AnimatedGIF */ = {
+			isa = PBXGroup;
+			children = (
+				4F4BF0AA223F98FE00E88693 /* UIImage+animatedGIF.h */,
+				4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */,
+			);
+			path = AnimatedGIF;
 			sourceTree = "<group>";
 		};
 		4FEE101A21F6F22500E6D849 = {
@@ -694,6 +715,7 @@
 				4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */,
 				4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */,
+				4F4BF0AB223F98FE00E88693 /* UIImage+animatedGIF.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
 				4F4BF0A5223F68DC00E88693 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,

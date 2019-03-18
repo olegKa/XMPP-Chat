@@ -8,6 +8,8 @@
 
 #import "TWMessage.h"
 #import <SDWebImage/SDWebImageDownloader.h>
+#import "UIImage+animatedGIF.h"
+
 
 @interface TWMessage ()
 {
@@ -31,9 +33,12 @@
     self.picture_width = RCMessages.pictureBubbleWidth;
     
     if (url) {
-        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url
+                                                              options:0
+                                                             progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             
-        } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+        }
+                                                            completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
             self.status = RC_STATUS_SUCCEED;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.picture_image = image;
@@ -45,6 +50,26 @@
             
         }];
     }
+    
+    return self;
+}
+
+- (instancetype)initWithAnimatedGIFUrl:(NSURL *)url incoming:(BOOL)incoming
+{
+    self = [super init];
+    self.type = RC_TYPE_PICTURE;
+    //self.status = RC_STATUS_LOADING;
+    self.incoming = incoming;
+    self.outgoing = !incoming;
+    self.picture_width = RCMessages.pictureBubbleWidth;
+    
+    if (url) {
+        self.picture_image = [UIImage animatedImageWithAnimatedGIFURL:url];
+        self.picture_height = self.picture_width * self.picture_image.size.height / self.picture_image.size.width;
+        self.status = RC_STATUS_SUCCEED;
+    }
+    
+    
     
     return self;
 }
@@ -64,33 +89,29 @@
                 NSDictionary *message = json[@"message"];
                 
                 // check if picture
-                NSString *iconPath = [message[@"imgUrl"] isEqualToString:@"N/A"]? nil: message[@"imgUrl"];
+                NSString *imgPath = [message[@"imgUrl"] isEqualToString:@"N/A"]? nil: message[@"imgUrl"];
                 NSString *rtfText = [message[@"rtfText"] isEqualToString:@"N/A"]? nil: message[@"rtfText"];
                 
-                if (iconPath) {
-                    NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/resources/%@", TWChatDataProvider.shared.resourcePath, iconPath]];
+                if (imgPath) {
+                    NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/resources/%@", TWChatDataProvider.shared.resourcePath, imgPath]];
+                    if ([imgPath.pathExtension isEqualToString:@"gif"]) {
+                        // анимированная гифка
+                        //NSURL *imgUrl = [NSURL URLWithString:@"https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif"];
+                        self = [self initWithAnimatedGIFUrl:imgUrl incoming:incoming];
+                    } else {
+                        // обычная картинка
+                        self = [self initWithPictureUrl:imgUrl incoming:incoming complation:^{
+                            if (self.loadingHandle) {
+                                self.loadingHandle(self);
+                            }
+                        }];
+                    }
                     
-                    self = [self initWithPictureUrl:imgUrl incoming:incoming complation:^{
-                        if (self.loadingHandle) {
-                            self.loadingHandle(self);
-                        }
-                    }];
+                    
                     
                 // check if Attributed String
                     
                 } else if (rtfText) {
-                    /*
-                    rtfText = @"\
-                    <head>\
-                    <title>Пример веб-страницы</title>\
-                    </head>\
-                    <body>\
-                    <h1>Заголовок</h1>\
-                    <!-- Комментарий -->\
-                    <p>Первый абзац.</p>\
-                    <p>Второй абзац.</p>\
-                    </body>";
-                    */
                     
                     NSData *rtfData = [rtfText dataUsingEncoding:NSUTF8StringEncoding];
                     
