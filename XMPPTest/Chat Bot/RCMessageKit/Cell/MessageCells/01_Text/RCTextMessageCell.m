@@ -48,7 +48,7 @@
 		textView.editable = NO;
 		textView.selectable = YES;
 		textView.scrollEnabled = NO;
-		textView.userInteractionEnabled = YES;
+		textView.userInteractionEnabled = NO;
 		textView.backgroundColor = [UIColor clearColor];
 		textView.textContainer.lineFragmentPadding = 0;
 		textView.textContainerInset = [RCMessages textInset];

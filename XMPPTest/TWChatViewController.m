@@ -19,6 +19,8 @@
 
 #import <SafariServices/SafariServices.h>
 
+#import "TWChatGetUserDataViewController.h"
+
 @interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
@@ -467,6 +469,22 @@
         TWImageViewController *vc = [UIStoryboard storyboardWithName:@"TWImageViewController" bundle:nil].instantiateInitialViewController;
         vc.image = msg.picture_image;
         [self presentViewController:vc animated:YES completion:nil];
+    }
+    
+    if (msg.function) {
+        NSLog(@"Tap bubla with function:[%@]", msg.function.name);
+        
+        TWChatGetUserDataViewController *vc = [TWChatGetUserDataViewController chatGetUserDataViewControllerWithFunction:msg.function];
+        vc.getUserDataHandler = ^(BOOL success, TWChatBotFunction *function) {
+            if (success) {
+                [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:function]];
+            } else {
+                NSLog(@"user discard function");
+            }
+            
+        };
+        [self presentViewController:vc.navigationController animated:YES completion:nil];
+        
     }
 }
 

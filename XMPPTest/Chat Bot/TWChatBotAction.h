@@ -6,7 +6,7 @@
 //  Copyright © 2019 oki. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TWChatBotObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,14 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^TWChatBotActionHandler) (TWChatBotAction *action);
 
-@interface TWChatBotAction : NSObject
+@interface TWChatBotAction : TWChatBotObject
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *iconUrl;
 @property (nonatomic, strong) NSString *keyWord;
 @property (nonatomic, copy) TWChatBotActionHandler handler;
-@property (nonatomic, readonly) NSDictionary *json;
 
 - (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image handler:(TWChatBotActionHandler)handler;
 - (instancetype)initWithJSON:(NSDictionary *)json handler:(TWChatBotActionHandler)handler;

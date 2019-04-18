@@ -107,8 +107,6 @@
                         }];
                     }
                     
-                    
-                    
                 // check if Attributed String
                     
                 } else if (rtfText) {
@@ -126,20 +124,34 @@
                     self = [super initWithAttributedText:text incoming:incoming];
                 } else {
                     // Plain Text
-                    self.plainText = message[@"plainText"]? : @"error";
-                    if ([self.plainText isEqualToString:@"Тест "]) {
+                    NSString *plainText = message[@"plainText"];
+                    if ([plainText isEqualToString:@"Тест "]) {
                         self = [super initWithLatitude:55.157210 longitude:61.367877 incoming:incoming completion:^{
                             if (self.loadingHandle) {
                                 self.loadingHandle(self);
                             }
                         }];
-                    } else {
+                    } else if (plainText){
                         NSDictionary *attributes = @{NSFontAttributeName: RCMessages.textFont,
                                                      NSForegroundColorAttributeName: incoming? RCMessages.textTextColorIncoming: RCMessages.textTextColorOutgoing
                                                      };
-                        self = [super initWithAttributedText:[[NSAttributedString alloc] initWithString:_plainText
+                        self = [super initWithAttributedText:[[NSAttributedString alloc] initWithString:plainText
                                                                                              attributes:attributes]
                                                     incoming:incoming];
+                        self.plainText = plainText;
+                    }
+                }
+                
+                if (message[@"function"]) {
+                    _function = [[TWChatBotFunction alloc] initWithJSON:message[@"function"]];
+                    if (!self.plainText && _function) {
+                        
+                        NSDictionary *attributes = @{NSFontAttributeName: RCMessages.textFont,
+                                                     NSForegroundColorAttributeName: incoming? RCMessages.textTextColorIncoming: RCMessages.textTextColorOutgoing
+                                                     };
+                        self = [super initWithAttributedText:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Выполнить \"%@\"?", _function.name]
+                                                                                                    attributes:attributes]
+                                                           incoming:incoming];
                     }
                 }
                 
@@ -202,6 +214,30 @@
                                @{@"vidget":
                                      @{@"vidgetRowsList": @[]},
                                  @"plainText": text,
+                                 @"senderType": @(kSenderTypeClient)
+                                 },
+                           };
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:json
+                                                       options:0
+                                                         error:&error];
+    
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    return jsonString;
+}
+
++ (NSString *)messageWithFunction:(TWChatBotFunction *)function {
+    
+    NSString *jsonString;
+    NSDictionary *json = @{@"message":
+                               @{@"function": function.json,
+                                 @"plainText": [NSString stringWithFormat:@"Получи фашист гранату\n%@", function.outputDescription],
                                  @"senderType": @(kSenderTypeClient)
                                  },
                            };

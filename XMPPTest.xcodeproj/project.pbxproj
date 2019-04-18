@@ -61,6 +61,19 @@
 		4F4BF0A6223F68DC00E88693 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A1223F68DB00E88693 /* UITableView+FDKeyedHeightCache.m */; };
 		4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */; };
 		4F4BF0AB223F98FE00E88693 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */; };
+		4F5A7B4022682C43000BBCF0 /* TWChatBotFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A7B3F22682C43000BBCF0 /* TWChatBotFunction.m */; };
+		4F5A7B4322684548000BBCF0 /* TWChatGetUserDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A7B4222684548000BBCF0 /* TWChatGetUserDataViewController.m */; };
+		4F5A7B452268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5A7B442268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard */; };
+		4F5A7B4922684A50000BBCF0 /* TWChatInputFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A7B4722684A50000BBCF0 /* TWChatInputFieldCell.m */; };
+		4F5A7B4A22684A50000BBCF0 /* TWChatInputFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5A7B4822684A50000BBCF0 /* TWChatInputFieldCell.xib */; };
+		4F5CE21322685097007CA0F2 /* TWChatEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE21122685097007CA0F2 /* TWChatEmptyCell.m */; };
+		4F5CE21422685097007CA0F2 /* TWChatEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5CE21222685097007CA0F2 /* TWChatEmptyCell.xib */; };
+		4F5CE217226850FA007CA0F2 /* TWChatUserDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE216226850FA007CA0F2 /* TWChatUserDataCell.m */; };
+		4F5CE21B2268562F007CA0F2 /* TWChatButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE2192268562F007CA0F2 /* TWChatButtonCell.m */; };
+		4F5CE21C2268562F007CA0F2 /* TWChatButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5CE21A2268562F007CA0F2 /* TWChatButtonCell.xib */; };
+		4F5CE223226874F9007CA0F2 /* NSStringMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE21F226874F8007CA0F2 /* NSStringMask.m */; };
+		4F5CE224226874F9007CA0F2 /* UITextFieldMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE221226874F9007CA0F2 /* UITextFieldMask.m */; };
+		4F5CE22722689877007CA0F2 /* TWChatBotObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5CE22622689877007CA0F2 /* TWChatBotObject.m */; };
 		4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */; };
 		4F5D1006221D2D05007B52A4 /* TWMessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */; };
 		4FEE102821F6F22500E6D849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEE102721F6F22500E6D849 /* AppDelegate.m */; };
@@ -180,6 +193,28 @@
 		4F4BF0A3223F68DB00E88693 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		4F4BF0AA223F98FE00E88693 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		4F5A7B3E22682C43000BBCF0 /* TWChatBotFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotFunction.h; sourceTree = "<group>"; };
+		4F5A7B3F22682C43000BBCF0 /* TWChatBotFunction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotFunction.m; sourceTree = "<group>"; };
+		4F5A7B4122684548000BBCF0 /* TWChatGetUserDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatGetUserDataViewController.h; sourceTree = "<group>"; };
+		4F5A7B4222684548000BBCF0 /* TWChatGetUserDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatGetUserDataViewController.m; sourceTree = "<group>"; };
+		4F5A7B442268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWChatGetUserDataViewController.storyboard; sourceTree = "<group>"; };
+		4F5A7B4622684A50000BBCF0 /* TWChatInputFieldCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatInputFieldCell.h; sourceTree = "<group>"; };
+		4F5A7B4722684A50000BBCF0 /* TWChatInputFieldCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatInputFieldCell.m; sourceTree = "<group>"; };
+		4F5A7B4822684A50000BBCF0 /* TWChatInputFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatInputFieldCell.xib; sourceTree = "<group>"; };
+		4F5CE21022685097007CA0F2 /* TWChatEmptyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatEmptyCell.h; sourceTree = "<group>"; };
+		4F5CE21122685097007CA0F2 /* TWChatEmptyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatEmptyCell.m; sourceTree = "<group>"; };
+		4F5CE21222685097007CA0F2 /* TWChatEmptyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatEmptyCell.xib; sourceTree = "<group>"; };
+		4F5CE215226850FA007CA0F2 /* TWChatUserDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatUserDataCell.h; sourceTree = "<group>"; };
+		4F5CE216226850FA007CA0F2 /* TWChatUserDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatUserDataCell.m; sourceTree = "<group>"; };
+		4F5CE2182268562F007CA0F2 /* TWChatButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatButtonCell.h; sourceTree = "<group>"; };
+		4F5CE2192268562F007CA0F2 /* TWChatButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatButtonCell.m; sourceTree = "<group>"; };
+		4F5CE21A2268562F007CA0F2 /* TWChatButtonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatButtonCell.xib; sourceTree = "<group>"; };
+		4F5CE21F226874F8007CA0F2 /* NSStringMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringMask.m; sourceTree = "<group>"; };
+		4F5CE220226874F8007CA0F2 /* UITextFieldMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldMask.h; sourceTree = "<group>"; };
+		4F5CE221226874F9007CA0F2 /* UITextFieldMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldMask.m; sourceTree = "<group>"; };
+		4F5CE222226874F9007CA0F2 /* NSStringMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringMask.h; sourceTree = "<group>"; };
+		4F5CE22522689877007CA0F2 /* TWChatBotObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotObject.h; sourceTree = "<group>"; };
+		4F5CE22622689877007CA0F2 /* TWChatBotObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotObject.m; sourceTree = "<group>"; };
 		4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWMessagesView.h; sourceTree = "<group>"; };
 		4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWMessagesView.m; sourceTree = "<group>"; };
 		4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWMessagesView.xib; sourceTree = "<group>"; };
@@ -406,12 +441,16 @@
 				4F5D1002221D2CC0007B52A4 /* TWMessagesView.h */,
 				4F5D1003221D2CC0007B52A4 /* TWMessagesView.m */,
 				4F5D1005221D2D05007B52A4 /* TWMessagesView.xib */,
+				4F5CE22522689877007CA0F2 /* TWChatBotObject.h */,
+				4F5CE22622689877007CA0F2 /* TWChatBotObject.m */,
 				4F4B68BF221D503000C4AA96 /* TWChatBotAction.h */,
 				4F4B68C0221D503000C4AA96 /* TWChatBotAction.m */,
 				4F4B68C2221D524500C4AA96 /* TWChatBotActionButton.h */,
 				4F4B68C3221D524500C4AA96 /* TWChatBotActionButton.m */,
 				4F4B68C6221D54E100C4AA96 /* TWMessage.h */,
 				4F4B68C7221D54E100C4AA96 /* TWMessage.m */,
+				4F5A7B3E22682C43000BBCF0 /* TWChatBotFunction.h */,
+				4F5A7B3F22682C43000BBCF0 /* TWChatBotFunction.m */,
 				4F4B69792225441700C4AA96 /* TWChatTypingIndicator.h */,
 				4F4B697A2225441700C4AA96 /* TWChatTypingIndicator.m */,
 				4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */,
@@ -435,6 +474,7 @@
 		4F4B692122251F4400C4AA96 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				4F5CE21E226874DB007CA0F2 /* NSStringMask */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -461,6 +501,17 @@
 				4F4BF0A9223F98FD00E88693 /* UIImage+animatedGIF.m */,
 			);
 			path = AnimatedGIF;
+			sourceTree = "<group>";
+		};
+		4F5CE21E226874DB007CA0F2 /* NSStringMask */ = {
+			isa = PBXGroup;
+			children = (
+				4F5CE222226874F9007CA0F2 /* NSStringMask.h */,
+				4F5CE21F226874F8007CA0F2 /* NSStringMask.m */,
+				4F5CE220226874F8007CA0F2 /* UITextFieldMask.h */,
+				4F5CE221226874F9007CA0F2 /* UITextFieldMask.m */,
+			);
+			path = NSStringMask;
 			sourceTree = "<group>";
 		};
 		4FEE101A21F6F22500E6D849 = {
@@ -504,6 +555,20 @@
 				3A3E66112239269800243F93 /* TWImageViewController.h */,
 				3A3E66122239269800243F93 /* TWImageViewController.m */,
 				3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */,
+				4F5A7B4122684548000BBCF0 /* TWChatGetUserDataViewController.h */,
+				4F5A7B4222684548000BBCF0 /* TWChatGetUserDataViewController.m */,
+				4F5A7B442268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard */,
+				4F5CE215226850FA007CA0F2 /* TWChatUserDataCell.h */,
+				4F5CE216226850FA007CA0F2 /* TWChatUserDataCell.m */,
+				4F5A7B4622684A50000BBCF0 /* TWChatInputFieldCell.h */,
+				4F5A7B4722684A50000BBCF0 /* TWChatInputFieldCell.m */,
+				4F5A7B4822684A50000BBCF0 /* TWChatInputFieldCell.xib */,
+				4F5CE2182268562F007CA0F2 /* TWChatButtonCell.h */,
+				4F5CE2192268562F007CA0F2 /* TWChatButtonCell.m */,
+				4F5CE21A2268562F007CA0F2 /* TWChatButtonCell.xib */,
+				4F5CE21022685097007CA0F2 /* TWChatEmptyCell.h */,
+				4F5CE21122685097007CA0F2 /* TWChatEmptyCell.m */,
+				4F5CE21222685097007CA0F2 /* TWChatEmptyCell.xib */,
 				4FEE103C21F71C4100E6D849 /* TWXMPPProvider.h */,
 				4FEE103D21F71C4100E6D849 /* TWXMPPProvider.m */,
 				4F4B68CE221E61C700C4AA96 /* TWChatDataProvider.h */,
@@ -608,6 +673,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5CE21422685097007CA0F2 /* TWChatEmptyCell.xib in Resources */,
 				4FEE103321F6F22C00E6D849 /* LaunchScreen.storyboard in Resources */,
 				4F168EE9222CF33B00A0355A /* rcmessages_audiopause@2x.png in Resources */,
 				4F168EEF222CF33B00A0355A /* rcmessage_attach@2x.png in Resources */,
@@ -616,8 +682,10 @@
 				4F168EFF222CF33B00A0355A /* RCMessagesView.xib in Resources */,
 				4FEE103021F6F22C00E6D849 /* Assets.xcassets in Resources */,
 				4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */,
+				4F5A7B452268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard in Resources */,
 				4F168EE8222CF33B00A0355A /* rcmessage_send@2x.png in Resources */,
 				3A3E6615223926AB00243F93 /* TWImageViewController.storyboard in Resources */,
+				4F5A7B4A22684A50000BBCF0 /* TWChatInputFieldCell.xib in Resources */,
 				4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */,
 				4F168EEE222CF33B00A0355A /* rcmessage_incoming.aiff in Resources */,
 				4F4B69832225442B00C4AA96 /* TWChatTypingIndicator.xib in Resources */,
@@ -627,6 +695,7 @@
 				4F168EEA222CF33B00A0355A /* rcmessages_audioplay@2x.png in Resources */,
 				4F168EEC222CF33B00A0355A /* rcmessages_manual@2x.png in Resources */,
 				4F168EED222CF33B00A0355A /* rcmessages_videoplay@2x.png in Resources */,
+				4F5CE21C2268562F007CA0F2 /* TWChatButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +769,7 @@
 			files = (
 				3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */,
 				4F4B69862225573400C4AA96 /* NSDate+TWChat.m in Sources */,
+				4F5CE21B2268562F007CA0F2 /* TWChatButtonCell.m in Sources */,
 				4F168EF3222CF33B00A0355A /* RCMessageCell.m in Sources */,
 				4F168F00222CF33B00A0355A /* RCMessage.m in Sources */,
 				4F168EFA222CF33B00A0355A /* RCBubbleFooterCell.m in Sources */,
@@ -710,22 +780,27 @@
 				4F168F08222E820200A0355A /* NSString+TWChat.m in Sources */,
 				4F168EF4222CF33B00A0355A /* RCPictureMessageCell.m in Sources */,
 				4F168EF5222CF33B00A0355A /* RCVideoMessageCell.m in Sources */,
+				4F5A7B4022682C43000BBCF0 /* TWChatBotFunction.m in Sources */,
 				4F4BF0A4223F68DC00E88693 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
 				4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */,
 				4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */,
 				4F4BF0AB223F98FE00E88693 /* UIImage+animatedGIF.m in Sources */,
+				4F5CE217226850FA007CA0F2 /* TWChatUserDataCell.m in Sources */,
 				4F0CC6C521F8820700FA7A5C /* TWChatViewController.m in Sources */,
 				4F4BF0A5223F68DC00E88693 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */,
+				4F5A7B4322684548000BBCF0 /* TWChatGetUserDataViewController.m in Sources */,
 				4F4B68C8221D54E100C4AA96 /* TWMessage.m in Sources */,
 				4F168EFD222CF33B00A0355A /* RCMessagesView.m in Sources */,
+				4F5CE223226874F9007CA0F2 /* NSStringMask.m in Sources */,
 				4F5D1004221D2CC0007B52A4 /* TWMessagesView.m in Sources */,
 				4F168EF2222CF33B00A0355A /* RCEmojiMessageCell.m in Sources */,
 				4F0CC6D121F9CADA00FA7A5C /* TWChatAuthorizationViewController.m in Sources */,
 				4FEE103621F6F22C00E6D849 /* main.m in Sources */,
 				4FEE103E21F71C4100E6D849 /* TWXMPPProvider.m in Sources */,
+				4F5A7B4922684A50000BBCF0 /* TWChatInputFieldCell.m in Sources */,
 				4F168EFE222CF33B00A0355A /* RCMessages.m in Sources */,
 				4F4B68C4221D524500C4AA96 /* TWChatBotActionButton.m in Sources */,
 				4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */,
@@ -739,8 +814,11 @@
 				4F168EFB222CF33B00A0355A /* RCSectionHeaderCell.m in Sources */,
 				4F168F05222D0CD800A0355A /* XMPPRoomMessageCoreDataStorageObject+TWChat.m in Sources */,
 				4F4B68D0221E61C700C4AA96 /* TWChatDataProvider.m in Sources */,
+				4F5CE21322685097007CA0F2 /* TWChatEmptyCell.m in Sources */,
 				4F4B697B2225441700C4AA96 /* TWChatTypingIndicator.m in Sources */,
 				4F168EF7222CF33B00A0355A /* RCLocationMessageCell.m in Sources */,
+				4F5CE224226874F9007CA0F2 /* UITextFieldMask.m in Sources */,
+				4F5CE22722689877007CA0F2 /* TWChatBotObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

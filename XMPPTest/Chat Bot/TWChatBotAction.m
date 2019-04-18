@@ -22,7 +22,7 @@
 
 - (instancetype)initWithJSON:(NSDictionary *)json handler:(TWChatBotActionHandler)handler
 {
-    if (self = [super init]) {
+    if (self = [super initWithJSON:json]) {
         _title = json[@"text"];
         _image = nil; //[json[@"icon"] isEqualToString:@"N/A"]? [UIImage imageNamed:@"Banned"]: nil;
         
