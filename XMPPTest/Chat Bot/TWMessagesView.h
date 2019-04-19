@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray <TWChatBotAction *> *actions;
 @property (assign, nonatomic, getter=isEnabled) BOOL enabled;
 
+- (void)setInputEnabled:(BOOL)enabled;
+- (void)setActionsEnabled:(BOOL)enabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

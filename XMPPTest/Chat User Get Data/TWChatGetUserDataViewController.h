@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TWChatBotFunction.h"
 
-typedef void(^TWGetUserDataBlock)(BOOL success, TWChatBotFunction *function);
-
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^TWGetUserDataBlock)(BOOL success, TWChatBotFunction *function);
 
 @interface TWChatGetUserDataViewController : UITableViewController
 

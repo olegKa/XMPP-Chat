@@ -153,6 +153,29 @@
                                                                                                     attributes:attributes]
                                                            incoming:incoming];
                     }
+                    
+                    /*
+                    // Add vidgets OK|CANCEL
+                    TWChatBotAction *actionApprove = [[TWChatBotAction alloc] initWithTitle:@"OK" image:nil handler:^(TWChatBotAction * _Nonnull action) {
+                        NSLog(@"## DO FuNCTION");
+                    }];
+                    TWChatBotAction *actionDenied = [[TWChatBotAction alloc] initWithTitle:@"Отмена" image:nil handler:^(TWChatBotAction * _Nonnull action) {
+                        NSLog(@"## CANCEL FuNCTION");
+                    }];
+                    self.actions = @[actionApprove, actionDenied];
+                    */
+                } else {
+                    // initialize vidgets
+                    NSDictionary *vidget = message[@"vidget"];
+                    NSArray <NSDictionary *> *vidgetList = vidget[@"vidgetRowsList"];
+                    if ([vidgetList isKindOfClass:NSArray.class]) {
+                        NSMutableArray *actions = @[].mutableCopy;
+                        [vidgetList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            TWChatBotAction *action = [[TWChatBotAction alloc] initWithJSON:obj handler:nil];
+                            [actions addObject:action];
+                        }];
+                        self.actions = actions.copy;
+                    }
                 }
                 
                 // initalize sender type
@@ -160,19 +183,7 @@
                     _senderType = [message[@"senderType"] integerValue];
                 }
                 
-                // initialize vidgets
-                NSDictionary *vidget = message[@"vidget"];
-                NSArray <NSDictionary *> *vidgetList = vidget[@"vidgetRowsList"];
-                if ([vidgetList isKindOfClass:NSArray.class]) {
-                    NSMutableArray *actions = @[].mutableCopy;
-                    [vidgetList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        TWChatBotAction *action = [[TWChatBotAction alloc] initWithJSON:obj handler:^(TWChatBotAction *action) {
-                            NSLog(@"keyWord is [%@]", action.keyWord);
-                        }];
-                        [actions addObject:action];
-                    }];
-                    self.actions = actions.copy;
-                }
+                
                 
             }
             
@@ -237,7 +248,7 @@
     NSString *jsonString;
     NSDictionary *json = @{@"message":
                                @{@"function": function.json,
-                                 @"plainText": [NSString stringWithFormat:@"Получи фашист гранату\n%@", function.outputDescription],
+                                 @"plainText": function.resultType == kChatBotFunctionResultApproved? [NSString stringWithFormat:@"Получи фашист гранату\n%@", function.outputDescription]:@"Фигвам - национальная индейская изба",
                                  @"senderType": @(kSenderTypeClient)
                                  },
                            };

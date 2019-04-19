@@ -49,11 +49,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef NS_ENUM(NSInteger, TWChatBotFunctionResultType) {
+    kChatBotFunctionResultUnknown,
+    kChatBotFunctionResultApproved,
+    kChatBotFunctionResultDenied
+};
+
+@interface TWChatBotFunctionResult : TWChatBotFunctionParam
+
+- (instancetype)initWithResultType:(TWChatBotFunctionResultType)type;
+
+@end
+
 @interface TWChatBotFunction : TWChatBotObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, readonly) NSArray <TWChatBotFunctionParam *> *inputParams;
 @property (nonatomic, readonly) NSArray <TWChatBotFunctionParam *> *outputParams;
+
+@property (nonatomic, assign) TWChatBotFunctionResultType resultType;
 
 - (NSString *)outputDescription;
 

@@ -183,7 +183,32 @@
 {
     XMPPRoomMessageCoreDataStorageObject *obj = controller.fetchedObjects.lastObject;
     TWMessage *message = [[TWMessage alloc] initWithBody:obj.body incoming:![self isFromMeMessage:obj]];
-    if (message.actions) {
+    
+    if (message.function && message.incoming) {
+        
+        // Add vidgets OK|CANCEL
+        TWChatBotAction *actionApprove = [[TWChatBotAction alloc] initWithTitle:@"OK" image:nil handler:^(TWChatBotAction * _Nonnull action) {
+            
+            [self setActionsEnabled:NO];
+            TWChatGetUserDataViewController *vc = [TWChatGetUserDataViewController chatGetUserDataViewControllerWithFunction:message.function];
+            vc.getUserDataHandler = ^(BOOL success, TWChatBotFunction *function) {
+                [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:function]];
+            };
+            [self presentViewController:vc.navigationController animated:YES completion:nil];
+        }];
+        
+        TWChatBotAction *actionDenied = [[TWChatBotAction alloc] initWithTitle:@"Отмена" image:nil handler:^(TWChatBotAction * _Nonnull action) {
+            
+            [self setActionsEnabled:NO];
+            message.function.resultType = kChatBotFunctionResultDenied;
+            [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:message.function]];
+        }];
+        
+        self.actions = @[actionApprove, actionDenied];
+        [self setInputEnabled:NO];
+        
+    } else if (message.actions) {
+        self.enabled = YES;
         self.actions = message.actions.copy;
     }
 }
@@ -471,21 +496,6 @@
         [self presentViewController:vc animated:YES completion:nil];
     }
     
-    if (msg.function) {
-        NSLog(@"Tap bubla with function:[%@]", msg.function.name);
-        
-        TWChatGetUserDataViewController *vc = [TWChatGetUserDataViewController chatGetUserDataViewControllerWithFunction:msg.function];
-        vc.getUserDataHandler = ^(BOOL success, TWChatBotFunction *function) {
-            if (success) {
-                [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:function]];
-            } else {
-                NSLog(@"user discard function");
-            }
-            
-        };
-        [self presentViewController:vc.navigationController animated:YES completion:nil];
-        
-    }
 }
 
 - (void)updateUserTypingState:(BOOL)typing

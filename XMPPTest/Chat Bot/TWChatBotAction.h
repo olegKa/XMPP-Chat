@@ -22,9 +22,9 @@ typedef void (^TWChatBotActionHandler) (TWChatBotAction *action);
 @property (nonatomic, strong) NSString *keyWord;
 @property (nonatomic, copy) TWChatBotActionHandler handler;
 
-- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image handler:(TWChatBotActionHandler)handler;
-- (instancetype)initWithJSON:(NSDictionary *)json handler:(TWChatBotActionHandler)handler;
-+ (instancetype)botActionWithTitle:(NSString *)title image:(UIImage *)image handler:(TWChatBotActionHandler)handler;
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *_Nullable)image handler:(TWChatBotActionHandler _Nullable)handler;
+- (instancetype)initWithJSON:(NSDictionary *)json handler:(TWChatBotActionHandler _Nullable)handler;
++ (instancetype)botActionWithTitle:(NSString *)title image:(UIImage *_Nullable)image handler:(TWChatBotActionHandler _Nullable)handler;
 
 @end
 

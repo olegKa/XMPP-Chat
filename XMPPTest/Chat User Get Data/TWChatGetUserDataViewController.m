@@ -54,6 +54,7 @@ static NSString *const cellUnknown = @"cellUnknown";
 
 - (void)buttonCancel:(id)sender {
     
+    self.function.resultType = kChatBotFunctionResultDenied;
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         if (self.getUserDataHandler) {
             self.getUserDataHandler(NO, self.function);
@@ -100,6 +101,7 @@ static NSString *const cellUnknown = @"cellUnknown";
 
 - (void)configureButtonCell:(TWChatButtonCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     cell.buttonHandler = ^(id sender) {
+        self.function.resultType = kChatBotFunctionResultApproved;
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             if (self.getUserDataHandler) {
                 self.getUserDataHandler(YES, self.function);

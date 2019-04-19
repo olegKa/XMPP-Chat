@@ -28,9 +28,33 @@
     
     NSDictionary *json = @{
                            @"paramId": _ID,
+                           @"paramName": _name,
                            @"paramValue": _value
                            };
     return json;
+}
+
+@end
+
+@implementation TWChatBotFunctionResult
+
+- (instancetype)initWithResultType:(TWChatBotFunctionResultType)type {
+    if (self = [super init]) {
+        self.name = @"paramResult";
+        self.ID = @"none";
+        switch (type) {
+            case kChatBotFunctionResultDenied:
+                self.name = @"denied";
+                break;
+            case kChatBotFunctionResultApproved:
+                self.name = @"approved";
+                break;
+            default:
+                break;
+        }
+        self.value = @"";
+    }
+    return self;
 }
 
 @end
@@ -82,7 +106,9 @@
 
 - (NSDictionary *)json {
     
-    NSMutableArray *outputParams = @[].mutableCopy;
+    TWChatBotFunctionResult *result = [[TWChatBotFunctionResult alloc] initWithResultType:_resultType];
+    
+    NSMutableArray *outputParams = @[result.json].mutableCopy;
     [_outputParams enumerateObjectsUsingBlock:^(TWChatBotFunctionParam * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [outputParams addObject:obj.json];
     }];

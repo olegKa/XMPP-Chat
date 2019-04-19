@@ -77,9 +77,13 @@ static const CGFloat halfSpace = 0.5f * space;
     for (NSUInteger i = 0; i < rows; i++) {
         
         TWChatBotAction *actionL = [_actions objectAtIndex:idx];
-        actionL.handler = ^(TWChatBotAction *action) {
-            [self actionSendMessage:[TWMessage messageTextWithAction:action]];
-        };
+        
+        if (actionL.handler == nil) {
+            actionL.handler = ^(TWChatBotAction *action) {
+                [self actionSendMessage:[TWMessage messageTextWithAction:action]];
+            };
+        }
+        
         TWChatBotActionButton *btnActionL = [TWChatBotActionButton buttonWithAction:actionL];
         CGRect frameL = CGRectMake(posX,
                                    posY + halfSpace,
@@ -92,9 +96,13 @@ static const CGFloat halfSpace = 0.5f * space;
         
         if (_actions.count > idx) {
             TWChatBotAction *actionR = [_actions objectAtIndex:idx];
-            actionR.handler = ^(TWChatBotAction *action) {
-                [self actionSendMessage:[TWMessage messageTextWithAction:action]];
-            };
+            
+            if (actionR.handler == nil) {
+                actionR.handler = ^(TWChatBotAction *action) {
+                    [self actionSendMessage:[TWMessage messageTextWithAction:action]];
+                };
+            }
+            
             TWChatBotActionButton *btnActionR = [TWChatBotActionButton buttonWithAction:actionR];
             CGRect frameR = CGRectMake(posX + width + (0.5 * space), posY + halfSpace, width, actionButtonHeight);
             btnActionR.frame = frameR;
@@ -141,7 +149,22 @@ static const CGFloat halfSpace = 0.5f * space;
 - (void)setEnabled:(BOOL)enabled
 {
     _enabled = enabled;
+    
+    [self setInputEnabled:_enabled];
+    [self setActionsEnabled:_enabled];
+}
+
+- (BOOL)isEnabled
+{
+    return _enabled;
+}
+
+- (void)setInputEnabled:(BOOL)enabled {
+    
     _gTextInput.editable = enabled;
+}
+
+- (void)setActionsEnabled:(BOOL)enabled {
     
     for (UIView *button in _actionsPanel.subviews) {
         if ([button isKindOfClass:UIButton.class]) {
@@ -150,10 +173,6 @@ static const CGFloat halfSpace = 0.5f * space;
     }
 }
 
-- (BOOL)isEnabled
-{
-    return _enabled;
-}
 
 #pragma mark - Override
 - (void)inputPanelUpdate {

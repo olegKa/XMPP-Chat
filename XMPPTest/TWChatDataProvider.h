@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^TWChatResponse) (NSDictionary *json, NSError *error);
+typedef void (^TWChatResponse) (NSDictionary *_Nullable json, NSError *_Nullable error);
 
 typedef NS_ENUM(NSInteger, TWChatResponseCode) {
     kChatResponseCodeSuccess    = 200,
