@@ -246,10 +246,15 @@
 + (NSString *)messageWithFunction:(TWChatBotFunction *)function {
     
     NSString *jsonString;
+    
     NSDictionary *json = @{@"message":
                                @{@"function": function.json,
-                                 @"plainText": function.resultType == kChatBotFunctionResultApproved? [NSString stringWithFormat:@"Получи фашист гранату\n%@", function.outputDescription]:@"Фигвам - национальная индейская изба",
-                                 @"senderType": @(kSenderTypeClient)
+                                 
+                                 @"rtfText": function.resultType == kChatBotFunctionResultApproved? [NSString stringWithFormat:@"Получи фашист гранату\n%@", function.outputDescription] : @"Фигвам - национальная индейская изба",
+                                 
+                                 @"senderType": @(kSenderTypeClient),
+                                 
+                                 @"vidget": @{@"vidgetRowsList": @[]}
                                  },
                            };
     

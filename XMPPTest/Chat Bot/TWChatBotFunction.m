@@ -106,15 +106,28 @@
 
 - (NSDictionary *)json {
     
-    TWChatBotFunctionResult *result = [[TWChatBotFunctionResult alloc] initWithResultType:_resultType];
     
-    NSMutableArray *outputParams = @[result.json].mutableCopy;
+    NSMutableArray *outputParams = @[].mutableCopy;
     [_outputParams enumerateObjectsUsingBlock:^(TWChatBotFunctionParam * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [outputParams addObject:obj.json];
     }];
     
+    NSString *result;
+    switch (_resultType) {
+        case kChatBotFunctionResultApproved:
+            result = @"approved";
+            break;
+        case kChatBotFunctionResultDenied:
+            result = @"denied";
+            break;
+        default:
+            result = @"unknown";
+            break;
+    }
+    
     return @{@"functionName": _name,
-             @"outputParams": outputParams
+             @"params": outputParams,
+             @"status": result
              };
 }
 
