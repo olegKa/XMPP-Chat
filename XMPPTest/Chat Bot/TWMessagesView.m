@@ -49,7 +49,7 @@
     _gTextInput.delegate = self;
     _gTextInput.clipsToBounds = YES;
     _gTextInput.layer.cornerRadius = _gTextInput.bounds.size.height / 2;
-    _gTextInput.placeholder = @"Введите сообщение";
+    _gTextInput.placeholder = @"Message...";
     
 }
 

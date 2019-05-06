@@ -309,7 +309,7 @@
 
 - (void)xmppProvider:(TWXMPPProvider *)provider didJoinToRoom:(XMPPRoom *)room
 {
-    self.title = @"Онлайн";
+    self.title = @"Online";
     self.enabled = YES;
     if (fetchedResultsController) {
         fetchedResultsController.delegate = nil;
@@ -321,7 +321,7 @@
 
 - (void)didLeaveRoomXmppProvider:(TWXMPPProvider *)provider
 {
-    self.title = @"Оффлайн";
+    self.title = @"Offline";
     self.enabled = NO;
 }
 
