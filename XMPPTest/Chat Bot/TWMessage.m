@@ -144,14 +144,17 @@
                 
                 if (message[@"function"]) {
                     _function = [[TWChatBotFunction alloc] initWithJSON:message[@"function"]];
-                    if (!self.plainText && _function) {
+                    if (self.attributedText && _function && !incoming) {
+                        
                         
                         NSDictionary *attributes = @{NSFontAttributeName: RCMessages.textFont,
                                                      NSForegroundColorAttributeName: incoming? RCMessages.textTextColorIncoming: RCMessages.textTextColorOutgoing
                                                      };
-                        self = [super initWithAttributedText:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"Выполнить \"%@\"?", _function.name]
-                                                                                                    attributes:attributes]
-                                                           incoming:incoming];
+                        self = [super initWithAttributedText:[[NSAttributedString alloc] initWithString:self.attributedText.string
+                                                                                             attributes:attributes]
+                                                    incoming:incoming];
+                        
+                        
                     }
                     
                     /*

@@ -112,7 +112,7 @@ static NSString *const cellUnknown = @"cellUnknown";
 
 - (NSString *)identifierCellWithParam:(TWChatBotFunctionParam *)param {
     
-    if ([param.type isEqualToString:@"commonInputField"]) {
+    if ([param.type isEqualToString:@"string"]) {
         return cellInputField;
     }
     return cellUnknown;

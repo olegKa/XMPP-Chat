@@ -29,7 +29,8 @@
     NSDictionary *json = @{
                            @"paramId": _ID,
                            @"paramName": _name,
-                           @"paramValue": _value
+                           @"paramValue": _value,
+                           @"paramType":_type
                            };
     return json;
 }
