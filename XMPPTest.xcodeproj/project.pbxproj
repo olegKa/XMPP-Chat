@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3A3E66132239269800243F93 /* TWImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E66122239269800243F93 /* TWImageViewController.m */; };
 		3A3E6615223926AB00243F93 /* TWImageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */; };
+		3AAC2BC4228EDE34000FCE1A /* TWChatBotFunctionParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAC2BC3228EDE34000FCE1A /* TWChatBotFunctionParam.m */; };
+		3AAC2BC7228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAC2BC6228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.m */; };
+		3AF40500228ECFF100A72208 /* TWChatComboBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF404FE228ECFF100A72208 /* TWChatComboBoxCell.m */; };
+		3AF40501228ECFF100A72208 /* TWChatComboBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF404FF228ECFF100A72208 /* TWChatComboBoxCell.xib */; };
 		3AFE4072221FC1C900C5A0FE /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CB221E5A9B00C4AA96 /* HPGrowingTextView.m */; };
 		3AFE4073221FC1C900C5A0FE /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B68CC221E5A9B00C4AA96 /* HPTextViewInternal.m */; };
 		4F0CC6B821F7421D00FA7A5C /* TWChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0CC6B621F7421D00FA7A5C /* TWChatMessageCell.m */; };
@@ -103,6 +107,13 @@
 		3A3E66112239269800243F93 /* TWImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWImageViewController.h; sourceTree = "<group>"; };
 		3A3E66122239269800243F93 /* TWImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWImageViewController.m; sourceTree = "<group>"; };
 		3A3E6614223926AB00243F93 /* TWImageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TWImageViewController.storyboard; sourceTree = "<group>"; };
+		3AAC2BC2228EDE34000FCE1A /* TWChatBotFunctionParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotFunctionParam.h; sourceTree = "<group>"; };
+		3AAC2BC3228EDE34000FCE1A /* TWChatBotFunctionParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotFunctionParam.m; sourceTree = "<group>"; };
+		3AAC2BC5228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatBotFunctionComboBoxParam.h; sourceTree = "<group>"; };
+		3AAC2BC6228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatBotFunctionComboBoxParam.m; sourceTree = "<group>"; };
+		3AF404FD228ECFF100A72208 /* TWChatComboBoxCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatComboBoxCell.h; sourceTree = "<group>"; };
+		3AF404FE228ECFF100A72208 /* TWChatComboBoxCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatComboBoxCell.m; sourceTree = "<group>"; };
+		3AF404FF228ECFF100A72208 /* TWChatComboBoxCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatComboBoxCell.xib; sourceTree = "<group>"; };
 		4F0CC6B521F7421D00FA7A5C /* TWChatMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWChatMessageCell.h; sourceTree = "<group>"; };
 		4F0CC6B621F7421D00FA7A5C /* TWChatMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWChatMessageCell.m; sourceTree = "<group>"; };
 		4F0CC6B721F7421D00FA7A5C /* TWChatMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TWChatMessageCell.xib; sourceTree = "<group>"; };
@@ -257,6 +268,9 @@
 				4F5A7B442268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard */,
 				4F5CE215226850FA007CA0F2 /* TWChatUserDataCell.h */,
 				4F5CE216226850FA007CA0F2 /* TWChatUserDataCell.m */,
+				3AF404FD228ECFF100A72208 /* TWChatComboBoxCell.h */,
+				3AF404FE228ECFF100A72208 /* TWChatComboBoxCell.m */,
+				3AF404FF228ECFF100A72208 /* TWChatComboBoxCell.xib */,
 				4F5A7B4622684A50000BBCF0 /* TWChatInputFieldCell.h */,
 				4F5A7B4722684A50000BBCF0 /* TWChatInputFieldCell.m */,
 				4F5A7B4822684A50000BBCF0 /* TWChatInputFieldCell.xib */,
@@ -484,6 +498,10 @@
 				4F4B68C7221D54E100C4AA96 /* TWMessage.m */,
 				4F5A7B3E22682C43000BBCF0 /* TWChatBotFunction.h */,
 				4F5A7B3F22682C43000BBCF0 /* TWChatBotFunction.m */,
+				3AAC2BC2228EDE34000FCE1A /* TWChatBotFunctionParam.h */,
+				3AAC2BC3228EDE34000FCE1A /* TWChatBotFunctionParam.m */,
+				3AAC2BC5228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.h */,
+				3AAC2BC6228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.m */,
 				4F4B69792225441700C4AA96 /* TWChatTypingIndicator.h */,
 				4F4B697A2225441700C4AA96 /* TWChatTypingIndicator.m */,
 				4F4B69822225442B00C4AA96 /* TWChatTypingIndicator.xib */,
@@ -700,6 +718,7 @@
 				4F0CC6B921F7421D00FA7A5C /* TWChatMessageCell.xib in Resources */,
 				4F5A7B452268492E000BBCF0 /* TWChatGetUserDataViewController.storyboard in Resources */,
 				4F168EE8222CF33B00A0355A /* rcmessage_send@2x.png in Resources */,
+				3AF40501228ECFF100A72208 /* TWChatComboBoxCell.xib in Resources */,
 				3A3E6615223926AB00243F93 /* TWImageViewController.storyboard in Resources */,
 				4F5A7B4A22684A50000BBCF0 /* TWChatInputFieldCell.xib in Resources */,
 				4FEE102E21F6F22500E6D849 /* Main.storyboard in Resources */,
@@ -801,6 +820,7 @@
 				4F0CC6C821F9694500FA7A5C /* TWChatSettingsViewController.m in Sources */,
 				4F168EF8222CF33B00A0355A /* RCStatusCell.m in Sources */,
 				4F4BF0A7223F68DC00E88693 /* UITableView+FDTemplateLayoutCell.m in Sources */,
+				3AAC2BC7228EDED8000FCE1A /* TWChatBotFunctionComboBoxParam.m in Sources */,
 				4F168EF9222CF33B00A0355A /* RCSectionFooterCell.m in Sources */,
 				4F4BF0AB223F98FE00E88693 /* UIImage+animatedGIF.m in Sources */,
 				4F5CE217226850FA007CA0F2 /* TWChatUserDataCell.m in Sources */,
@@ -822,6 +842,8 @@
 				4F4B698922255A0700C4AA96 /* NSDate+Escort.m in Sources */,
 				4F0CC6CD21F9702700FA7A5C /* UIAlertController+AlertShow.m in Sources */,
 				4F4B68C1221D503000C4AA96 /* TWChatBotAction.m in Sources */,
+				3AF40500228ECFF100A72208 /* TWChatComboBoxCell.m in Sources */,
+				3AAC2BC4228EDE34000FCE1A /* TWChatBotFunctionParam.m in Sources */,
 				3A3E66132239269800243F93 /* TWImageViewController.m in Sources */,
 				4F4BF0A6223F68DC00E88693 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				4F168EFC222CF33B00A0355A /* RCBubbleHeaderCell.m in Sources */,

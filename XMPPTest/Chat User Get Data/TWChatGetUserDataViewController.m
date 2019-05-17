@@ -10,6 +10,7 @@
 #import "TWChatInputFieldCell.h"
 #import "TWChatEmptyCell.h"
 #import "TWChatButtonCell.h"
+#import "TWChatComboBoxCell.h"
 
 @interface TWChatGetUserDataViewController ()
 
@@ -17,9 +18,10 @@
 
 @implementation TWChatGetUserDataViewController
 
-static NSString *const cellInputField = @"cellInputField";
-static NSString *const cellButton = @"cellButton";
-static NSString *const cellUnknown = @"cellUnknown";
+static NSString *const identCellInputField = @"cellInputField";
+static NSString *const identCellComboBox = @"cellComboBox";
+static NSString *const identCellButton = @"cellButton";
+static NSString *const identCellUnknown = @"cellUnknown";
 
 + (instancetype)chatGetUserDataViewControllerWithFunction:(TWChatBotFunction *)function {
     UINavigationController *nav = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil].instantiateInitialViewController;
@@ -33,9 +35,10 @@ static NSString *const cellUnknown = @"cellUnknown";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatInputFieldCell" bundle:nil] forCellReuseIdentifier:cellInputField];
-    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatEmptyCell" bundle:nil] forCellReuseIdentifier:cellUnknown];
-    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatButtonCell" bundle:nil] forCellReuseIdentifier:cellButton];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatInputFieldCell" bundle:nil] forCellReuseIdentifier:identCellInputField];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatEmptyCell" bundle:nil] forCellReuseIdentifier:identCellUnknown];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatButtonCell" bundle:nil] forCellReuseIdentifier:identCellButton];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatComboBoxCell" bundle:nil] forCellReuseIdentifier:identCellComboBox];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 10;
@@ -81,7 +84,7 @@ static NSString *const cellUnknown = @"cellUnknown";
     
     if (indexPath.row == _function.outputParams.count) {
         
-        cell = [tableView dequeueReusableCellWithIdentifier:cellButton forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:identCellButton forIndexPath:indexPath];
         [self configureButtonCell:(TWChatButtonCell *)cell atIndexPath:indexPath];
         
     } else {
@@ -95,6 +98,15 @@ static NSString *const cellUnknown = @"cellUnknown";
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UITableViewCell <TWChatUserDataCellProtocol> *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell conformsToProtocol:@protocol(TWChatUserDataCellProtocol)]) {
+        [cell didSelectCellWithViewController:self];
+    }
 }
 
 #pragma mark - Helpers
@@ -113,9 +125,11 @@ static NSString *const cellUnknown = @"cellUnknown";
 - (NSString *)identifierCellWithParam:(TWChatBotFunctionParam *)param {
     
     if ([param.type isEqualToString:@"string"]) {
-        return cellInputField;
+        return identCellInputField;
+    } else if ([param.type isEqualToString:@"comboBox"]) {
+        return identCellComboBox;
     }
-    return cellUnknown;
+    return identCellUnknown;
 }
 
 /*

@@ -25,4 +25,9 @@
     _param = param;
 }
 
+#pragma mark - <TWChatUserDataCellProtocol> -
+- (void)didSelectCellWithViewController:(UIViewController *)controller {
+    // abstract
+}
+
 @end

@@ -9,7 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "TWChatBotFunction.h"
 
-@interface TWChatUserDataCell : UITableViewCell
+@class TWChatUserDataCell;
+
+@protocol TWChatUserDataCellProtocol
+
+@required
+- (void)didSelectCellWithViewController:(UIViewController *)controller;
+
+@end
+
+@interface TWChatUserDataCell : UITableViewCell <TWChatUserDataCellProtocol>
 
 @property (nonatomic, strong) TWChatBotFunctionParam *param;
 
