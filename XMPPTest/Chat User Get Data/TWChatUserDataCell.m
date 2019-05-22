@@ -30,4 +30,8 @@
     // abstract
 }
 
+- (void)configureCellWithParameter:(TWChatBotFunctionParam *)param atIndexPath:(NSIndexPath *)indexPath {
+    [self setParam:param];
+}
+
 @end

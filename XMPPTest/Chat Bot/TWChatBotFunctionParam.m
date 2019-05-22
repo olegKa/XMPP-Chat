@@ -8,15 +8,22 @@
 
 #import "TWChatBotFunctionParam.h"
 
+@interface TWChatBotFunctionParam ()
+
+@property (nonatomic, strong) NSString *internalType;
+//@property (nonatomic, strong) NSString *internalValue;
+
+@end
+
 @implementation TWChatBotFunctionParam
 
 - (instancetype)initWithJSON:(NSDictionary *)json {
     if (self = [super initWithJSON:json]) {
         self.ID = json[@"paramId"];
-        self.type = json[@"paramType"];
+        self.value = json[@"paramValue"];
+        self.internalType = json[@"paramType"];
         self.name = json[@"paramName"];
         self.desc = json[@"paramDesc"];
-        self.value = json[@"paramValue"];
         self.mask = json[@"mask"];
         self.minLength = [json[@"minLength"] integerValue];
         self.maxLength = [json[@"maxLength"] integerValue];
@@ -30,9 +37,30 @@
                            @"paramId": _ID,
                            @"paramName": _name,
                            @"paramValue": _value,
-                           @"paramType":_type
+                           @"paramType":_internalType
                            };
     return json;
+}
+
+- (TWFunctionParamType)type {
+    
+    TWFunctionParamType result = TWFunctionParamTypeUnknown;
+    if ([_internalType isEqualToString:@"string"]) {
+        result = TWFunctionParamTypeString;
+    } else if ([_internalType isEqualToString:@"checklist"]) {
+        result = TWFunctionParamTypeCheckBox;
+    } else if ([_internalType isEqualToString:@"comboBox"]) {
+        result = TWFunctionParamTypeComboBox;
+    } else if ([_internalType isEqualToString:@"boolean"]) {
+        result = TWFunctionParamTypeBool;
+    }
+    
+    return result;
+}
+
+- (BOOL)validate {
+    // Abstract
+    return YES;
 }
 
 @end

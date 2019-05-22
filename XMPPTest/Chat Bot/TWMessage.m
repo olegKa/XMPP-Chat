@@ -263,7 +263,7 @@
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:json
-                                                       options:0
+                                                       options:kNilOptions
                                                          error:&error];
     
     if (! jsonData) {

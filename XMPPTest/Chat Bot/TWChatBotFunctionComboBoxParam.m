@@ -17,4 +17,8 @@
     return self;
 }
 
+- (BOOL)validate {
+    return [(NSString *)self.value length] > 0;
+}
+
 @end

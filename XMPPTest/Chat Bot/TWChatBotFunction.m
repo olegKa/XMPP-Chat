@@ -8,6 +8,10 @@
 
 #import "TWChatBotFunction.h"
 #import "TWChatBotFunctionComboBoxParam.h"
+#import "TWChatBotFunctionStringParam.h"
+#import "TWChatBotFunctionBooleanParam.h"
+#import "TWChatBotFunctionCheckBoxParam.h"
+
 
 
 #pragma mark - TWFunction -
@@ -49,9 +53,13 @@
 
 - (Class)parameterClassForParam:(NSDictionary *)param {
     if ([param[@"paramType"] isEqualToString:@"string"]) {
-        return TWChatBotFunctionParam.class;
+        return TWChatBotFunctionStringParam.class;
     } else if ([param[@"paramType"] isEqualToString:@"comboBox"]) {
         return TWChatBotFunctionComboBoxParam.class;
+    } else if ([param[@"paramType"] isEqualToString:@"boolean"]) {
+        return TWChatBotFunctionBooleanParam.class;
+    } else if ([param[@"paramType"] isEqualToString:@"checklist"]) {
+        return TWChatBotFunctionCheckBoxParam.class;
     }
     return nil;
 }

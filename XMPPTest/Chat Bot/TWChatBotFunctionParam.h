@@ -8,12 +8,23 @@
 
 #import "TWChatBotObject.h"
 
+typedef NS_ENUM(NSInteger, TWFunctionParamType) {
+    TWFunctionParamTypeUnknown,
+    TWFunctionParamTypeString,
+    TWFunctionParamTypeNumber,
+    TWFunctionParamTypeBool,
+    TWFunctionParamTypeComboBox,
+    TWFunctionParamTypeCheckBox,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TWChatBotFunctionParam : TWChatBotObject
 
-@property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *value;
+/**
+ value может быть любого типа и реально зависит от типа параметра
+ */
+@property (nonatomic, strong, setter=setValue:) id value;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *ID;
@@ -21,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger minLength;
 @property (nonatomic, assign) NSInteger maxLength;
 @property (nonatomic, assign) BOOL isSecurity;
+@property (nonatomic, assign) BOOL isOptional;
+
+@property (nonatomic, readonly) TWFunctionParamType type;
+
+- (BOOL)validate;
 
 @end
 

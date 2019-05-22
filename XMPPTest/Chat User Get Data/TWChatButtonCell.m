@@ -19,12 +19,21 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0);
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    _button.enabled = enabled;
+}
+
+- (BOOL)enabled {
+    return _button.enabled;
 }
 
 - (IBAction)buttonTap:(id)sender

@@ -25,6 +25,8 @@
     [super awakeFromNib];
     
     _textField.delegate = self;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,14 +38,19 @@
 - (void)setParam:(TWChatBotFunctionParam *)param {
     [super setParam:param];
     
-    _labelTitle.text = param.name;
+    _labelTitle.text = param.desc;
     _labelAnnotation.text = nil;
-    _textField.placeholder = param.value;
+    _textField.text = param.value;
+    _textField.placeholder = param.desc;
     
-    //NSStringMask *mask = [[NSStringMask alloc] initWithPattern:@"(\\d{2}) ([a-z]{2})(\\d{4})"];
-    //_textField.mask = mask;
-    
-    
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return _textField.canBecomeFirstResponder;
+}
+
+- (BOOL)becomeFirstResponder {
+    return _textField.becomeFirstResponder;
 }
 
 #pragma mark - <UITextFieldDelegate> -
@@ -53,6 +60,11 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    self.param.value = textField.text;
     return YES;
 }
 

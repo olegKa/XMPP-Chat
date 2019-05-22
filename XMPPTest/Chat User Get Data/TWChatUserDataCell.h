@@ -15,6 +15,7 @@
 
 @required
 - (void)didSelectCellWithViewController:(UIViewController *)controller;
+- (void)configureCellWithParameter:(TWChatBotFunctionParam *)param atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
