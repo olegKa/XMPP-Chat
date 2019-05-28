@@ -11,4 +11,6 @@ target 'XMPPTest' do
     pod 'SDWebImage', '~> 4.0'
     pod 'DZNEmptyDataSet'
 
+    pod 'MaterialComponents/AppBar'
+    pod 'MaterialComponents/BottomSheet'
 end

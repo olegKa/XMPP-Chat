@@ -13,8 +13,12 @@
 #import "TWChatComboBoxCell.h"
 #import "TWChatCheckBoxCell.h"
 #import "TWChatSwitchCell.h"
+#import "TWChatDateCell.h"
+#import "TWChatPeriodCell.h"
+
 
 #import "TWChatBotFunctionCheckBoxParam.h"
+#import "TWDatePickerBottomSheetController.h"
 
 @interface TWChatGetUserDataViewController () <UIScrollViewDelegate>
 {
@@ -28,6 +32,8 @@ static NSString *const identCellInputField  = @"cellInputField";
 static NSString *const identCellBoolean     = @"cellBoolean";
 static NSString *const identCellComboBox    = @"cellComboBox";
 static NSString *const identCellCheckBox    = @"cellCheckBox";
+static NSString *const identCellDate        = @"cellDate";
+static NSString *const identCellPeriod      = @"cellPeriod";
 static NSString *const identCellButton      = @"cellButton";
 static NSString *const identCellUnknown     = @"cellUnknown";
 
@@ -85,6 +91,8 @@ static NSString *const identCellUnknown     = @"cellUnknown";
     [self.tableView registerNib:[UINib nibWithNibName:@"TWChatComboBoxCell" bundle:nil] forCellReuseIdentifier:identCellComboBox];
     [self.tableView registerNib:[UINib nibWithNibName:@"TWChatSwitchCell" bundle:nil] forCellReuseIdentifier:identCellBoolean];
     [self.tableView registerNib:[UINib nibWithNibName:@"TWChatCheckBoxCell" bundle:nil] forCellReuseIdentifier:identCellCheckBox];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatDateCell" bundle:nil] forCellReuseIdentifier:identCellDate];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TWChatPeriodCell" bundle:nil] forCellReuseIdentifier:identCellPeriod];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 10;
@@ -149,8 +157,11 @@ static NSString *const identCellUnknown     = @"cellUnknown";
     TWChatBotFunctionParam *param = [self paramAtSection:section];
     switch (param.type) {
         case TWFunctionParamTypeString:
+        case TWFunctionParamTypeDate:
         case TWFunctionParamTypeComboBox:
         case TWFunctionParamTypeBool:
+            return 1;
+        case TWFunctionParamTypePeriod:
             return 1;
         case TWFunctionParamTypeCheckBox:
             return [(TWChatBotFunctionCheckBoxParam *)param values].count;
@@ -191,6 +202,7 @@ static NSString *const identCellUnknown     = @"cellUnknown";
     if ([cell conformsToProtocol:@protocol(TWChatUserDataCellProtocol)]) {
         [cell didSelectCellWithViewController:self];
     }
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -200,6 +212,7 @@ static NSString *const identCellUnknown     = @"cellUnknown";
         case TWFunctionParamTypeString:
         case TWFunctionParamTypeComboBox:
         case TWFunctionParamTypeBool:
+        case TWFunctionParamTypeDate:
         {
             /* Вывести пустой footer, если предыдущий параметр отображается как секция (например, CheckBox) */
             NSString *previosTitle = section? [self tableView:tableView titleForHeaderInSection:section - 1]:nil;
@@ -207,6 +220,7 @@ static NSString *const identCellUnknown     = @"cellUnknown";
         }
             break;
         case TWFunctionParamTypeCheckBox:
+        case TWFunctionParamTypePeriod:
             return param.desc;
         default:
             break;
@@ -241,6 +255,10 @@ static NSString *const identCellUnknown     = @"cellUnknown";
             return identCellBoolean;
         case TWFunctionParamTypeCheckBox:
             return identCellCheckBox;
+        case TWFunctionParamTypePeriod:
+             return identCellPeriod;
+        case TWFunctionParamTypeDate:
+            return identCellDate;
         default:
             break;
     }

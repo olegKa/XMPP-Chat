@@ -43,16 +43,23 @@
 }
 
 - (TWFunctionParamType)type {
-    
+    return [TWChatBotFunctionParam typeByString:_internalType];
+}
+
++ (TWFunctionParamType)typeByString:(NSString *)str {
     TWFunctionParamType result = TWFunctionParamTypeUnknown;
-    if ([_internalType isEqualToString:@"string"]) {
+    if ([str isEqualToString:@"string"]) {
         result = TWFunctionParamTypeString;
-    } else if ([_internalType isEqualToString:@"checklist"]) {
+    } else if ([str isEqualToString:@"checklist"]) {
         result = TWFunctionParamTypeCheckBox;
-    } else if ([_internalType isEqualToString:@"comboBox"]) {
+    } else if ([str isEqualToString:@"comboBox"]) {
         result = TWFunctionParamTypeComboBox;
-    } else if ([_internalType isEqualToString:@"boolean"]) {
+    } else if ([str isEqualToString:@"boolean"]) {
         result = TWFunctionParamTypeBool;
+    } else if ([str isEqualToString:@"date"]) {
+        result = TWFunctionParamTypeDate;
+    } else if ([str isEqualToString:@"dateperiod"]) {
+        result = TWFunctionParamTypePeriod;
     }
     
     return result;
@@ -61,6 +68,10 @@
 - (BOOL)validate {
     // Abstract
     return YES;
+}
+
+- (NSString *)prettyValueDescription {
+    return @"";
 }
 
 @end

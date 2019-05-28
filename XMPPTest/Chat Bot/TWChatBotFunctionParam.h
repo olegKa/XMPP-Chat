@@ -15,6 +15,8 @@ typedef NS_ENUM(NSInteger, TWFunctionParamType) {
     TWFunctionParamTypeBool,
     TWFunctionParamTypeComboBox,
     TWFunctionParamTypeCheckBox,
+    TWFunctionParamTypeDate,
+    TWFunctionParamTypePeriod
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -36,7 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) TWFunctionParamType type;
 
++ (TWFunctionParamType)typeByString:(NSString *)str;
 - (BOOL)validate;
+- (NSString *)prettyValueDescription;
 
 @end
 

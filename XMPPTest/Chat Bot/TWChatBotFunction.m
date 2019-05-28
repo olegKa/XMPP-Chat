@@ -11,6 +11,8 @@
 #import "TWChatBotFunctionStringParam.h"
 #import "TWChatBotFunctionBooleanParam.h"
 #import "TWChatBotFunctionCheckBoxParam.h"
+#import "TWChatBotFunctionDateParam.h"
+#import "TWChatBotFunctionPeriodParam.h"
 
 
 
@@ -52,15 +54,24 @@
 }
 
 - (Class)parameterClassForParam:(NSDictionary *)param {
-    if ([param[@"paramType"] isEqualToString:@"string"]) {
-        return TWChatBotFunctionStringParam.class;
-    } else if ([param[@"paramType"] isEqualToString:@"comboBox"]) {
-        return TWChatBotFunctionComboBoxParam.class;
-    } else if ([param[@"paramType"] isEqualToString:@"boolean"]) {
-        return TWChatBotFunctionBooleanParam.class;
-    } else if ([param[@"paramType"] isEqualToString:@"checklist"]) {
-        return TWChatBotFunctionCheckBoxParam.class;
+    
+    switch ([TWChatBotFunctionParam typeByString:param[@"paramType"]]) {
+        case TWFunctionParamTypeString:
+            return TWChatBotFunctionStringParam.class;
+        case TWFunctionParamTypeComboBox:
+            return TWChatBotFunctionComboBoxParam.class;
+        case TWFunctionParamTypeCheckBox:
+            return TWChatBotFunctionCheckBoxParam.class;
+        case TWFunctionParamTypeBool:
+            return TWChatBotFunctionBooleanParam.class;
+        case TWFunctionParamTypeDate:
+            return TWChatBotFunctionDateParam.class;
+        case TWFunctionParamTypePeriod:
+            return TWChatBotFunctionPeriodParam.class;
+        default:
+            break;
     }
+    
     return nil;
 }
 
