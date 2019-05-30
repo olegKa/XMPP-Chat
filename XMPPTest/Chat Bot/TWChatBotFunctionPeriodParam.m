@@ -54,6 +54,8 @@
     }
     
     json[@"paramValue"] = value.copy;
+    json[@"dateFormat"] = self.dateFormatter.dateFormat;
+    json[@"gmt"] = self.gmt;
     return json.copy;
 }
 

@@ -35,6 +35,8 @@
 - (NSDictionary *)json {
     NSMutableDictionary *json = [super json].mutableCopy;
     json[@"paramValue"] = [self.value isKindOfClass:NSDate.class]? [self.dateFormatter stringFromDate:self.value]:@"";
+    json[@"dateFormat"] = self.dateFormatter.dateFormat;
+    json[@"gmt"] = self.gmt;
     return json.copy;
 }
 
