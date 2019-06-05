@@ -7,6 +7,7 @@
 //
 
 #import "TWCustomPickerViewController.h"
+#import "TWCustomPickerDataSource.h"
 
 @interface TWCustomPickerViewController ()
 
@@ -16,17 +17,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    _picker.dataSource = _pickerDataSource;
+    _picker.delegate = _pickerDataSource;
+    [_pickerDataSource configureInitialsForPicker:_picker];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGSize)prefferedSize {
+    return CGSizeMake(UIScreen.mainScreen.bounds.size.width, 260);
 }
-*/
+
+- (void)setPickerDataSource:(TWCustomPickerDataSource<UIPickerViewDelegate,UIPickerViewDataSource> *)pickerDataSource {
+    _pickerDataSource = pickerDataSource;
+}
+
+#pragma mark - User Actions
+- (IBAction)barButtonItemPress:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(customPickerViewController:didPressBarButtonItem:)]) {
+        [self.delegate customPickerViewController:self didPressBarButtonItem:sender];
+    }
+}
 
 @end

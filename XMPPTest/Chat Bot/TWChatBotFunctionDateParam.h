@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TWChatBotFunctionDateParam : TWChatBotFunctionParam
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, readonly) NSDateFormatter *presentationFormatter;
 @property (nonatomic, strong) NSString *gmt;
 
 

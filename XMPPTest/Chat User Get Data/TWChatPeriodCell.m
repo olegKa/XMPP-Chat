@@ -9,13 +9,14 @@
 #import "TWChatPeriodCell.h"
 #import "TWDatePickerBottomSheetController.h"
 #import "TWChatBotFunctionPeriodParam.h"
+#import "TWCustomPickerBottomSheetController.h"
+#import "TWPeriodOfYearsPickerDataSource.h"
+#import "NSDate+Escort.h"
 
 @interface TWChatPeriodCell () <TWDatePickerSelectorDataSource>
 {
-    __weak IBOutlet UILabel *_labelFrom;
-    __weak IBOutlet UILabel *_labelTo;
-    
-    NSDateFormatter *dateFormatter;
+    __weak IBOutlet UILabel *_labelTitle;
+
 }
 
 @property (nonatomic, readonly) TWChatBotFunctionPeriodParam *parametr;
@@ -30,19 +31,6 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    dateFormatter = [NSDateFormatter new];
-    dateFormatter.dateFormat = @"dd.MM.yyyy";
-    
-    UITapGestureRecognizer *tapFrom = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFrom:)];
-    tapFrom.numberOfTapsRequired = 1;
-    [_labelFrom addGestureRecognizer:tapFrom];
-    
-    UITapGestureRecognizer *tapTo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTo:)];
-    tapFrom.numberOfTapsRequired = 1;
-    [_labelTo addGestureRecognizer:tapTo];
-    
-    _labelFrom.userInteractionEnabled = YES;
-    _labelTo.userInteractionEnabled = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -53,8 +41,28 @@
     [super setParam:param];
     
     TWChatBotFunctionPeriodParam *period = (TWChatBotFunctionPeriodParam *)param;
-    _labelFrom.text = [dateFormatter stringFromDate:period.dateFrom]? : @"Выберите";
-    _labelTo.text = [dateFormatter stringFromDate:period.dateTo]? : @"Выберите";
+    
+    if (!period.dateFrom) {
+        _labelTitle.text = @"Выберите";
+    } else {
+        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"Период с: "
+                                                                                  attributes:@{NSForegroundColorAttributeName: UIColor.darkGrayColor,
+                                                                                               NSFontAttributeName: [UIFont systemFontOfSize:14]
+                                                                                               }];
+        [title appendAttributedString:[[NSAttributedString alloc] initWithString:[self.parametr.presentationFormatter stringFromDate:period.dateFrom]
+                                                                      attributes:@{NSForegroundColorAttributeName: UIColor.darkGrayColor,
+                                                                                   NSFontAttributeName: [UIFont systemFontOfSize:18]}]];
+        
+        [title appendAttributedString:[[NSAttributedString alloc] initWithString:@" по: "
+                                                                      attributes:@{NSForegroundColorAttributeName: UIColor.darkGrayColor,
+                                                                                   NSFontAttributeName: [UIFont systemFontOfSize:14]}]];
+        
+        [title appendAttributedString:[[NSAttributedString alloc] initWithString:period.dateTo.year > 1? [self.parametr.presentationFormatter
+                                                                                                          stringFromDate:period.dateTo]:@"настоящее время"
+                                                                      attributes:@{NSForegroundColorAttributeName: UIColor.darkGrayColor,
+                                                                                   NSFontAttributeName: [UIFont systemFontOfSize:18]}]];
+        _labelTitle.attributedText = title;
+    }
     
 }
 
@@ -83,20 +91,45 @@
     return datePicker;
 }
 
-#pragma mark - User Actions -
-- (void)tapFrom:(UITapGestureRecognizer *)gest {
-    TWDatePickerBottomSheetController *datePicker = [self datePicker];
-    [datePicker gotoStage:kDatePickerStageDateFrom];
-}
-
-- (void)tapTo:(UITapGestureRecognizer *)gest {
-    
-}
-
 #pragma mark - <TWChatUserDataCellProtocol> -
 - (void)didSelectCellWithViewController:(UIViewController *)controller {
-    TWDatePickerBottomSheetController *datePicker = [self datePicker];
-    [controller presentViewController:datePicker animated:true completion:nil];
+    
+    if ([self.parametr.dateFormatter.dateFormat isEqualToString:@"yyyy"]) {
+        [self presentPeriodOfYearsSelectorFromController:controller];
+    } else {
+        TWDatePickerBottomSheetController *datePicker = [self datePicker];
+        [controller presentViewController:datePicker animated:true completion:nil];
+    }
+}
+
+- (void)presentPeriodOfYearsSelectorFromController:(UIViewController *)controller {
+    TWPeriodOfYearsPickerDataSource *pickerDataSource = [TWPeriodOfYearsPickerDataSource new];
+    pickerDataSource.minYear = 1970;
+    pickerDataSource.yearStart = 1979;
+    pickerDataSource.yearEnd = 1989;
+    pickerDataSource.unclosedPeriod = YES;
+    TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
+    sheet.title = self.parametr.desc;
+    
+    __weak typeof(sheet) __weakSheet = sheet;
+    sheet.customPickerHandler = ^(BOOL cancel, TWPeriodOfYearsPickerDataSource * _Nullable data) {
+        
+        if (cancel) {
+            //NSLog(@"cancel");
+        } else {
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            [comps setDay:1];
+            [comps setMonth:1];
+            [comps setYear:data.yearStart];
+            self.parametr.dateFrom = [[NSCalendar currentCalendar] dateFromComponents:comps];
+            [comps setYear:data.yearEnd];
+            self.parametr.dateTo = [[NSCalendar currentCalendar] dateFromComponents:comps];
+            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo];
+        }
+        
+        [__weakSheet dismissViewControllerAnimated:YES completion:nil];
+    };
+    [controller presentViewController:sheet animated:YES completion:nil];
 }
 
 #pragma mark - TWDatePickerSelectorDataSource -

@@ -32,13 +32,23 @@
                     <items>
                         <barButtonItem title="Cancel" id="lJ2-Mj-gDv">
                             <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="barButtonItemPress:" destination="-1" id="jYD-Pz-ZHQ"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="hjX-hr-NJn"/>
                         <barButtonItem title="Today" width="42" id="lQK-rk-AGi">
                             <color key="tintColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="barButtonItemPress:" destination="-1" id="Ufp-j3-618"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="nQ6-px-t5r"/>
-                        <barButtonItem title="Done" id="6I1-xm-CRn"/>
+                        <barButtonItem title="Done" id="6I1-xm-CRn">
+                            <connections>
+                                <action selector="barButtonItemPress:" destination="-1" id="fpT-mA-IG1"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKq-th-jLy">
@@ -53,7 +63,7 @@
                 <constraint firstItem="xqv-8B-Gmd" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="RHH-SB-jYm"/>
                 <constraint firstItem="GKq-th-jLy" firstAttribute="top" secondItem="xqv-8B-Gmd" secondAttribute="bottom" id="cmJ-6E-DSv"/>
                 <constraint firstItem="GKq-th-jLy" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="nEl-9X-loX"/>
-                <constraint firstItem="xqv-8B-Gmd" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="u77-WR-DjM"/>
+                <constraint firstItem="xqv-8B-Gmd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="u77-WR-DjM"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

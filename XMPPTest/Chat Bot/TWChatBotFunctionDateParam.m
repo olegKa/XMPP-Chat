@@ -54,4 +54,22 @@
     return [self.value isKindOfClass:NSDate.class];
 }
 
+- (NSDateFormatter *)presentationFormatter {
+    
+    NSString *strPresentationFormatter = @"dd.MM.yyyy";
+    if ([self.dateFormatter.dateFormat containsString:@"M"]) {
+        if ([self.dateFormatter.dateFormat containsString:@"H"]) {
+            strPresentationFormatter = @"dd.MM.yyyy HH:mm";
+        }
+    } else if ([self.dateFormatter.dateFormat containsString:@"H"]) {
+        strPresentationFormatter = @"HH:mm";
+    } else if ([self.dateFormatter.dateFormat containsString:@"y"]) {
+        strPresentationFormatter = @"yyyy";
+    }
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = strPresentationFormatter;
+    return formatter;
+}
+
 @end

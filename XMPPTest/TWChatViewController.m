@@ -21,6 +21,9 @@
 
 #import "TWChatGetUserDataViewController.h"
 
+#import "TWCustomPickerBottomSheetController.h"
+#import "TWPeriodOfYearsPickerDataSource.h"
+
 @interface TWChatViewController () <NSFetchedResultsControllerDelegate, XMPPChatStateDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
@@ -129,40 +132,6 @@
 {
 }
 
-- (IBAction)tapOperator:(id)sender
-{
-    NSString *tel = [@"tel://" stringByAppendingString:@"+79227345533"];
-    if (chat.operator) {
-        
-        XMPPvCardTemp *vCard = [chat vCardTempWithJID:chat.operator];
-        if (vCard.telecomsAddresses.count) {
-            tel = [@"tel://" stringByAppendingString:vCard.telecomsAddresses.firstObject.number];
-        }
-        
-    }
-    if (tel.length) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel] options:@{} completionHandler:nil];
-    }
-    
-}
-
-- (IBAction)buttonCall:(id)sender
-{
-    
-}
-
-- (IBAction)buttonSettings:(id)sender
-{
-    TWChatSettingsViewController *settingsVC = [[UIStoryboard storyboardWithName:@"TWChatSettings" bundle:nil] instantiateViewControllerWithIdentifier:@"TWChatSettingsViewController"];
-    [self.navigationController pushViewController:settingsVC animated:YES];
-}
-
-- (void)buttonClearRoom:(id)sender
-{
-    [chat resetRoomWithCompletion:^(BOOL success) {
-        
-    }];
-}
 
 - (void)updateDates
 {
@@ -192,7 +161,9 @@
             [self setActionsEnabled:NO];
             TWChatGetUserDataViewController *vc = [TWChatGetUserDataViewController chatGetUserDataViewControllerWithFunction:message.function];
             vc.getUserDataHandler = ^(BOOL success, TWChatBotFunction *function) {
-                [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:function]];
+                if (success) {
+                    [chat.xmppRoom sendMessageWithBody:[TWMessage messageWithFunction:function]];
+                }
             };
             [self presentViewController:vc.navigationController animated:YES completion:nil];
         }];
@@ -509,6 +480,63 @@
     
     [chat.xmppRoom sendMessage:msg];
     
+}
+
+- (IBAction)tapOperator:(id)sender
+{
+    /*
+     NSString *tel = [@"tel://" stringByAppendingString:@"+79227345533"];
+     if (chat.operator) {
+     
+     XMPPvCardTemp *vCard = [chat vCardTempWithJID:chat.operator];
+     if (vCard.telecomsAddresses.count) {
+     tel = [@"tel://" stringByAppendingString:vCard.telecomsAddresses.firstObject.number];
+     }
+     
+     }
+     if (tel.length) {
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel] options:@{} completionHandler:nil];
+     }
+     */
+    
+    TWPeriodOfYearsPickerDataSource *pickerDataSource = [TWPeriodOfYearsPickerDataSource new];
+    pickerDataSource.minYear = 1970;
+    pickerDataSource.yearStart = 1979;
+    pickerDataSource.yearEnd = 1989;
+    pickerDataSource.unclosedPeriod = YES;
+    TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
+    
+    __weak typeof(sheet) __weakSheet = sheet;
+    sheet.customPickerHandler = ^(BOOL cancel, TWPeriodOfYearsPickerDataSource * _Nullable data) {
+        
+        if (cancel) {
+            NSLog(@"cancel");
+        } else {
+            NSLog(@"from: %@ to %@", @(data.yearStart), @(data.yearEnd));
+        }
+        
+        [__weakSheet dismissViewControllerAnimated:YES completion:nil];
+    };
+    [self presentViewController:sheet animated:YES completion:nil];
+    
+}
+
+- (IBAction)buttonCall:(id)sender
+{
+    
+}
+
+- (IBAction)buttonSettings:(id)sender
+{
+    TWChatSettingsViewController *settingsVC = [[UIStoryboard storyboardWithName:@"TWChatSettings" bundle:nil] instantiateViewControllerWithIdentifier:@"TWChatSettingsViewController"];
+    [self.navigationController pushViewController:settingsVC animated:YES];
+}
+
+- (void)buttonClearRoom:(id)sender
+{
+    [chat resetRoomWithCompletion:^(BOOL success) {
+        
+    }];
 }
 
 #pragma mark - <RCTextMessageCellDelegate>

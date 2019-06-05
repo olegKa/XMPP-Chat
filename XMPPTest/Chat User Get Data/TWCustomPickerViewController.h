@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class TWCustomPickerDataSource;
+@protocol TWCustomPickerViewDelegate;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TWCustomPickerViewController : UIViewController
@@ -16,6 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *buttonRight;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *buttonCenter;
 @property (nonatomic, weak) IBOutlet UIPickerView *picker;
+
+@property (nonatomic, readonly) CGSize prefferedSize;
+@property (nonatomic, strong) TWCustomPickerDataSource <UIPickerViewDelegate, UIPickerViewDataSource> *pickerDataSource;
+@property (nonatomic, weak) id <TWCustomPickerViewDelegate> delegate;
+
+@end
+
+@protocol TWCustomPickerViewDelegate <NSObject>
+
+@optional
+- (void)customPickerViewController:(TWCustomPickerViewController *)picker didPressBarButtonItem:(UIBarButtonItem *)button;
+- (void)didChangeCustomPickerViewController:(TWCustomPickerViewController *)picker;
+
 
 @end
 
