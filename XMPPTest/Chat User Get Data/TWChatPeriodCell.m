@@ -11,6 +11,7 @@
 #import "TWChatBotFunctionPeriodParam.h"
 #import "TWCustomPickerBottomSheetController.h"
 #import "TWPeriodOfYearsPickerDataSource.h"
+#import "TWPeriodYMPickerDataSource.h"
 #import "NSDate+Escort.h"
 
 @interface TWChatPeriodCell () <TWDatePickerSelectorDataSource>
@@ -96,17 +97,44 @@
     
     if ([self.parametr.dateFormatter.dateFormat isEqualToString:@"yyyy"]) {
         [self presentPeriodOfYearsSelectorFromController:controller];
+    } else if ([self.parametr.dateFormatter.dateFormat isEqualToString:@"yyyy-MM"]) {
+        [self presentPeriodOfYearsAndMonthSelectorFromController:controller];
+        //[self presentPeriodOfYearsSelectorFromController:controller];
     } else {
         TWDatePickerBottomSheetController *datePicker = [self datePicker];
         [controller presentViewController:datePicker animated:true completion:nil];
     }
 }
 
+- (void)presentPeriodOfYearsAndMonthSelectorFromController:(UIViewController *)controller {
+    TWPeriodYMPickerDataSource *pickerDataSource = [TWPeriodYMPickerDataSource new];
+    pickerDataSource.dateFrom = self.parametr.dateFrom;
+    pickerDataSource.dateTo = self.parametr.dateTo;
+    pickerDataSource.maximumDate = NSDate.date;
+    TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
+    sheet.title = self.parametr.desc;
+    __weak typeof(sheet) __weakSheet = sheet;
+    sheet.customPickerHandler = ^(BOOL cancel, TWPeriodYMPickerDataSource * _Nullable data) {
+        
+        if (cancel) {
+            //NSLog(@"cancel");
+        } else {
+            self.parametr.dateFrom = data.dateFrom;
+            self.parametr.dateTo = data.dateTo;
+            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo];
+        }
+        
+        [__weakSheet dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    [controller presentViewController:sheet animated:YES completion:nil];
+}
+
 - (void)presentPeriodOfYearsSelectorFromController:(UIViewController *)controller {
     TWPeriodOfYearsPickerDataSource *pickerDataSource = [TWPeriodOfYearsPickerDataSource new];
     pickerDataSource.minYear = 1970;
-    pickerDataSource.yearStart = 1979;
-    pickerDataSource.yearEnd = 1989;
+    pickerDataSource.yearStart = self.parametr.dateFrom.year;
+    pickerDataSource.yearEnd = self.parametr.dateTo.year;
     pickerDataSource.unclosedPeriod = YES;
     TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
     sheet.title = self.parametr.desc;

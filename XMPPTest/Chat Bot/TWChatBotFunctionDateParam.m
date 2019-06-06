@@ -60,6 +60,8 @@
     if ([self.dateFormatter.dateFormat containsString:@"M"]) {
         if ([self.dateFormatter.dateFormat containsString:@"H"]) {
             strPresentationFormatter = @"dd.MM.yyyy HH:mm";
+        } else if (![self.dateFormatter.dateFormat containsString:@"d"]) {
+            strPresentationFormatter = @"MMM yyyy";
         }
     } else if ([self.dateFormatter.dateFormat containsString:@"H"]) {
         strPresentationFormatter = @"HH:mm";
