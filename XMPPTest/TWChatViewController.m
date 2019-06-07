@@ -500,9 +500,9 @@
      */
     
     TWPeriodOfYearsPickerDataSource *pickerDataSource = [TWPeriodOfYearsPickerDataSource new];
-    pickerDataSource.minYear = 1970;
-    pickerDataSource.yearStart = 1979;
-    pickerDataSource.yearEnd = 1989;
+    //pickerDataSource.minYear = 1970;
+    //pickerDataSource.dateFrom = [NSDate.date date];
+    //pickerDataSource.yearEnd = 1989;
     pickerDataSource.unclosedPeriod = YES;
     TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
     
@@ -512,7 +512,7 @@
         if (cancel) {
             NSLog(@"cancel");
         } else {
-            NSLog(@"from: %@ to %@", @(data.yearStart), @(data.yearEnd));
+            NSLog(@"from: %@ to %@", data.dateFrom, data.dateTo);
         }
         
         [__weakSheet dismissViewControllerAnimated:YES completion:nil];

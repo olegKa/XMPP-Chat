@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TWPeriodOfYearsPickerDataSource : TWCustomPickerDataSource
 
 @property (nonatomic, assign) BOOL unclosedPeriod;
-@property (nonatomic, assign) NSInteger yearStart;
-@property (nonatomic, assign) NSInteger yearEnd;
+@property (nonatomic, strong) NSDate *dateFrom;
+@property (nonatomic, strong) NSDate *dateTo;
+@property (nonatomic, strong) NSDate *maximumDate;      // Today by default
 @property (nonatomic, assign) NSInteger minYear;        // 1900 by default
-@property (nonatomic, assign) NSInteger maxYear;        // Today by default
 
 @end
 

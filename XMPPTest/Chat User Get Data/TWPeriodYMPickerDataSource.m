@@ -86,9 +86,11 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     switch (component) {
         case YEAR_FROM:
+            return 300;
         case YEAR_TO:
             return 300;
         case MONTH_FROM:
+            return 12 * 30;
         case MONTH_TO:
             return 12 * 30;
         case DIV:
@@ -101,7 +103,7 @@
 
 
 #pragma mark - UIPickerViewDelegate -
-/*
+/* Кастомное представление
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     

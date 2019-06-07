@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TWPeriodYMPickerDataSource : TWCustomPickerDataSource
 
+@property (nonatomic, assign) BOOL unclosedPeriod;
 @property (nonatomic, strong) NSDate *dateFrom;
 @property (nonatomic, strong) NSDate *dateTo;
 @property (nonatomic, strong) NSDate *maximumDate;

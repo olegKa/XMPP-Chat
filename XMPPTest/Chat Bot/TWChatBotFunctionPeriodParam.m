@@ -50,7 +50,7 @@
     NSMutableArray *value = @[].mutableCopy;
     if ([(NSArray *)self.value firstObject]) {
         [value addObject:[self.dateFormatter stringFromDate:[(NSArray *)self.value firstObject]]];
-        [value addObject:[self.dateFormatter stringFromDate:[(NSArray *)self.value lastObject]]];
+        [value addObject:[self.dateFormatter stringFromDate:[(NSArray *)self.value lastObject]]? :NSNull.null];
     }
     
     json[@"paramValue"] = value.copy;

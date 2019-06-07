@@ -121,7 +121,7 @@
         } else {
             self.parametr.dateFrom = data.dateFrom;
             self.parametr.dateTo = data.dateTo;
-            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo];
+            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo? :[NSNull null]];
         }
         
         [__weakSheet dismissViewControllerAnimated:YES completion:nil];
@@ -133,8 +133,8 @@
 - (void)presentPeriodOfYearsSelectorFromController:(UIViewController *)controller {
     TWPeriodOfYearsPickerDataSource *pickerDataSource = [TWPeriodOfYearsPickerDataSource new];
     pickerDataSource.minYear = 1970;
-    pickerDataSource.yearStart = self.parametr.dateFrom.year;
-    pickerDataSource.yearEnd = self.parametr.dateTo.year;
+    pickerDataSource.dateFrom = self.parametr.dateFrom;
+    pickerDataSource.dateTo = self.parametr.dateTo;
     pickerDataSource.unclosedPeriod = YES;
     TWCustomPickerBottomSheetController *sheet = [TWCustomPickerBottomSheetController customPickerControllerWithDataSource:pickerDataSource];
     sheet.title = self.parametr.desc;
@@ -145,14 +145,9 @@
         if (cancel) {
             //NSLog(@"cancel");
         } else {
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            [comps setDay:1];
-            [comps setMonth:1];
-            [comps setYear:data.yearStart];
-            self.parametr.dateFrom = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            [comps setYear:data.yearEnd];
-            self.parametr.dateTo = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo];
+            self.parametr.dateFrom = data.dateFrom;
+            self.parametr.dateTo = data.dateTo;
+            self.parametr.value = @[self.parametr.dateFrom, self.parametr.dateTo? :[NSNull null]];
         }
         
         [__weakSheet dismissViewControllerAnimated:YES completion:nil];
